@@ -1,0 +1,12 @@
+.email-check-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.email-check-label {
+    border: 2px solid #bababa;
+}
+
+.email-check-form {
+    width: 100%;
+}

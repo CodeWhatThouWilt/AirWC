@@ -4,3 +4,7 @@ body {
     width: 100vw;
     background-color: #D9D9DB50;
 }
+
+* {
+    font-family: sans-serif;
+}

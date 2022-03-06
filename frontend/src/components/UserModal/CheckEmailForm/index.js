@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { csrfFetch } from "../../../store/csrf";
 import LoginForm from "../../LoginFormModal/LoginForm";
 import SignupForm from "../../SignupFormModal/SignupForm";
+import './CheckEmailForm.css';
 
 function CheckEmailForm() {
     const [email, setEmail] = useState("");
@@ -31,19 +32,24 @@ function CheckEmailForm() {
 
     if (currentForm === 'checkEmail') {
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='email-check-form'>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
-                <label>
-                    Email
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>
+                <div className="email-check-form">
+                    <span>Welcome to AirWC!</span>
+                    <label>
+                        <span className="email-check-label">Email</span><br/>
+                        <input
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder='Email'
+                            required
+                            autoFocus
+                        />
+                    </label>
+                </div>
                 <button type="submit">Continue</button>
             </form>
         );
