@@ -19,13 +19,11 @@ function CheckEmailForm() {
             });
 
             const { isUser } = await res.json();
-            console.log('AYO', isUser);
 
             isUser ? setCurrentForm('login') : setCurrentForm('signup')
 
         } catch (e) {
             const { errors } = await e.json();
-            console.log('YOOOOOOOOOOOOOOO', errors);
             setErrors(errors);
             return;
         }
