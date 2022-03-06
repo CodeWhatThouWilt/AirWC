@@ -1,0 +1,15 @@
+.logo {
+    height: 30px;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+nav {
+    height: 5%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-rows: 1fr;
+}

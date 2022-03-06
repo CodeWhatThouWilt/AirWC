@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import * as sessionActions from "../../../store/session"
 import { useDispatch } from "react-redux";
 
-function LoginForm() {
+function LoginForm({ email }) {
     const dispatch = useDispatch();
-    const [credential, setCredential] = useState("");
+    const [credential, setCredential] = useState(email);
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 

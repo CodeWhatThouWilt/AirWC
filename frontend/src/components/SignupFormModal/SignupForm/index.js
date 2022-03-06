@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../../store/session";
 
-function SignupForm() {
+function SignupForm(props) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.sessionState.user);
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(props.email);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");

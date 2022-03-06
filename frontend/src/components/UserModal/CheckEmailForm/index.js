@@ -1,45 +1,59 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../../store/session";
+import { csrfFetch } from "../../../store/csrf";
+import LoginForm from "../../LoginFormModal/LoginForm";
+import SignupForm from "../../SignupFormModal/SignupForm";
 
 function CheckEmailForm() {
-    const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.sessionState.user);
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState([]);
-
-    if (sessionUser) return <Redirect to="/" />;
+    const [currentForm, setCurrentForm] = useState('checkEmail')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch()
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+        try {
+            const res = await csrfFetch('/api/users/check', {
+                method: 'POST',
+                body: JSON.stringify({ email })
             });
 
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+            const { isUser } = await res.json();
+            console.log('AYO', isUser);
+
+            isUser ? setCurrentForm('login') : setCurrentForm('signup')
+
+        } catch (e) {
+            const { errors } = await e.json();
+            console.log('YOOOOOOOOOOOOOOO', errors);
+            setErrors(errors);
+            return;
+        }
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Email
-                <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Continue</button>
-        </form>
-    );
+    if (currentForm === 'checkEmail') {
+        return (
+            <form onSubmit={handleSubmit}>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+                <label>
+                    Email
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </label>
+                <button type="submit">Continue</button>
+            </form>
+        );
+    } else if (currentForm === 'login') {
+        return <LoginForm email={email} />
+    } else if (currentForm === 'signup') {
+        return <SignupForm email={email} />
+    }
 }
 
-export default SignupForm;
+export default CheckEmailForm;

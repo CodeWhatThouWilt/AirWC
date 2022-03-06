@@ -44,8 +44,24 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
     })
 );
 
-// Check if user email exists
+const validateEmail = [
+    check('email')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide an email'),
+    handleValidationErrors
+]
 
+// Check if user email exists
+router.post('/check', validateEmail, asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    let isUser = await User.findOne({
+        where: {
+            email
+        }
+    });
+    isUser ? isUser = true : isUser = false;
+    return res.json({ isUser })
+}));
 
 
 module.exports = router;

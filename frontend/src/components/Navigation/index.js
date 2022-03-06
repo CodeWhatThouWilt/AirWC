@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import UserModal from '../UserModal';
+import logo from '../../assets/airwc-logo.png';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -17,19 +19,20 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <>
-                <LoginFormModal />
-                <SignupFormModal />
+                <UserModal />
             </>
         );
     }
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <nav>
+            <ul className='nav-list'>
+                <li>
+                    <NavLink exact to="/"><img src={logo} className='logo' alt='logo' /></NavLink>
+                    {isLoaded && sessionLinks}
+                </li>
+            </ul>
+        </nav>
     );
 }
 
