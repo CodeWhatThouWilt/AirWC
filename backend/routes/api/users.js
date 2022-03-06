@@ -44,4 +44,8 @@ router.post('/', validateSignup, asyncHandler(async (req, res) => {
     })
 );
 
+// Check if user email exists
+
+
+
 module.exports = router;
