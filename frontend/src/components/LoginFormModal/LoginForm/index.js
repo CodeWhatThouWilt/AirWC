@@ -42,6 +42,7 @@ function LoginForm({ email }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoFocus
                 />
             </label>
             <button type="submit">Log In</button>

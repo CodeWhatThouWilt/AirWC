@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import CheckEmailForm from './CheckEmailForm';
+import './UserModal.css';
 
 
 const UserModal = () => {

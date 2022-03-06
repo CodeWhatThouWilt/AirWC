@@ -1,15 +1,28 @@
-.logo {
-    height: 30px;
-}
-
 .nav-list {
     list-style: none;
 }
 
 nav {
-    height: 5%;
+    height: 100px;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-columns: 1fr 1.5fr 8fr 1.5fr 1fr ;
     grid-template-rows: 1fr;
+}
+
+.logo-link {
+    height: 30px;
+    grid-column: 2;
+}
+
+.user-dropdown {
+    grid-column: 4;
+    position: relative;
+    display: inline-block;
+    justify-self: right;
+}
+
+.logo {
+    height: auto;
+    width: 100%;
 }
