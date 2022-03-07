@@ -4,23 +4,25 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [3, 30],
-        isNotEmail(value) {
-          if (Validator.isEmail(value)) {
-            throw new Error('Cannot be an email.');
-          }
-        }
-      }
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [3, 256]
+      }
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 50]
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 50]
       }
     },
     hashedPassword: {
@@ -34,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       defaultScope: {
         attributes: {
-          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+          exclude: ['lastName', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
         }
       },
       scopes: {
@@ -49,8 +51,8 @@ module.exports = (sequelize, DataTypes) => {
 
   // Returns information that is safe to have in a JWT
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
-    const { id, username, email } = this; // context will be the User instance
-    return { id, username, email };
+    const { id, email } = this; // context will be the User instance
+    return { id, email, firstName};
   };
 
   // Returns a boolean if a password match is valid or not
@@ -66,13 +68,9 @@ module.exports = (sequelize, DataTypes) => {
   // Takes in an object with credentials and a password
   // If the login is successful then the current user scope is returned
   User.login = async function ({ credential, password }) {
-    const { Op } = require('sequelize');
     const user = await User.scope('loginUser').findOne({
       where: {
-        [Op.or]: {
-          username: credential,
-          email: credential
-        }
+        email: credential
       }
     });
     if (user && user.validatePassword(password)) {
@@ -82,10 +80,11 @@ module.exports = (sequelize, DataTypes) => {
 
   // Takes in an object. Hashes password with bcrypt, then saves the user information
   // Returns the current scope for User
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ email, password, firstName, lastName }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
-      username,
+      firstName,
+      lastName,
       email,
       hashedPassword
     });
