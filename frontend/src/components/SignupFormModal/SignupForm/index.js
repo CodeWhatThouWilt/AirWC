@@ -8,8 +8,9 @@ function SignupForm(props) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.sessionState.user);
     const [email, setEmail] = useState(props.email);
-    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
@@ -19,7 +20,7 @@ function SignupForm(props) {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
+            return dispatch(sessionActions.signup({ email, firstName, lastName, password }))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
@@ -43,11 +44,20 @@ function SignupForm(props) {
                 />
             </label>
             <label>
-                Username
+                First Name
                 <input
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Last Name
+                <input
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
                 />
             </label>
