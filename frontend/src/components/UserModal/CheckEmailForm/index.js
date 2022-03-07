@@ -35,7 +35,7 @@ function CheckEmailForm() {
     const guestHandler = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential: 'yake@gmail.com', password: 'password' })).catch(
+        return dispatch(sessionActions.login({ credential: 'user1@default.com', password: 'password' })).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
