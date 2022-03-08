@@ -93,15 +93,6 @@ module.exports = {
         name: 'Post 11',
         price: 20
       },
-      {
-        userId: 1,
-        address: '1 app academy ln',
-        city: 'Full stack city',
-        state: 'Solid',
-        country: 'United States of America',
-        name: 'Post 1',
-        price: 20
-      },
     ], {});
   },
 

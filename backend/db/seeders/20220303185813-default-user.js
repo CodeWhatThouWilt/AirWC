@@ -8,7 +8,7 @@ module.exports = {
         email: 'user1@default.com',
         firstName: 'Demo',
         lastName: 'User',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: 'user2@default.com',
@@ -73,10 +73,13 @@ module.exports = {
     ], {});
   },
 
+  // down: (queryInterface, Sequelize) => {
+  //   const Op = Sequelize.Op;
+  //   return queryInterface.bulkDelete('Users', {
+  //     email: { [Op.in]: ['user1@default.com', 'user1@user.io', 'user2@user.io'] }
+  //   }, {});
+  // }
   down: (queryInterface, Sequelize) => {
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
-      email: { [Op.in]: ['user1@default.com', 'user1@user.io', 'user2@user.io'] }
-    }, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };
