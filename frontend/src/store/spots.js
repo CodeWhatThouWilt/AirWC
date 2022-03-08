@@ -17,6 +17,27 @@ const removeSpot = () => {
     };
 };
 
+const addSpot = (spot) => {
+    return {
+        type: ADD_SPOT,
+        spot
+    }
+}
+
+export const addSingleSpot = (spot) => async (dispatch) => {
+    // const { name, address, city, country, price } = spot;
+    const res = await csrfFetch('/api/spots', {
+        method: 'POST',
+        body: JSON.stringify(spot)
+    });
+
+    if (res.ok) {
+        const newSpot = await res.json();
+        dispatch(addSpot(newSpot));
+        return newSpot;
+    }
+}
+
 export const getSpots = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots');
 
@@ -56,6 +77,9 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...state };
             newState.user = null;
             return newState;
+        case ADD_SPOT:
+            newState = { ...state, [action.spot.id]:{...action.spot} };
+            return newState
         default:
             return state;
     }

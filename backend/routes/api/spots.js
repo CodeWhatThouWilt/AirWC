@@ -17,6 +17,23 @@ router.get('/', asyncHandler(async (req, res) => {
         }
     });
     return res.json(spots);
+}));
+
+router.post('/', restoreUser, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { address, city, state, country, name, price } = req.body;
+
+    const spot = await Spot.create({
+        userId: user.id,
+        address,
+        city,
+        state,
+        country,
+        name,
+        price
+    });
+
+    return res.json(spot);
 }))
 
 
