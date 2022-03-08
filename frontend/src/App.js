@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
+import { getSpots } from "./store/spots";
 
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
@@ -11,8 +12,15 @@ import NewListing from "./components/NewListing";
 import Spot from "./components/Spot";
 
 function App() {
+  
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  const spots = useSelector((state) => Object.values(state.spotsState));
+  useEffect(() => {
+    dispatch(getSpots())
+  }, [dispatch])
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -24,7 +32,7 @@ function App() {
         <Switch>
 
           <Route path='/manage-spots'>
-            <ManageSpots />
+            <ManageSpots spots={spots} />
           </Route>
 
           <Route exact path='/new-listing'>
@@ -32,15 +40,15 @@ function App() {
           </Route>
 
           <Route path='/spots/:spotId'>
-            <Spot />
+            <Spot spots={spots} />
           </Route>
 
           <Route exact path='/spots'>
-            <Spots />
+            <Spots spots={spots} />
           </Route>
 
           <Route exact path='/'>
-            <Homepage />
+            <Homepage spots={spots} />
           </Route>
 
         </Switch>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import UserModal from '../UserModal';
-import logo from '../../assets/airwc-logo.png';
+import logo from '../../assets/airwc-logo.svg';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {

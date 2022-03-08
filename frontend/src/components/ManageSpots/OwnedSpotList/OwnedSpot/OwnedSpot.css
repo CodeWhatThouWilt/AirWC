@@ -1,0 +1,10 @@
+.spot-card {
+    display: flex;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100px;
+}

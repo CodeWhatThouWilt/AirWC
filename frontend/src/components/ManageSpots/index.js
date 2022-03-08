@@ -2,8 +2,9 @@ import './ManageSpots.css';
 import * as sessionActions from '../../store/session';
 import { useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
+import OwnedSpotList from './OwnedSpotList';
 
-const ManageSpots = () => {
+const ManageSpots = ({ spots }) => {
     const history = useHistory();
     const sessionUser = useSelector(state => state.sessionState.user);
 
@@ -17,6 +18,7 @@ const ManageSpots = () => {
     return (
         <div>
             <button onClick={clickHandler} >New Listing</button>
+            <OwnedSpotList spots={spots} sessionUser={sessionUser} />
         </div>
     )
 }

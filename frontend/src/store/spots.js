@@ -34,7 +34,6 @@ export const addSingleSpot = (spot) => async (dispatch) => {
     if (res.ok) {
         const newSpot = await res.json();
         dispatch(addSpot(newSpot));
-        return newSpot;
     }
 }
 
@@ -44,41 +43,24 @@ export const getSpots = () => async (dispatch) => {
     if (res.ok) {
     const spots = await res.json();
     dispatch(getAllSpots(spots));
-    return spots;
     }
 }
-
-// export const signup = (user) => async (dispatch) => {
-//     const { firstName, lastName, email, password } = user;
-//     const res = await csrfFetch('/api/users', {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             firstName,
-//             lastName,
-//             email,
-//             password
-//         })
-//     });
-
-
 
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
-    let newState;
+    let newState = { ...state }
     switch (action.type) {
         case GET_SPOTS:
-            newState = { ...state };
             action.spots.forEach(spot => {
                 return newState[spot.id] = spot
             });
             return newState;
         case REMOVE_SPOT:
-            newState = { ...state };
-            newState.user = null;
+            delete newState[action.id];
             return newState;
         case ADD_SPOT:
-            newState = { ...state, [action.spot.id]:{...action.spot} };
+            newState[action.spot.id] = {...action.spot};
             return newState
         default:
             return state;
