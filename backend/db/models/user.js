@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Returns information that is safe to have in a JWT
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
-    const { id, email } = this; // context will be the User instance
+    const { id, email, firstName } = this; // context will be the User instance
     return { id, email, firstName};
   };
 
