@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
+
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
 import Spots from "./components/Spots";
+import ManageSpots from "./components/ManageSpots";
+import NewListing from "./components/NewListing";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +21,14 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+
+          <Route path='/manage-spots'>
+            <ManageSpots />
+          </Route>
+
+          <Route exact path='/new-listing'>
+            <NewListing />
+          </Route>
 
           <Route path='/spots/:spotId'>
             <div>Hey</div>
