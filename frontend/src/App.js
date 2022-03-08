@@ -8,6 +8,7 @@ import Homepage from "./components/Homepage";
 import Spots from "./components/Spots";
 import ManageSpots from "./components/ManageSpots";
 import NewListing from "./components/NewListing";
+import Spot from "./components/Spot";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function App() {
           </Route>
 
           <Route path='/spots/:spotId'>
-            <div>Hey</div>
+            <Spot />
           </Route>
 
           <Route exact path='/spots'>
