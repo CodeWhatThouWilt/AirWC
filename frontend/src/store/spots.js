@@ -7,7 +7,7 @@ const REMOVE_SPOT = 'spots/removeSpot';
 const getAllSpots = (spots) => {
     return {
         type: GET_SPOTS,
-        payload: spots,
+        spots,
     };
 };
 
@@ -18,10 +18,10 @@ const removeSpot = () => {
 };
 
 export const getSpots = () => async (dispatch) => {
-    const res = csrfFetch('/api/spots');
+    const res = await csrfFetch('/api/spots');
 
     if (res.ok) {
-    const spots = res.json()
+    const spots = await res.json();
     dispatch(getAllSpots(spots));
     return spots;
     }
@@ -48,7 +48,9 @@ const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOTS:
             newState = { ...state };
-            newState.user = action.payload;
+            action.spots.forEach(spot => {
+                return newState[spot.id] = spot
+            });
             return newState;
         case REMOVE_SPOT:
             newState = { ...state };
