@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { csrfFetch } from "../../../store/csrf";
+import { useDispatch } from "react-redux";
+import * as sessionActions from '../../../store/session'
 import LoginForm from "../../LoginFormModal/LoginForm";
 import SignupForm from "../../SignupFormModal/SignupForm";
 import './CheckEmailForm.css';
 
 function CheckEmailForm() {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState([]);
     const [currentForm, setCurrentForm] = useState('checkEmail')
@@ -30,28 +32,42 @@ function CheckEmailForm() {
         }
     };
 
+    const guestHandler = (e) => {
+        e.preventDefault();
+        setErrors([]);
+        return dispatch(sessionActions.login({ credential: 'user1@default.com', password: 'password' })).catch(
+            async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            }
+        );
+    }
+
     if (currentForm === 'checkEmail') {
         return (
-            <form onSubmit={handleSubmit} className='email-check-form'>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-                <div className="email-check-form">
-                    <span>Welcome to AirWC!</span>
-                    <label>
-                        <span className="email-check-label">Email</span><br/>
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder='Email'
-                            required
-                            autoFocus
-                        />
-                    </label>
-                </div>
-                <button type="submit">Continue</button>
-            </form>
+            <div>
+                <form onSubmit={handleSubmit} className='email-check-form'>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                    <div className="email-check-form">
+                        <span>Welcome to AirWC!</span>
+                        <label>
+                            Email
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder='Email'
+                                required
+                                autoFocus
+                            />
+                        </label>
+                    </div>
+                    <button type="submit">Continue</button>
+                </form>
+                <button onClick={guestHandler} >Demo User</button>
+            </div>
         );
     } else if (currentForm === 'login') {
         return <LoginForm email={email} />

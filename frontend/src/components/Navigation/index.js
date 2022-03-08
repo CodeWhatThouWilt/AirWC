@@ -28,7 +28,7 @@ function Navigation({ isLoaded }) {
 
     return (
         <nav>
-            <Link exact to="/" className='logo-link' ><img src={logo} className='logo' alt='logo' /></Link>
+            <Link to="/" className='logo-link' ><img src={logo} className='logo' alt='logo' /></Link>
             {isLoaded && sessionLinks}
         </nav>
     );

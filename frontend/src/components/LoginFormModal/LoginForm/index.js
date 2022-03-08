@@ -27,9 +27,9 @@ function LoginForm({ email }) {
                 ))}
             </ul>
             <label>
-                Username or Email
+                Email
                 <input
-                    type="text"
+                    type="email"
                     value={credential}
                     onChange={(e) => setCredential(e.target.value)}
                     required

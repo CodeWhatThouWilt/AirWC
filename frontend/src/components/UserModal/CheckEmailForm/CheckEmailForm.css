@@ -3,9 +3,10 @@
     flex-direction: column;
 }
 
-.email-check-label {
+/* .email-check-label {
     border: 2px solid #bababa;
-}
+    width: 100%;
+} */
 
 .email-check-form {
     width: 100%;
