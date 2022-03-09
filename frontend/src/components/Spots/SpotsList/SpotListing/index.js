@@ -2,7 +2,7 @@ import './SpotListing.css';
 import { Link } from 'react-router-dom';
 
 const SpotListing = ({ details }) => {
-    console.log(details);
+    
     return (
         <div className='listing-card' >
             <Link to={`/spots/${details.id}`} className='listing-card-link' >

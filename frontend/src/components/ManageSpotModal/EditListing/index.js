@@ -13,7 +13,7 @@ const EditListing = ({ spot }) => {
     const [country, setCountry] = useState('');
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');
-    console.log('SPOT', spot)
+    
     const submitHandler = async (e) => {
         e.preventDefault();
         await dispatch(editSpot({
