@@ -1,10 +1,12 @@
 .login-button {
     grid-column: 4;
-    border-radius: 50px;
+    justify-self: end;
+    border-radius: 40px;
     border: none;
-    background-color: #465271;
+    background-color: #4F72C4;
     color: white;
     height: 50%;
-    /* padding: 4px 2px; */
-
+    padding: 0px 20px;
+    margin-top: 25px;
 }
+

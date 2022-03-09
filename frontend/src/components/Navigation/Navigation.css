@@ -1,18 +1,25 @@
+.navbar-containter {
+    display: flex;
+    height: 100px;
+    width: 100%;
+}
 .nav-list {
     list-style: none;
 }
 
 nav {
     height: 100px;
-    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1.5fr 8fr 1.5fr 1fr ;
     grid-template-rows: 1fr;
+    background-color: #303645;
+    border-radius: 20px;
 }
 
 .logo-link {
     height: 30px;
     grid-column: 2;
+    margin-top: 20px;
 }
 
 .user-dropdown {
@@ -20,6 +27,7 @@ nav {
     position: relative;
     display: inline-block;
     justify-self: right;
+    margin-top: 25px;
 }
 
 .logo {

@@ -14,7 +14,7 @@ const Homepage = () => {
     }, [dispatch])
 
     return (
-        <div>
+        <div className='homepage-container'>
             <Banner />
             <SpotSlideShow spots={spots} />
         </div>

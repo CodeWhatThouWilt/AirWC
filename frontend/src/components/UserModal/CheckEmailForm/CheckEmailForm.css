@@ -1,13 +1,59 @@
 .email-check-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-/* .email-check-label {
-    border: 2px solid #bababa;
+.email-check-form input {
+    height: 25px;
     width: 100%;
-} */
+    border:none;
+    border-radius: 4px;
+}
 
-.email-check-form {
+.email-check-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 50%;
+}
+
+.email-check-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     width: 100%;
+}
+
+.email-check-modal button {
+    margin-top: 10px;
+}
+
+.welcome-to-airwc {
+    font-size: 20px;
+    margin-bottom: 35px;
+}
+
+.email-check-continue {
+    justify-self: end;
+    border-radius: 40px;
+    border: none;
+    background-color: #4F72C4;
+    color: white;
+    height: 25px;
+    padding: 0px 20px;
+}
+
+.demo-user-button {
+    justify-self: end;
+    border-radius: 40px;
+    border: none;
+    background-color: #4F72C490;
+    color: white;
+    height: 25px;
+    padding: 0px 20px;
 }
