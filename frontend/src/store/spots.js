@@ -6,9 +6,12 @@ const REMOVE_SPOT = 'spots/removeSpot';
 const EDIT_SPOT = 'spots/editSpot'
 
 
-const editSpot = (spot) => {
-
-};
+// const editSpot = (spot) => {
+//     return {
+//         type: EDIT_SPOT,
+//         spot
+//     }
+// };
 
 const getAllSpots = (spots) => {
     return {
@@ -44,7 +47,17 @@ export const addSingleSpot = (spot) => async (dispatch) => {
     }
 }
 
-export const editSpot 
+export const editSpot = (spot) => async (dispatch) => {
+    const res = await csrfFetch('/api/spots', {
+        method: 'PUT',
+        body: JSON.stringify(spot)
+    });
+
+    if (res.ok) {
+        const newSpot = await res.json();
+        await dispatch(addSpot(newSpot));
+    }
+}
 
 export const deleteSpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch('/api/spots', {

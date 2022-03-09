@@ -45,6 +45,31 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     return res.json(newSpot);
 }))
 
+router.put('/', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { spotId, address, city, state, country, name, price } = req.body;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (spot.userId === user.is) {
+        await spot.update({
+            address,
+            city,
+            state,
+            country,
+            name,
+            price
+        });
+        return res.json(spotId);
+    }
+
+    const err = new Error('Unauthorized');
+    err.title = 'Unauthorized';
+    err.errors = ['Unauthorized'];
+    err.status = 401;
+    return next(err);
+}))
+
 router.delete('/', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
     const { spotId } = req.body;
