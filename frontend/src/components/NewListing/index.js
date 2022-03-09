@@ -2,10 +2,11 @@ import './NewListing.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../store/spots';
+import { useHistory } from 'react-router-dom';
 
 const NewListing = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
-
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -13,17 +14,19 @@ const NewListing = () => {
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        dispatch(addSingleSpot({
+        await dispatch(addSingleSpot({
             name,
             address,
             city,
             state,
             country,
             price
-        }))
+        }));
+        history.push('/manage-spots')
     }
+
 
     return (
         <form onSubmit={submitHandler}>
@@ -93,16 +96,4 @@ const NewListing = () => {
 }
 
 export default NewListing;
-
-// spots:
-// userID
-// address
-// city 
-// state 
-// country 
-// name 
-// price 
-
-// images
-//     spotId
 //     url

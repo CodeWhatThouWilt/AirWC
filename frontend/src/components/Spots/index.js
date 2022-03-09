@@ -6,7 +6,14 @@ import { getSpots } from '../../store/spots';
 
 import SpotsList from './SpotsList';
 
-const Spots = ({ spots }) => {
+const Spots = () => {
+    const dispatch = useDispatch()
+
+    const spots = useSelector((state) => Object.values(state.spotsState));
+
+    useEffect(() => {
+        dispatch(getSpots())
+    }, [dispatch])
 
     return (
         <SpotsList spots={spots} />

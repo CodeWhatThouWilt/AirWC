@@ -19,7 +19,7 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(spots);
 }));
 
-router.post('/', restoreUser, asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
     const { address, city, state, country, name, price } = req.body;
 
@@ -33,7 +33,39 @@ router.post('/', restoreUser, asyncHandler(async (req, res) => {
         price
     });
 
-    return res.json(spot);
+    const newSpot = await Spot.findOne({
+        where: {
+            id: spot.id
+        },
+        include: {
+            model: Image
+        }
+    });
+
+    return res.json(newSpot);
+}))
+
+router.delete('/', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { spotId } = req.body;
+
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId,
+            userId: user.id
+        }
+    });
+
+    if (spot) {
+        await spot.destroy();
+        return res.json(spotId);
+    }
+
+    const err = new Error('Unauthorized');
+    err.title = 'Unauthorized';
+    err.errors = ['Unauthorized'];
+    err.status = 401;
+    return next(err);
 }))
 
 
