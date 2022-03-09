@@ -11,6 +11,8 @@ import NewListing from "./components/ManageSpotModal/NewListing";
 import Spot from "./components/Spot";
 import EditListing from "./components/ManageSpotModal/EditListing";
 
+import { getSpots } from "./store/spots";
+
 function App() {
   
   const dispatch = useDispatch();
