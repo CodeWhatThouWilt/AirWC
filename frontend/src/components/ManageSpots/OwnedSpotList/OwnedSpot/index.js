@@ -2,6 +2,7 @@ import './OwnedSpot.css';
 import SpotListing from '../../../Spots/SpotsList/SpotListing';
 import { useDispatch } from 'react-redux';
 import { deleteSpot } from '../../../../store/spots';
+import { Link } from 'react-router-dom';
 
 const OwnedSpot = ({ spot }) => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const OwnedSpot = ({ spot }) => {
     return (
         <div className='spot-card'>
             <div className='buttons' >
-                <button >Edit</button>
+                <Link to='/edit-listing' state={ spot } ><button>Edit</button></Link>
                 <button onClick={deleteHandler} >Delete</button>
             </div>
             <SpotListing details={spot} />

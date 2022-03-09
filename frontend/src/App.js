@@ -7,8 +7,9 @@ import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
 import Spots from "./components/Spots";
 import ManageSpots from "./components/ManageSpots";
-import NewListing from "./components/NewListing";
+import NewListing from "./components/ManageSpotModal/NewListing";
 import Spot from "./components/Spot";
+import EditListing from "./components/ManageSpotModal/EditListing";
 
 function App() {
   
@@ -31,6 +32,10 @@ function App() {
 
           <Route exact path='/new-listing'>
             <NewListing />
+          </Route>
+
+          <Route exact path='/edit-listing'>
+            <EditListing />
           </Route>
 
           <Route path='/spots/:spotId'>

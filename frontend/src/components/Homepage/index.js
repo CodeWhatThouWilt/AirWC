@@ -1,5 +1,6 @@
 import './Homepage.css';
 import Banner from './Banner';
+import SpotSlideShow from './SpotSlideShow';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpots } from '../../store/spots';
 import { useEffect } from 'react';
@@ -13,7 +14,11 @@ const Homepage = () => {
     }, [dispatch])
 
     return (
-        <Banner />
+        <div>
+            <Banner />
+            <SpotSlideShow spots={spots} />
+        </div>
+        
     )
 }
 

@@ -1,7 +1,7 @@
 import './NewListing.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addSingleSpot } from '../../store/spots';
+import { addSingleSpot } from '../../../store/spots';
 import { useHistory } from 'react-router-dom';
 
 const NewListing = () => {
@@ -16,7 +16,7 @@ const NewListing = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await dispatch(addSingleSpot({
+        return dispatch(addSingleSpot({
             name,
             address,
             city,
@@ -24,7 +24,7 @@ const NewListing = () => {
             country,
             price
         }));
-        history.push('/manage-spots')
+        // history.push('/manage-spots')
     }
 
 

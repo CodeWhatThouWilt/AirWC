@@ -4,13 +4,13 @@ import { Redirect, useHistory, Link } from 'react-router-dom';
 import OwnedSpotList from './OwnedSpotList';
 import { getSpots } from '../../store/spots';
 import { useEffect } from 'react';
+import ManageSpotModal from '../ManageSpotModal';
 
 const ManageSpots = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.sessionState.user);
     const spots = useSelector((state) => Object.values(state.spotsState));
-    
     
     useEffect(() => {
         dispatch(getSpots())
@@ -20,7 +20,8 @@ const ManageSpots = () => {
 
     return (
         <div>
-            <Link to='new-listing' ><button>New Listing</button></Link>
+            {/* <Link to='new-listing' ><button>New Listing</button></Link> */}
+            <ManageSpotModal />
             <OwnedSpotList spots={spots} sessionUser={sessionUser} />
         </div>
     )

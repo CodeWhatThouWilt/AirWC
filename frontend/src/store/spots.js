@@ -3,15 +3,6 @@ import { csrfFetch } from './csrf';
 const GET_SPOTS = 'spots/getAllSpots';
 const ADD_SPOT = 'spots/addSpot'
 const REMOVE_SPOT = 'spots/removeSpot';
-const EDIT_SPOT = 'spots/editSpot'
-
-
-// const editSpot = (spot) => {
-//     return {
-//         type: EDIT_SPOT,
-//         spot
-//     }
-// };
 
 const getAllSpots = (spots) => {
     return {
@@ -35,7 +26,6 @@ const addSpot = (spot) => {
 };
 
 export const addSingleSpot = (spot) => async (dispatch) => {
-    // const { name, address, city, country, price } = spot;
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spot)
