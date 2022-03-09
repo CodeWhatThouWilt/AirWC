@@ -5,16 +5,18 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, Image } = require('../../db/models');
+const { Spot, Image, Review, Booking } = require('../../db/models');
 
 const router = express.Router();
 
 
 router.get('/', asyncHandler(async (req, res) => {
     const spots = await Spot.findAll({
-        include: {
-            model: Image
-        }
+        include: [
+            {model: Image},
+            {model: Review},
+            {model: Booking}
+        ]
     });
     return res.json(spots);
 }));
@@ -37,9 +39,11 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
         where: {
             id: spot.id
         },
-        include: {
-            model: Image
-        }
+        include: [
+            { model: Image },
+            { model: Review },
+            { model: Booking }
+        ]
     });
 
     return res.json(newSpot);

@@ -10,7 +10,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 2',
-        price: 20
+        price: 20,
+        shortDescription: 'Lavish bathroom for engineers',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: true,
       },
       {
         userId: 3,
@@ -19,7 +22,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 3',
-        price: 20
+        price: 20,
+        shortDescription: 'Lavish bathroom for senior devs',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: false,
       },
       {
         userId: 4,
@@ -28,7 +34,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 4',
-        price: 20
+        price: 20,
+        shortDescription: 'Bathroom for junior devs',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: true,
       },
       {
         userId: 5,
@@ -37,7 +46,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 5',
-        price: 20
+        price: 20,
+        shortDescription: 'For those in a hurry!',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: true,
       },
       {
         userId: 6,
@@ -46,7 +58,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 6',
-        price: 20
+        price: 20,
+        shortDescription: 'If you gotta go...',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: true,
       },
       {
         userId: 7,
@@ -55,7 +70,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 7',
-        price: 20
+        price: 20,
+        shortDescription: 'Tourist on the go?',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: false,
       },
       {
         userId: 8,
@@ -64,7 +82,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 8',
-        price: 20
+        price: 20,
+        shortDescription: 'Let yourself in!',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: true,
       },
       {
         userId: 9,
@@ -73,7 +94,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 9',
-        price: 20
+        price: 20,
+        shortDescription: '#1 for your place to go #2',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: true,
       },
       {
         userId: 10,
@@ -82,7 +106,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 10',
-        price: 20
+        price: 20,
+        shortDescription: 'If you need to go',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: false,
       },
       {
         userId: 11,
@@ -91,7 +118,10 @@ module.exports = {
         state: 'Solid',
         country: 'United States of America',
         name: 'Post 11',
-        price: 20
+        price: 20,
+        shortDescription: 'Clean bathroom!',
+        longDescription: 'id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam non nisi est sit amet facilisis magna etiam tempor orci eu lobortis elementum nibh tellus molestie nunc non',
+        selfCheckIn: false,
       },
     ], {});
   },
