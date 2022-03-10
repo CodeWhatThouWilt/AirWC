@@ -9,7 +9,7 @@ import Spots from "./components/Spots";
 import ManageSpots from "./components/ManageSpots";
 import NewListing from "./components/ManageSpotModal/NewListing";
 import Spot from "./components/Spot";
-import EditListing from "./components/ManageSpotModal/EditListing";
+import EditListing from "./components/ManageSpotModal/EditListingModal/EditListing";
 
 import { getSpots } from "./store/spots";
 

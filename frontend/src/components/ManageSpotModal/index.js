@@ -1,7 +1,7 @@
-import './ManageSpotModal.css';
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import NewListing from './NewListing';
+import './ManageSpotModal.css';
 
 
 const ManageSpotModal = () => {

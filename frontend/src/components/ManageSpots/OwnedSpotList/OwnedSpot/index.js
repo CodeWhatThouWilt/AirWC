@@ -3,10 +3,11 @@ import SpotListing from '../../../Spots/SpotsList/SpotListing';
 import { useDispatch } from 'react-redux';
 import { deleteSpot } from '../../../../store/spots';
 import { Link } from 'react-router-dom';
+import EditListingModal from '../../../ManageSpotModal/EditListingModal';
 
 const OwnedSpot = ({ spot }) => {
     const dispatch = useDispatch();
-
+    console.log(spot);
     const deleteHandler = () => {
         dispatch(deleteSpot(spot.id))
     }
@@ -14,7 +15,7 @@ const OwnedSpot = ({ spot }) => {
     return (
         <div className='spot-card'>
             <div className='buttons' >
-                <Link to='/edit-listing' state={ spot } ><button>Edit</button></Link>
+                <EditListingModal spot={spot} />
                 <button onClick={deleteHandler} >Delete</button>
             </div>
             <SpotListing details={spot} />

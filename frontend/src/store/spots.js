@@ -34,13 +34,14 @@ export const addSingleSpot = (spot) => async (dispatch) => {
     if (res.ok) {
         const newSpot = await res.json();
         await dispatch(addSpot(newSpot));
+        return
     }
 }
 
 export const editSpot = (spot) => async (dispatch) => {
     const res = await csrfFetch('/api/spots', {
         method: 'PUT',
-        body: JSON.stringify(spot)
+        body: JSON.stringify({spot})
     });
 
     if (res.ok) {

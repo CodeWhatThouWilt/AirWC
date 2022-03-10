@@ -1,34 +1,35 @@
-import './NewListing.css';
-import React, { useState, useEffect, useContext } from 'react';
-import { useDispatch } from 'react-redux';
-import { addSingleSpot } from '../../../store/spots';
+import './EditListing.css';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { editSpot } from '../../../../store/spots';
 
-const NewListing = () => {
+const EditListing = ({ spot }) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    // console.log(spot)
+    const [name, setName] = useState(spot.name);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [country, setCountry] = useState(spot.country);
+    const [price, setPrice] = useState(spot.price);
+    const [state, setState] = useState(spot.state);
+    const [selfCheckIn, setSelfCheckIn] = useState(spot.selfCheckIn);
 
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [country, setCountry] = useState('');
-    const [price, setPrice] = useState('');
-    const [state, setState] = useState('');
-    const [selfCheckIn, setSelfCheckIn] = useState(false);
-    
-    const [shortDescription, setshortDescription] = useState('');
+    const [shortDescription, setshortDescription] = useState(spot.shortDescription);
     const [shortSelection, setShortSelection] = useState(false);
     let shortError;
     if (shortDescription.length > 35) shortError = { color: 'red' }
 
-    const [longDescription, setLongDescription] = useState('');
+    const [longDescription, setLongDescription] = useState(spot.longDescription);
     const [longSelection, setLongSelection] = useState(false);
     let longError;
-    if (shortDescription.length > 1500) longError = { color: 'red' }
-
+    if (longDescription.length > 1500) longError = { color: 'red' }
+    
     const submitHandler = async (e) => {
         e.preventDefault();
-        dispatch(addSingleSpot({
+        dispatch(editSpot({
+            spotId: spot.id,
             name,
             address,
             city,
@@ -121,7 +122,7 @@ const NewListing = () => {
                     />
                 </label>
                 <label>
-                    <div className='description-div'>Long description: {longSelection && <span style={longError} >{`${longDescription.length} / 1500`}</span>}</div>
+                    <div className='description-div'>Long description: {longSelection && <span style={longError}>{`${longDescription.length} / 1500`}</span>}</div>
                     <textarea
                         required
                         placeholder='Long description (1500 char max)'
@@ -142,6 +143,7 @@ const NewListing = () => {
             </form>
         </div>
     )
+
 }
 
-export default NewListing;
+export default EditListing
