@@ -45,13 +45,13 @@ function CheckEmailForm() {
 
     if (currentForm === 'checkEmail') {
         return (
-            <div>
+            <div className="email-check-modal" >
                 <form onSubmit={handleSubmit} className='email-check-form'>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
                     <div className="email-check-form">
-                        <span>Welcome to AirWC!</span>
+                        <span className="welcome-to-airwc">Welcome to AirWC!</span>
                         <label>
                             Email
                             <input
@@ -64,9 +64,9 @@ function CheckEmailForm() {
                             />
                         </label>
                     </div>
-                    <button type="submit">Continue</button>
+                    <button type="submit" className="email-check-continue">Continue</button>
                 </form>
-                <button onClick={guestHandler} >Demo User</button>
+                <button onClick={guestHandler} className='demo-user-button'>Demo User</button>
             </div>
         );
     } else if (currentForm === 'login') {

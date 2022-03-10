@@ -25,10 +25,12 @@ function Navigation({ isLoaded }) {
     }
 
     return (
-        <nav>
-            <Link to="/" className='logo-link' ><img src={logo} className='logo' alt='logo' /></Link>
-            {isLoaded && sessionLinks}
-        </nav>
+        <div className='navbar-container' >
+            <nav>
+                <Link to="/" className='logo-link' ><img src={logo} className='logo' alt='logo' /></Link>
+                {isLoaded && sessionLinks}
+            </nav>
+        </div>
     );
 }
 

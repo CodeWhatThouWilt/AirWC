@@ -1,0 +1,24 @@
+.spot-image-section {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.spot-image-container {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    object-fit: cover;
+}
+
+.spot-image-container img {
+    object-fit: cover;
+}
+
+.spot-solo-image {
+    border-radius: 10px;
+}
+

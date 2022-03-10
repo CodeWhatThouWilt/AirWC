@@ -31,11 +31,23 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(35)
       },
       price: {
         allowNull: false,
         type: Sequelize.DECIMAL
+      },
+      shortDescription: {
+        allowNull: false,
+        type: Sequelize.STRING(35)
+      },
+      longDescription: {
+        allowNull: false,
+        type: Sequelize.STRING(1500)
+      },
+      selfCheckIn: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

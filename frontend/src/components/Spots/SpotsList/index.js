@@ -9,7 +9,7 @@ import SpotListing from './SpotListing';
 const SpotsList = ({ spots }) => {
 
     return (
-        <div>
+        <div className='spot-list-container'>
             {spots.map(spot => (
                 <SpotListing key={spot.id} details={spot} />
             ))}

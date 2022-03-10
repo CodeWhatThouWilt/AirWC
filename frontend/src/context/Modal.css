@@ -21,8 +21,12 @@
 #modal-content {
     position: absolute;
     background-color:white;
-    height: 40%;
+    height: 30%;
     width: 30%;
     border-radius: 10px;
+    border: 10px #4F72C4 solid;
     box-shadow: 1px 1px 10px black;
+    background-color: #90A3CE;
+    color: white;
+    overflow: auto;
 }

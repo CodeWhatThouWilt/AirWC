@@ -1,0 +1,16 @@
+.spot-title-area {
+    width: 60%;
+    height: 75px;
+    margin-top: 20px;
+    justify-self: center;
+}
+
+.spot-name {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.spot-location {
+    font-size: 18px;
+    margin-top: 10px;
+}
