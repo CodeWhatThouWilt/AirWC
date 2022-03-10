@@ -15,9 +15,10 @@ const NewListing = () => {
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');
     const [selfCheckIn, setSelfCheckIn] = useState(false);
-    // const [images, setImages] = useState([])
-    // const [form, setForm] = useState('content')
-    
+
+    const [form, setForm] = useState('content')
+    const [imageInputs, setImageInputs] = useState([{image: ''}])
+
     const [shortDescription, setshortDescription] = useState('');
     const [shortSelection, setShortSelection] = useState(false);
     let shortError;
@@ -28,7 +29,7 @@ const NewListing = () => {
     let longError;
     if (shortDescription.length > 1500) longError = { color: 'red' }
 
-    const submitHandler = async (e) => {
+    const secondSubmit = async (e) => {
         e.preventDefault();
         dispatch(addSingleSpot({
             name,
@@ -39,15 +40,31 @@ const NewListing = () => {
             price,
             shortDescription,
             longDescription,
-            selfCheckIn
+            selfCheckIn,
         }));
         return history.push('/manage-spots')
     }
 
-    return (
-        // {form === 'content'}
+    const firstSubmit = (e) => {
+        e.preventDefault();
+        setForm('images')
+    }
+
+    const addImage = (e) => {
+        e.preventDefault();
+        setImageInputs([...imageInputs, { image: '' }]);
+    }
+
+    const imagesInputHandler = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...imageInputs];
+        list[index][name] = value;
+        setImageInputs(list);
+    };
+
+    if (form === 'content') return (
         <div className='new-list-container' >
-            <form className='new-list-form' onSubmit={submitHandler}>
+            <form className='new-list-form' onSubmit={firstSubmit}>
                 <label>
                     Listing Name:
                     <input
@@ -139,8 +156,26 @@ const NewListing = () => {
                         <option value='false' >False</option>
                     </select>
                 </label>
-                <button className='new-list-button' >Submit</button>
+                <button className='new-list-button'>Submit</button>
             </form>
+        </div>
+    )
+
+
+    if (form === 'images') return (
+        <div>
+            <button onClick={addImage}>Add More Images</button>
+            {imageInputs.map((x, index) => (
+                <div key={index}>
+                    <img src={x.image} alt={`pic ${index}`} />
+                    <input
+                    name='image'
+                    type='text'
+                    value={x.image}
+                    onChange={e => imagesInputHandler(e, index)}
+                    ></input>
+                </div>
+            ))}
         </div>
     )
 }
