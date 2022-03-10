@@ -1,5 +1,5 @@
 import './NewListing.css';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../../store/spots';
 import { useHistory } from 'react-router-dom';
@@ -15,6 +15,8 @@ const NewListing = () => {
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');
     const [selfCheckIn, setSelfCheckIn] = useState(false);
+    const [images, setImages] = useState([])
+    const [form, setForm] = useState('content')
     
     const [shortDescription, setshortDescription] = useState('');
     const [shortSelection, setShortSelection] = useState(false);
@@ -42,9 +44,8 @@ const NewListing = () => {
         return history.push('/manage-spots')
     }
 
-
-
     return (
+        // {form === 'content'}
         <div className='new-list-container' >
             <form className='new-list-form' onSubmit={submitHandler}>
                 <label>
@@ -138,7 +139,7 @@ const NewListing = () => {
                         <option value='false' >False</option>
                     </select>
                 </label>
-                <button className='new-list-button'>Submit</button>
+                <button className='new-list-button' >Submit</button>
             </form>
         </div>
     )

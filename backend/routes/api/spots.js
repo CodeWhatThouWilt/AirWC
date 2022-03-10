@@ -69,7 +69,19 @@ router.put('/', requireAuth, asyncHandler(async (req, res) => {
             longDescription, 
             selfCheckIn
         });
-        return res.json(spotId);
+
+        const editedSpot = await Spot.findOne({
+            where: {
+                id: spot.id
+            },
+            include: [
+                { model: Image },
+                { model: Review },
+                { model: Booking }
+            ]
+        });
+
+        return res.json(editedSpot);
     }
 
     // const err = new Error('Unauthorized');

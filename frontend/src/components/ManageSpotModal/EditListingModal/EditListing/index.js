@@ -25,7 +25,7 @@ const EditListing = ({ spot }) => {
     const [longSelection, setLongSelection] = useState(false);
     let longError;
     if (longDescription.length > 1500) longError = { color: 'red' }
-    
+
     const submitHandler = async (e) => {
         e.preventDefault();
         dispatch(editSpot({
@@ -47,7 +47,7 @@ const EditListing = ({ spot }) => {
 
     return (
         <div className='new-list-container' >
-            <form className='new-list-form' onSubmit={submitHandler}>
+            <form className='new-list-form'>
                 <label>
                     Listing Name:
                     <input
@@ -139,7 +139,7 @@ const EditListing = ({ spot }) => {
                         <option value='false' >False</option>
                     </select>
                 </label>
-                <button className='new-list-button'>Submit</button>
+                <button className='new-list-button' onClick={submitHandler}>Submit</button>
             </form>
         </div>
     )

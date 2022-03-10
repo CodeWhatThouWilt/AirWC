@@ -8,7 +8,6 @@ import ManageSpotModal from '../ManageSpotModal';
 
 const ManageSpots = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const sessionUser = useSelector(state => state.sessionState.user);
     const spots = useSelector((state) => Object.values(state.spotsState));
     
