@@ -23,7 +23,7 @@ router.get('/', asyncHandler(async (req, res) => {
 
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
-    const { address, city, state, country, name, price } = req.body;
+    const { address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn } = req.body;
 
     const spot = await Spot.create({
         userId: user.id,
@@ -32,7 +32,10 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
         state,
         country,
         name,
-        price
+        price,
+        shortDescription, 
+        longDescription, 
+        selfCheckIn
     });
 
     const newSpot = await Spot.findOne({
@@ -51,7 +54,7 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
 router.put('/', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
-    const { spotId, address, city, state, country, name, price } = req.body;
+    const { spotId, address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn } = req.body;
 
     const spot = await Spot.findByPk(spotId);
 
@@ -62,7 +65,10 @@ router.put('/', requireAuth, asyncHandler(async (req, res) => {
             state,
             country,
             name,
-            price
+            price,
+            shortDescription, 
+            longDescription, 
+            selfCheckIn
         });
         return res.json(spotId);
     }

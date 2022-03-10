@@ -34,7 +34,10 @@ const NewListing = () => {
             city,
             state,
             country,
-            price
+            price,
+            shortDescription,
+            longDescription,
+            selfCheckIn
         }));
         return history.push('/manage-spots')
     }

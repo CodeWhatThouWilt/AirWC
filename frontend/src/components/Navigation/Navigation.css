@@ -1,5 +1,4 @@
 .navbar-containter {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     display: flex;
@@ -16,7 +15,6 @@ nav {
     grid-template-columns: 1fr 1.5fr 8fr 1.5fr 1fr ;
     grid-template-rows: 1fr;
     background-color: #303645;
-    border-radius: 20px;
 }
 
 .logo-link {
