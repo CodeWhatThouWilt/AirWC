@@ -5,7 +5,7 @@ import SpotBooking from './SpotBooking';
 const SpotBody = ({ spot }) => {
 
     return (
-        <div>
+        <div className='spot-content-container'>
             <SpotContent spot={spot} />
             <SpotBooking />
         </div>

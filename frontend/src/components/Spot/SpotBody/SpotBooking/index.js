@@ -3,7 +3,7 @@ import './SpotBooking.css'
 const SpotBooking = () => {
 
     return (
-        <div>SpotBooking Component</div>
+        <div className='spot-booking-container'>SpotBooking Component</div>
     )
 }
 

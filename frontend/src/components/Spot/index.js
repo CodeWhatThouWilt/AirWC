@@ -25,11 +25,15 @@ const Spot = () => {
 
     return (
         isLoaded && (
-            <div>
-                <SpotTitle spot={spot} />
-                <SpotImages images={spot.Images} />
-                <SpotBody spot={spot} />
-            </div>
+            <div className='spot-container'>
+                <div className='spot-card' >
+                    <div className='spot-background'>
+                        <SpotTitle spot={spot} />
+                        <SpotImages images={spot.Images} />
+                        <SpotBody spot={spot} />
+                    </div>
+                </div>
+            </div >
         )
     )
 }

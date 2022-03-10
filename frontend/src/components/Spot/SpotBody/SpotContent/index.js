@@ -4,7 +4,7 @@ import SpotReviews from './SpotReviews';
 const SpotContent = ({ spot }) => {
 
     return (
-        <div>
+        <div className='spot-content'>
             <div>
                 <h2>{spot.shortDescription}</h2>
             </div>
