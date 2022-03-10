@@ -7,7 +7,7 @@ import { editSpot } from '../../../../store/spots';
 const EditListing = ({ spot }) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    // console.log(spot)
+    
     const [name, setName] = useState(spot.name);
     const [address, setAddress] = useState(spot.address);
     const [city, setCity] = useState(spot.city);

@@ -15,8 +15,8 @@ const NewListing = () => {
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');
     const [selfCheckIn, setSelfCheckIn] = useState(false);
-    const [images, setImages] = useState([])
-    const [form, setForm] = useState('content')
+    // const [images, setImages] = useState([])
+    // const [form, setForm] = useState('content')
     
     const [shortDescription, setshortDescription] = useState('');
     const [shortSelection, setShortSelection] = useState(false);

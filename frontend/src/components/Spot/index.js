@@ -14,7 +14,6 @@ const Spot = () => {
     const { spotId } = useParams();
 
     const spot = useSelector(state => state.spotsState[spotId]);
-    console.log('SPOT', spot);
 
 
     useEffect(() => {

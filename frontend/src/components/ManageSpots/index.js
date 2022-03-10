@@ -1,6 +1,6 @@
 import './ManageSpots.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import OwnedSpotList from './OwnedSpotList';
 import { getSpots } from '../../store/spots';
 import { useEffect } from 'react';
