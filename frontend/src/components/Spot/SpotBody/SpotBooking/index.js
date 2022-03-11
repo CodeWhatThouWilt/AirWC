@@ -52,11 +52,16 @@ const SpotBooking = () => {
             hour + 12 < rightNow.getHours() && rightNow > value
     }
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+        
+    }
+
 
     return (
         <div className='spot-booking-container'>
-            <form>
-                <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} /* tileContent={tileContent} */ />
+            <form onSubmit={e => submitHandler(e)}>
+                <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled}/>
                 <label>
                     Time:
                     <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
