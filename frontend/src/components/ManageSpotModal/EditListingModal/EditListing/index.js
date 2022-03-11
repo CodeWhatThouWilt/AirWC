@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { editSpot } from '../../../../store/spots';
 
-const EditListing = ({ spot }) => {
+const EditListing = ({ spot, setShowModal }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     
@@ -40,6 +40,7 @@ const EditListing = ({ spot }) => {
             longDescription,
             selfCheckIn
         }));
+        setShowModal(false);
         return history.push('/manage-spots')
     }
 

@@ -7,7 +7,7 @@ const SpotBody = ({ spot }) => {
     return (
         <div className='spot-content-container'>
             <SpotContent spot={spot} />
-            <SpotBooking />
+            <SpotBooking bookings={spot.Bookings} />
         </div>
     )
 }

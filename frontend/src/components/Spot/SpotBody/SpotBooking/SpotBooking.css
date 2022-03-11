@@ -1,5 +1,12 @@
 .spot-booking-container {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     width: 40%;
+}
+
+.spot-booking-container form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
 }
