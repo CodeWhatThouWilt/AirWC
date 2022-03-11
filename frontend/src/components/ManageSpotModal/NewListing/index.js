@@ -1,5 +1,5 @@
 import './NewListing.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../../store/spots';
 import { useHistory } from 'react-router-dom';
@@ -17,7 +17,7 @@ const NewListing = ({ setShowModal }) => {
     const [selfCheckIn, setSelfCheckIn] = useState(false);
 
     const [form, setForm] = useState('content')
-    const [imageInputs, setImageInputs] = useState([{image: ''}])
+    const [imageInputs, setImageInputs] = useState([''])
 
     const [shortDescription, setshortDescription] = useState('');
     const [shortSelection, setShortSelection] = useState(false);
@@ -57,15 +57,18 @@ const NewListing = ({ setShowModal }) => {
     }
 
     const imagesInputHandler = (e, index) => {
-        const { name, value } = e.target;
+        e.preventDefault();
+        e.stopPropagation();
+        const { value } = e.target;
         const list = [...imageInputs];
-        list[index][name] = value;
+        list[index] = value;
         setImageInputs(list);
     };
 
+
     if (form === 'content') return (
         <div className='new-list-container' >
-            <form className='new-list-form' onSubmit={secondSubmit}>
+            <form className='new-list-form' onSubmit={firstSubmit}>
                 <label>
                     Listing Name:
                     <input
@@ -162,23 +165,22 @@ const NewListing = ({ setShowModal }) => {
         </div>
     )
 
-
-    // if (form === 'images') return (
-    //     <div>
-    //         <button onClick={addImage}>Add More Images</button>
-    //         {imageInputs.map((x, index) => (
-    //             <div key={index}>
-    //                 <img src={x.image} alt={`pic ${index}`} />
-    //                 <input
-    //                 name='image'
-    //                 type='text'
-    //                 value={x.image}
-    //                 onChange={e => imagesInputHandler(e, index)}
-    //                 ></input>
-    //             </div>
-    //         ))}
-    //     </div>
-    // )
+    console.log(imageInputs)
+    if (form === 'images') return (
+        <div>
+            <button onClick={addImage}>Add More Images</button>
+            {imageInputs.map((x, index) => (
+                <div key={index} className='image-submission-container' >
+                    <img src={imageInputs[index]} alt={`pic ${index}`} className='submitted-image' />
+                    <input
+                    type='text'
+                    value={x.image}
+                    onChange={e => imagesInputHandler(e, index)}
+                    ></input>
+                </div>
+            ))}
+        </div>
+    )
 }
 
 export default NewListing;

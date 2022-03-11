@@ -37,10 +37,13 @@ const SpotBooking = () => {
     const rightNow = new Date();
 
     const minDisabled = (minute) => {
-        return dayTime === 'AM' ?
-            hourSelection - 1 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value :
-            hourSelection - 1 + 12 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
+        if (dayTime === 'AM') {
+            return hourSelection !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
+        } else {
+            return hourSelection + 12 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
+        }
     }
+
     console.log(minDisabled(59))
 
     const hourDisabled = (hour) => {
@@ -67,11 +70,11 @@ const SpotBooking = () => {
                         ))}
                     </select>
                     <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
-                        {rightNow.getHours() > 11 && rightNow > value ? <option disabled value='AM' >AM</option> : <option value='AM' >AM</option>}
+                        <option disabled={rightNow.getHours() > 11 && rightNow > value } value='AM' >AM</option>
                         <option value='PM' >PM</option>
                     </select>
                 </label>
-                <button>Check Avilability</button>
+                <button>Check Availability</button>
             </form>
         </div>
     )
