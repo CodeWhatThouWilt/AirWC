@@ -3,38 +3,21 @@ import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 
 import Calendar from 'react-calendar';
-import { differenceInCalendarDays, isBefore,} from 'date-fns'
+import { differenceInCalendarDays, isBefore, } from 'date-fns'
 
 const SpotBooking = () => {
     const [value, setValue] = useState(new Date());
-    const [ minSelection, setMinSelection ] = useState('00');
-    const [ hourSelection, setHourSelection] = useState(12);
-    const [ dayTime, setDayTime ] = useState('PM')
-
-
-    // const datesToAddContentTo = [new Date(), ];
-
-    // function isSameDay(a, b) {
-    //     return differenceInCalendarDays(a, b) === 0;
-    // }
-
-    // function tileContent({ date, view }) {
-    //     // Add class to tiles in month view only
-    //     if (view === 'month') {
-    //         // Check if a date React-Calendar wants to check is on the list of dates to add class to
-    //         if (datesToAddContentTo.find(dDate => isSameDay(dDate, date))) {
-    //             return <div>•</div>;
-    //         }
-    //     }
-    // }
+    const [minSelection, setMinSelection] = useState('00');
+    const [hourSelection, setHourSelection] = useState(12);
+    const [dayTime, setDayTime] = useState('PM')
 
 
     function tileDisabled({ date, view }) {
         // Add class to tiles in month view only
         if (view === 'month') {
-            // Check if a date React-Calendar wants to check is within any of the ranges
             const newDate = new Date();
-            return isBefore(date, new Date());
+            // Check if a date React-Calendar wants to check is within any of the ranges
+            return isBefore(date, newDate.setDate(newDate.getDate() - 1));
         }
     }
 
@@ -51,7 +34,21 @@ const SpotBooking = () => {
         }
     })();
 
-    console.log(minutes)
+    const rightNow = new Date();
+
+    const minDisabled = (minute) => {
+        return dayTime === 'AM' ?
+            hourSelection - 1 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value :
+            hourSelection - 1 + 12 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
+
+    }
+
+    const hourDisabled = (hour) => {
+        return dayTime === 'AM' ?
+            hour < rightNow.getHours() && rightNow > value :
+            hour + 12 < rightNow.getHours() && rightNow > value
+    }
+
 
     return (
         <div className='spot-booking-container'>
@@ -59,19 +56,23 @@ const SpotBooking = () => {
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} /* tileContent={tileContent} */ />
                 <label>
                     Time:
-                    <select>
-                        {hours.map(hour => (
-                            <option>{hour}</option>
-                        ))}
+                    <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
+                        {hours.map(hour => {
+                            return hourDisabled(hour) ?
+                                <option key={hour} disabled value={hour} >{hour}</option> :
+                                <option key={hour} value={hour} >{hour}</option>
+                        })}
                     </select>
-                    <select>
-                        {minutes.map(min => (
-                            <option>{min}</option>
-                        ))}
+                    <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
+                        {minutes.map(min => {
+                            return minDisabled(min) ?
+                                <option key={min} disabled value={min} >{min}</option> :
+                                <option key={min} value={min} >{min}</option>
+                        })}
                     </select>
-                    <select>
-                        <option>AM</option>
-                        <option>PM</option>
+                    <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
+                        {rightNow.getHours() > 11 && rightNow > value ? <option disabled value='AM' >AM</option> : <option value='AM' >AM</option>}
+                        <option value='PM' >PM</option>
                     </select>
                 </label>
                 <button>Check Avilability</button>

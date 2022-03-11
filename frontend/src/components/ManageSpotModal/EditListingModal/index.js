@@ -12,7 +12,7 @@ const EditListingModal = ({ spot }) => {
             <button className='create-spot-button' onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <EditListing spot={spot} />
+                    <EditListing spot={spot} setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

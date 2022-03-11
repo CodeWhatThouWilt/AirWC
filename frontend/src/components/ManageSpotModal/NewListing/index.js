@@ -162,22 +162,22 @@ const NewListing = () => {
     )
 
 
-    if (form === 'images') return (
-        <div>
-            <button onClick={addImage}>Add More Images</button>
-            {imageInputs.map((x, index) => (
-                <div key={index}>
-                    <img src={x.image} alt={`pic ${index}`} />
-                    <input
-                    name='image'
-                    type='text'
-                    value={x.image}
-                    onChange={e => imagesInputHandler(e, index)}
-                    ></input>
-                </div>
-            ))}
-        </div>
-    )
+    // if (form === 'images') return (
+    //     <div>
+    //         <button onClick={addImage}>Add More Images</button>
+    //         {imageInputs.map((x, index) => (
+    //             <div key={index}>
+    //                 <img src={x.image} alt={`pic ${index}`} />
+    //                 <input
+    //                 name='image'
+    //                 type='text'
+    //                 value={x.image}
+    //                 onChange={e => imagesInputHandler(e, index)}
+    //                 ></input>
+    //             </div>
+    //         ))}
+    //     </div>
+    // )
 }
 
 export default NewListing;
