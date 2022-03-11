@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../../store/spots';
 import { useHistory } from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fontawesome/react-fontawesome'
 
 const NewListing = ({ setShowModal }) => {
     const history = useHistory();
@@ -15,6 +16,7 @@ const NewListing = ({ setShowModal }) => {
     const [price, setPrice] = useState('');
     const [state, setState] = useState('');
     const [selfCheckIn, setSelfCheckIn] = useState(false);
+    const [errors, setErrors] = useState([]);
 
     const [form, setForm] = useState('content')
     const [imageInputs, setImageInputs] = useState([''])
@@ -30,6 +32,9 @@ const NewListing = ({ setShowModal }) => {
     if (shortDescription.length > 1500) longError = { color: 'red' }
 
     const secondSubmit = async (e) => {
+
+        setErrors([]);
+
         e.preventDefault();
         dispatch(addSingleSpot({
             name,
@@ -42,10 +47,28 @@ const NewListing = ({ setShowModal }) => {
             longDescription,
             selfCheckIn,
             imageInputs
-        }));
-        setShowModal(false);
-        return history.push('/manage-spots')
+        }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
+
+        if (!setErrors.length) setShowModal(false);
     }
+
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (password === confirmPassword) {
+    //         setErrors([]);
+    //         return dispatch(sessionActions.signup({ email, firstName, lastName, password }))
+    //             .catch(async (res) => {
+    //                 const data = await res.json();
+    //                 if (data && data.errors) setErrors(data.errors);
+    //             });
+    //     }
+    //     return setErrors(['Confirm Password field must be the same as the Password field']);
+    // };
 
     const firstSubmit = (e) => {
         e.preventDefault();
@@ -170,15 +193,23 @@ const NewListing = ({ setShowModal }) => {
     if (form === 'images') return (
         <div>
             <button onClick={addImage}>Add More Images</button>
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
             <form onSubmit={secondSubmit}>
             {imageInputs.map((x, index) => (
                 <div key={index} className='image-submission-container' >
+                    <div className='input-and-button-div'>
                     <img src={imageInputs[index]} alt={`pic ${index}`} className='submitted-image' />
                     <input
                     type='text'
                     value={x.image}
                     onChange={e => imagesInputHandler(e, index)}
                     ></input>
+                    <button>
+                            {/* <FontAwesomeIcon icon="fa-solid fa-circle-minus" /> */}
+                    </button>
+                    </div>
                 </div>
             ))}
             <button>Submit</button>
