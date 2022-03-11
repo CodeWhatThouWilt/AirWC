@@ -20,7 +20,7 @@ const ManageSpotModal = () => {
             <button className='create-spot-button' onClick={() => setShowModal(true)}>Create New Listing</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <NewListing />
+                    <NewListing setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

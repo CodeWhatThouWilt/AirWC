@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../../store/spots';
 import { useHistory } from 'react-router-dom';
 
-const NewListing = () => {
+const NewListing = ({ setShowModal }) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -42,6 +42,7 @@ const NewListing = () => {
             longDescription,
             selfCheckIn,
         }));
+        setShowModal(false);
         return history.push('/manage-spots')
     }
 
@@ -64,7 +65,7 @@ const NewListing = () => {
 
     if (form === 'content') return (
         <div className='new-list-container' >
-            <form className='new-list-form' onSubmit={firstSubmit}>
+            <form className='new-list-form' onSubmit={secondSubmit}>
                 <label>
                     Listing Name:
                     <input

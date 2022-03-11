@@ -40,8 +40,8 @@ const SpotBooking = () => {
         return dayTime === 'AM' ?
             hourSelection - 1 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value :
             hourSelection - 1 + 12 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
-
     }
+    console.log(minDisabled(59))
 
     const hourDisabled = (hour) => {
         return dayTime === 'AM' ?
@@ -57,18 +57,14 @@ const SpotBooking = () => {
                 <label>
                     Time:
                     <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
-                        {hours.map(hour => {
-                            return hourDisabled(hour) ?
-                                <option key={hour} disabled value={hour} >{hour}</option> :
-                                <option key={hour} value={hour} >{hour}</option>
-                        })}
+                        {hours.map(hour => (
+                            <option key={hour} disabled={hourDisabled(hour)} value={hour} >{hour}</option>
+                        ))}
                     </select>
                     <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
-                        {minutes.map(min => {
-                            return minDisabled(min) ?
-                                <option key={min} disabled value={min} >{min}</option> :
-                                <option key={min} value={min} >{min}</option>
-                        })}
+                        {minutes.map(min => (
+                            <option key={min} disabled={minDisabled(min)} value={min} >{min}</option>
+                        ))}
                     </select>
                     <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
                         {rightNow.getHours() > 11 && rightNow > value ? <option disabled value='AM' >AM</option> : <option value='AM' >AM</option>}
