@@ -41,6 +41,7 @@ const NewListing = ({ setShowModal }) => {
             shortDescription,
             longDescription,
             selfCheckIn,
+            imageInputs
         }));
         setShowModal(false);
         return history.push('/manage-spots')
@@ -169,6 +170,7 @@ const NewListing = ({ setShowModal }) => {
     if (form === 'images') return (
         <div>
             <button onClick={addImage}>Add More Images</button>
+            <form onSubmit={secondSubmit}>
             {imageInputs.map((x, index) => (
                 <div key={index} className='image-submission-container' >
                     <img src={imageInputs[index]} alt={`pic ${index}`} className='submitted-image' />
@@ -179,6 +181,8 @@ const NewListing = ({ setShowModal }) => {
                     ></input>
                 </div>
             ))}
+            <button>Submit</button>
+            </form>
         </div>
     )
 }
