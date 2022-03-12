@@ -1,5 +1,6 @@
 import './CurrentBookingsList.css';
 import OwnedSpot from '../../ManageSpots/OwnedSpotList/OwnedSpot';
+import { getAllBookings } from '../../../store/bookings';
 
 
 

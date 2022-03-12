@@ -69,9 +69,7 @@ router.post('/', asyncHandler(async (req, res) => {
 router.get('/', asyncHandler(async (req, res) => {
     const spots = await Spot.findAll({
         include: [
-            {model: Image},
-            {model: Review},
-            {model: Booking}
+            {model: Image}
         ]
     });
     return res.json(spots);
@@ -109,9 +107,7 @@ router.post('/', requireAuth, validateSpot, asyncHandler(async (req, res) => {
             id: spot.id
         },
         include: [
-            { model: Image },
-            { model: Review },
-            { model: Booking }
+            { model: Image }
         ]
     });
 
@@ -141,9 +137,7 @@ router.put('/', requireAuth, asyncHandler(async (req, res) => {
                 id: spot.id
             },
             include: [
-                { model: Image },
-                { model: Review },
-                { model: Booking }
+                { model: Image }
             ]
         });
 

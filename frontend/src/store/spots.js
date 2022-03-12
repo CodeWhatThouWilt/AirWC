@@ -71,19 +71,6 @@ export const getSpots = () => async (dispatch) => {
     }
 }
 
-export const createBooking = (booking) => async(dispatch) => {
-    console.log(booking);
-    const res = await csrfFetch('/api/bookings', {
-        method: 'POST',
-        body: JSON.stringify(booking)
-    });
-
-    if (res.ok) {
-        const booking = await res.json();
-        await dispatch(addSpot(booking));
-    }
-}
-
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {

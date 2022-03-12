@@ -1,26 +1,31 @@
 import './SpotBooking.css'
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
-import { createBooking } from '../../../../store/spots';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+// import { createBooking } from '../../../../store/spots';
+import { getAllBookings, createBooking } from '../../../../store/bookings';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Calendar from 'react-calendar';
-import { isBefore, } from 'date-fns'
+import { isBefore } from 'date-fns'
 
 
 const SpotBooking = ({ spot }) => {
     const dispatch = useDispatch();
+    const bookings = useSelector(state => state.bookingsState.spotBookings)
+
     const [value, setValue] = useState(new Date());
     const [minSelection, setMinSelection] = useState('00');
     const [hourSelection, setHourSelection] = useState(12);
     const [dayTime, setDayTime] = useState('PM');
     const [minBooked, setMinBooked ] =  useState(5);
 
+    useEffect(() => {
+        dispatch(getAllBookings())
+    }, [dispatch])
+
     function tileDisabled({ date, view }) {
-        // Add class to tiles in month view only
         if (view === 'month') {
             const newDate = new Date();
-            // Check if a date React-Calendar wants to check is within any of the ranges
             return isBefore(date, newDate.setDate(newDate.getDate() - 1));
         }
     }
@@ -58,10 +63,19 @@ const SpotBooking = ({ spot }) => {
     const submitHandler = async(e) => {
         e.preventDefault();
 
-        const startHour = dayTime === 'AM' ? hourSelection : parseInt(hourSelection, 10) + 12
-        console.log(startHour);
-        const startDate = new Date(value.getFullYear(), value.getMonth(), value.getDate(), startHour, minSelection);
+        let startHour;
         
+        if (dayTime === 'AM' && hourSelection === 12) {
+            startHour = 0;
+        } else if (dayTime === 'AM'){
+            startHour = hourSelection
+        } else if (dayTime === 'PM' && hourSelection === 12) {
+            startHour = 12;
+        } else if (dayTime === 'PM') {
+            startHour = hourSelection + 12
+        }
+
+        const startDate = new Date(value.getFullYear(), value.getMonth(), value.getDate(), startHour, minSelection);
         const endDate = new Date(startDate.getTime() + parseInt(minBooked, 10) * 1000 * 60);
 
         const booking = {

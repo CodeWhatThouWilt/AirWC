@@ -18,8 +18,8 @@ const bookingValidations = [
             const checkRange = await Booking.findAll({
                 where: {
                     [Op.or]: [
-                        {startDate: {[Op.between]: [req.body.startDate, req.body.endDate]}},
-                        {endDate: {[Op.between]: [req.body.startDate, req.body.endDate]}}
+                        { startDate: { [Op.between]: [req.body.startDate, req.body.endDate] } },
+                        { endDate: { [Op.between]: [req.body.startDate, req.body.endDate] } }
                     ]
                 }
             });
@@ -29,31 +29,49 @@ const bookingValidations = [
     handleValidationErrors
 ]
 
+
+
 router.post('/', requireAuth, bookingValidations, asyncHandler(async (req, res) => {
     const userId = req.user.id;
     const { spotId, startDate, endDate } = req.body;
 
-    const booking = await Booking.create({
+    const userBooking = await Booking.create({
         userId,
         spotId,
         startDate,
         endDate
     });
 
-    const booked = await Spot.findOne({
-        where: {
-            id: booking.spotId
-        },
-        include: [
-            { model: Image },
-            { model: Review },
-            { model: Booking }
-        ]
+    if (userBooking) {
+        spotBooking = await Booking.findByPk(userBooking.id, {
+            attributes: { exclude: ['userId'] }
+        });
+    }
+
+    return res.json({ userBooking, spotBooking });
+
+}));
+
+
+
+router.get('/', restoreUser, asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    let userBookings = null;
+
+    if (userId) {
+        userBookings = await Booking.findAll({
+            where: {
+                userId
+            }
+        })
+    }
+
+    spotBookings = await Booking.findAll({
+        attributes: { exclude: ['userId'] }
     });
 
-    return res.json(booked);
-
-}))
+    return res.json({ spotBookings, userBookings });
+}));
 
 
 module.exports = router;
