@@ -24,6 +24,10 @@ function App() {
       {isLoaded && (
         <Switch>
 
+          <Route path='manage-bookings'>
+
+          </Route>
+
           <Route path='/manage-spots'>
             <ManageSpots />
           </Route>

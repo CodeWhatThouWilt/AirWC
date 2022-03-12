@@ -28,7 +28,7 @@ nav {
     position: relative;
     display: inline-block;
     justify-self: right;
-    margin-top: 25px;
+    /* margin-top: 25px; */
 }
 
 .logo {

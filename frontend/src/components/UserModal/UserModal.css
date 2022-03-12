@@ -10,3 +10,7 @@
     margin-top: 25px;
 }
 
+.login-button:hover {
+    background-color: #4869b8;
+}
+
