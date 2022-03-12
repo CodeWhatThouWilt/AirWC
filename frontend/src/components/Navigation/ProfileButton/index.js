@@ -35,7 +35,7 @@ function ProfileButton({ user }) {
             <button onClick={openMenu} className='login-button' >
                 <div className='user-dropdown-icons'>
                     <i className="fa-solid fa-restroom"></i>
-                    <i class="fa-solid fa-poop"></i>
+                    <i className="fa-solid fa-poop"></i>
                 </div>
             </button>
             {showMenu && (
@@ -46,7 +46,7 @@ function ProfileButton({ user }) {
                         <li><NavLink to='/manage-spots'>My spots</NavLink></li>
                         <li><NavLink to='/manage-bookings'>Bookings</NavLink></li>
                         <li>
-                            <button onClick={logout}>Log Out</button>
+                            <button className='home-list-button logout-button' onClick={logout}>Log Out</button>
                         </li>
                     </ul>
                 </div>

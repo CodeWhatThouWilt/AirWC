@@ -8,9 +8,10 @@ import Homepage from "./components/Homepage";
 import Spots from "./components/Spots";
 import ManageSpots from "./components/ManageSpots";
 import Spot from "./components/Spot";
+import ManageBookings from "./components/ManageBookings";
 
 function App() {
-  
+
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -24,11 +25,11 @@ function App() {
       {isLoaded && (
         <Switch>
 
-          <Route path='manage-bookings'>
-
+          <Route exact path='/manage-bookings'>
+            <ManageBookings />
           </Route>
 
-          <Route path='/manage-spots'>
+          <Route exact path='/manage-spots'>
             <ManageSpots />
           </Route>
 
@@ -44,6 +45,9 @@ function App() {
             <Homepage />
           </Route>
 
+          <Route path='/' >
+            404 Not found.
+          </Route>
         </Switch>
       )}
     </>
