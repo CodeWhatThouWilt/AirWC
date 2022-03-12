@@ -6,15 +6,33 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
 const { Spot, Image, Review, Booking } = require('../../db/models');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
-// const bookingValidators
 
-router.post('/', asyncHandler, asyncHandler( async(req, res) => {
-    const { userId } = req;
-    const { spotId, startDate, endDate} = req.body;
-    console.log('###############', spotId, startDate, endDate)
+const bookingValidations = [
+    check('startDate', 'endDate')
+        .custom(async (value, { req }) => {
+            // console.log('######################', value, valueTwo)
+            const checkRange = await Booking.findAll({
+                where: {
+                    [Op.or]: [
+                        {startDate: {[Op.between]: [req.body.startDate, req.body.endDate]}},
+                        {endDate: {[Op.between]: [req.body.startDate, req.body.endDate]}}
+                    ]
+                }
+            });
+
+            if (checkRange.length) return Promise.reject("TIME OVERLAP")
+        }),
+    handleValidationErrors
+]
+
+router.post('/', requireAuth, bookingValidations, asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { spotId, startDate, endDate } = req.body;
+
     const booking = await Booking.create({
         userId,
         spotId,

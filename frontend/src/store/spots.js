@@ -77,7 +77,6 @@ export const createBooking = (booking) => async(dispatch) => {
         method: 'POST',
         body: JSON.stringify(booking)
     });
-    console.log('yoooooooooo made')
 
     if (res.ok) {
         const booking = await res.json();

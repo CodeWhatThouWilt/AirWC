@@ -5,7 +5,7 @@ import { createBooking } from '../../../../store/spots';
 import { useDispatch } from 'react-redux';
 
 import Calendar from 'react-calendar';
-import { differenceInCalendarDays, isBefore, } from 'date-fns'
+import { isBefore, } from 'date-fns'
 
 
 const SpotBooking = ({ spot }) => {
@@ -57,12 +57,13 @@ const SpotBooking = ({ spot }) => {
 
     const submitHandler = async(e) => {
         e.preventDefault();
-        const startHour = dayTime === 'AM' ? hourSelection : hourSelection + 12
+
+        const startHour = dayTime === 'AM' ? hourSelection : parseInt(hourSelection, 10) + 12
+        console.log(startHour);
         const startDate = new Date(value.getFullYear(), value.getMonth(), value.getDate(), startHour, minSelection);
         
-        const endDate = new Date(startDate.getTime() + minBooked * 1000);
+        const endDate = new Date(startDate.getTime() + parseInt(minBooked, 10) * 1000 * 60);
 
-        console.log(startDate, endDate)
         const booking = {
             spotId : spot.id,
             startDate,
