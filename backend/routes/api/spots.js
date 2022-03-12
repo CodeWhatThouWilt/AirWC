@@ -61,7 +61,7 @@ const validateSpot = [
 ];
 
 
-router.post('/', validateSpot,asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
     res.json();
 }))
 

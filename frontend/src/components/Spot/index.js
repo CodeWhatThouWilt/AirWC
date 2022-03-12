@@ -14,8 +14,7 @@ const Spot = () => {
     const { spotId } = useParams();
 
     const spot = useSelector(state => state.spotsState[spotId]);
-
-
+    
     useEffect(() => {
         dispatch(getSpots()).then(res => setIsLoaded(true));
     }, [dispatch]);

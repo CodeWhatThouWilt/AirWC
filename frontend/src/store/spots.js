@@ -72,14 +72,16 @@ export const getSpots = () => async (dispatch) => {
 }
 
 export const createBooking = (booking) => async(dispatch) => {
+    console.log(booking);
     const res = await csrfFetch('/api/bookings', {
         method: 'POST',
         body: JSON.stringify(booking)
     });
+    console.log('yoooooooooo made')
 
     if (res.ok) {
         const booking = await res.json();
-        dispatch(addSpot(booking))
+        await dispatch(addSpot(booking));
     }
 }
 

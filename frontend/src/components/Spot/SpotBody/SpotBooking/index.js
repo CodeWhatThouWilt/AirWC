@@ -1,16 +1,20 @@
 import './SpotBooking.css'
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
+import { createBooking } from '../../../../store/spots';
+import { useDispatch } from 'react-redux';
 
 import Calendar from 'react-calendar';
 import { differenceInCalendarDays, isBefore, } from 'date-fns'
 
-const SpotBooking = () => {
+
+const SpotBooking = ({ spot }) => {
+    const dispatch = useDispatch();
     const [value, setValue] = useState(new Date());
     const [minSelection, setMinSelection] = useState('00');
     const [hourSelection, setHourSelection] = useState(12);
-    const [dayTime, setDayTime] = useState('PM')
-
+    const [dayTime, setDayTime] = useState('PM');
+    const [minBooked, setMinBooked ] =  useState(5);
 
     function tileDisabled({ date, view }) {
         // Add class to tiles in month view only
@@ -44,7 +48,6 @@ const SpotBooking = () => {
         }
     }
 
-    console.log(minDisabled(59))
 
     const hourDisabled = (hour) => {
         return dayTime === 'AM' ?
@@ -52,16 +55,28 @@ const SpotBooking = () => {
             hour + 12 < rightNow.getHours() && rightNow > value
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
         e.preventDefault();
+        const startHour = dayTime === 'AM' ? hourSelection : hourSelection + 12
+        const startDate = new Date(value.getFullYear(), value.getMonth(), value.getDate(), startHour, minSelection);
         
-    }
+        const endDate = new Date(startDate.getTime() + minBooked * 1000);
 
+        console.log(startDate, endDate)
+        const booking = {
+            spotId : spot.id,
+            startDate,
+            endDate
+        }
+
+        await dispatch(createBooking(booking))
+
+    }
 
     return (
         <div className='spot-booking-container'>
             <form onSubmit={e => submitHandler(e)}>
-                <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled}/>
+                <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
                 <label>
                     Time:
                     <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
@@ -75,9 +90,15 @@ const SpotBooking = () => {
                         ))}
                     </select>
                     <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
-                        <option disabled={rightNow.getHours() > 11 && rightNow > value } value='AM' >AM</option>
+                        <option disabled={rightNow.getHours() > 11 && rightNow > value} value='AM' >AM</option>
                         <option value='PM' >PM</option>
                     </select>
+                </label>
+                <label>
+                    Book for:
+                    <div className='min-selector'>
+                        <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
+                    </div>
                 </label>
                 <button>Check Availability</button>
             </form>

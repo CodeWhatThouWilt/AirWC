@@ -11,10 +11,10 @@ const router = express.Router();
 
 // const bookingValidators
 
-router.post('/', asyncHandler, async((req, res) => {
+router.post('/', asyncHandler, asyncHandler( async(req, res) => {
     const { userId } = req;
     const { spotId, startDate, endDate} = req.body;
-
+    console.log('###############', spotId, startDate, endDate)
     const booking = await Booking.create({
         userId,
         spotId,
@@ -33,7 +33,7 @@ router.post('/', asyncHandler, async((req, res) => {
         ]
     });
 
-    return res.json();
+    return res.json(booked);
 
 }))
 
