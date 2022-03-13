@@ -41,13 +41,14 @@ export const addSingleSpot = (spot) => async (dispatch) => {
 export const editSpot = (spot) => async (dispatch) => {
     const res = await csrfFetch('/api/spots', {
         method: 'PUT',
-        body: JSON.stringify({spot})
+        body: JSON.stringify(spot)
     });
 
     if (res.ok) {
         const newSpot = await res.json();
         await dispatch(addSpot(newSpot));
     }
+    return res
 }
 
 export const deleteSpot = (spotId) => async (dispatch) => {
@@ -69,6 +70,19 @@ export const getSpots = () => async (dispatch) => {
     const spots = await res.json();
     await dispatch(getAllSpots(spots));
     }
+}
+
+export const editImages = (images) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${images.spotId}/images`, {
+        method: 'PUT',
+        body: JSON.stringify(images)
+    });
+
+    if (res.ok) {
+        const editedSpot = await res.json()
+        dispatch(addSpot(editedSpot))
+    }
+    return res;
 }
 
 const initialState = {};

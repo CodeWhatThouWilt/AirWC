@@ -36,7 +36,7 @@ const validateSpot = [
         .isString()
         .withMessage('Provide a valid state'),
     check('country')
-        .isLength({max: 56 })
+        .isLength({ max: 56 })
         .withMessage('56 character limit')
         .isLength({ min: 4 })
         .withMessage('4 character min'),
@@ -50,12 +50,12 @@ const validateSpot = [
         .withMessage('Required')
         .isLength({ max: 1500 })
         .withMessage('1500 character limit'),
-        oneOf([
-            check('selfCheckIn')
-                .equals('false'),
-            check('selfCheckIn')
-                .equals('true')
-        ], 'True or false'),
+    oneOf([
+        check('selfCheckIn')
+            .equals('false'),
+        check('selfCheckIn')
+            .equals('true')
+    ], 'True or false'),
     handleValidationErrors
 ];
 
@@ -123,9 +123,9 @@ router.post('/', requireAuth, validateSpot, validateImages, asyncHandler(async (
     return res.json(newSpot);
 }))
 
-router.put('/', requireAuth, asyncHandler(async (req, res) => {
+router.put('/', requireAuth, validateSpot, asyncHandler(async (req, res) => {
     const { user } = req;
-    const { spotId, address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn } = req.body.spot;
+    const { spotId, address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn } = req.body;
     const spot = await Spot.findByPk(spotId);
 
     if (spot.userId === user.id) {
@@ -181,6 +181,42 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
     err.errors = ['Unauthorized'];
     err.status = 401;
     return next(err);
+}))
+
+
+router.put('/:spotId/images', requireAuth, asyncHandler(async (req, res) => {
+    const { spotId, images } = req.body;
+    const userId = req.user.id;
+    const spot = await Spot.findByPk(spotId, { include: { model: Image } });
+
+    if (userId === spot.userId) {
+        const spotImagesArr = spot.Images.map(image => image.url)
+        const incomingImagesArr = images.map(image => image.image)
+        const toBeCreated = incomingImagesArr.filter(image => !spotImagesArr.includes(image))
+        const toBeDestroyed = spotImagesArr.filter(image => !incomingImagesArr.includes(image))
+
+        for await (const image of toBeDestroyed) {
+            const doomedImage = await Image.findOne({
+                where: {
+                    url: image
+                }
+            })
+            await doomedImage.destroy();
+
+        }
+
+        // console.log('##################', toBeDestroyed);
+
+        for await (const image of toBeCreated) {
+            const newImage = await Image.create({
+                spotId: spot.id,
+                url: image
+            });
+        }
+        const updatedSpot = await Spot.findByPk(spotId, { include: { model: Image } });
+        res.json(updatedSpot);
+    }
+
 }))
 
 

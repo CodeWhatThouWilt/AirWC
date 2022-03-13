@@ -1,13 +1,11 @@
 import './NewListing.css';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addSingleSpot, verifySpotContent } from '../../../store/spots';
-import { useHistory } from 'react-router-dom';
+import { addSingleSpot } from '../../../store/spots';
 import { csrfFetch } from '../../../store/csrf';
 // import { FontAwesomeIcon } from '@fontawesome/react-fontawesome'
 
 const NewListing = ({ setShowModal }) => {
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
@@ -49,27 +47,15 @@ const NewListing = ({ setShowModal }) => {
             selfCheckIn,
             imageInputs
         }))
+            .then(res => res.json())
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
-
-        if (!errors.length) setShowModal(false);
+        console.log(errors)
+        if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
     }
 
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (password === confirmPassword) {
-    //         setErrors([]);
-    //         return dispatch(sessionActions.signup({ email, firstName, lastName, password }))
-    //             .catch(async (res) => {
-    //                 const data = await res.json();
-    //                 if (data && data.errors) setErrors(data.errors);
-    //             });
-    //     }
-    //     return setErrors(['Confirm Password field must be the same as the Password field']);
-    // };
 
     const firstSubmit = async (e) => {
         e.preventDefault();
@@ -234,7 +220,7 @@ const NewListing = ({ setShowModal }) => {
 
 
     const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
-    console.log(errors);
+
     if (form === 'images') return (
         <div className='image-form-container'>
             <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setForm('content')} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px' }}></i>
