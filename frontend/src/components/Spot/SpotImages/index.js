@@ -9,15 +9,15 @@ const SpotImages = ({ images }) => {
 
     return (
         <div className='spot-image-section'>
-            {images.length === 1 && (<div className='spot-image-container'><img className='spot-solo-image' src={images[0].url} alt='pic 1' /></div>)}
+            {images.length === 1 && (<div className='spot-image-container one-item'><img className='spot-solo-image' src={images[0].url} alt='pic 1' /></div>)}
             {images.length > 1 && images.length < 5 && (
-                <div className='spot-image-container'>
+                <div className='spot-image-container two-items'>
                     <img src={images[0].url} alt='pic 1' />
                     <img src={images[1].url} alt='pic 2' />
                 </div>
             )}
             {images.length >= 5 && (
-                <div className='spot-image-container'>
+                <div className='spot-image-container five-items'>
                     <img src={images[0].url} alt='pic 1' />
                     <div className='image-container-grid'>
                         <img src={images[1].url} alt='pic 2' />

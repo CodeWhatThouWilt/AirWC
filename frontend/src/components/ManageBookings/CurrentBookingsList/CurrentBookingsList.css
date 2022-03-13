@@ -1,0 +1,10 @@
+.booking-list {
+    margin-top: 15px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 25px;
+    column-gap: 25px;
+}
+

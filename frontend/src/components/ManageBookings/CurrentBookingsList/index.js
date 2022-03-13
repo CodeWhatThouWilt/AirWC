@@ -12,9 +12,9 @@ const CurrentBookings = ({ spots, userBookings, sessionUser }) => {
     // const bookedSpots = userBookingsArr.filter(booking => spots[booking.spotId] && !bookedSpots.includes)
 
         return (
-            <div>
+            <div className='booking-list'>
                 {userBookingsArr.map(booking => (
-                    <BookingCard key={booking.id} booking={currentBookings} spots={spots} />
+                    <BookingCard key={booking.id} booking={booking} spots={spots} />
                 ))}
             </div>
         )
