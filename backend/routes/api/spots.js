@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { check } = require('express-validator');
+const { check, oneOf } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
@@ -14,70 +14,79 @@ const router = express.Router();
 const validateSpot = [
     check('name')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1, max: 35 })
-        .withMessage('Provide a valid name'),
+        .withMessage('Required')
+        .isLength({ max: 35 })
+        .withMessage('35 character limit'),
     check('price')
+        .isInt({ max: 500 })
+        .withMessage('$500 limit')
         .exists({ checkFalsy: true })
-        .isInt({ min: 1 , max: 500})
-        .withMessage('Prove a valid price'),
+        .withMessage('Required'),
     check('address')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1 })
-        .withMessage('Provide a valid address'),
+        .withMessage('Required'),
     check('city')
-        .isLength({ min: 1, max: 50 })
-        .withMessage('Provide a valid city'),
+        .isLength({ max: 50 })
+        .withMessage('50 character limit')
+        .exists({ checkFalsy: true })
+        .withMessage('Required'),
     check('state')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1 })
+        .withMessage('Required')
+        .isString()
         .withMessage('Provide a valid state'),
     check('country')
-        .isLength({ min: 50, max: 56})
-        .withMessage('Enter a valid country'),
+        .isLength({max: 56 })
+        .withMessage('56 character limit')
+        .isLength({ min: 4 })
+        .withMessage('4 character min'),
     check('shortDescription')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1, max: 35})
-        .withMessage(''),
+        .withMessage('Require')
+        .isLength({ max: 35 })
+        .withMessage('35 character limit'),
     check('longDescription')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1, max: 1500 })
-        .withMessage('Password must be 6 characters or more.'),
-    check('selfCheckIn')
-        .equals('false' || 'true')
-        .withMessage('True or false'),
-    check('imageInputs')
-    .custom(images => {
-        const errors = [];
-        const urlCheck = /https ?: \/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
-        images.forEach(element => {
-            if (!element.match(url)) errors.push('url error')
-        });
-        if (errors.length) return Promise.reject('Enter a valid image address')
-    })
-        .exists({ checkFalsy: true })
-        .isURL()
-        .withMessage('Enter a valid image'),
+        .withMessage('Required')
+        .isLength({ max: 1500 })
+        .withMessage('1500 character limit'),
+        oneOf([
+            check('selfCheckIn')
+                .equals('false'),
+            check('selfCheckIn')
+                .equals('true')
+        ], 'True or false'),
     handleValidationErrors
 ];
 
+const validateImages = [
+    check('imageInputs.*')
+        .custom(async images => {
+            const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
+            if (!images.match(urlCheck)) return await Promise.reject('Invalid image address')
+        }),
+    handleValidationErrors
+]
 
-router.post('/', asyncHandler(async (req, res) => {
-    res.json();
+
+router.post('/validate-forms', validateSpot, asyncHandler(async (req, res) => {
+    res.json({});
 }))
 
 
 router.get('/', asyncHandler(async (req, res) => {
     const spots = await Spot.findAll({
         include: [
-            {model: Image}
+            { model: Image }
         ]
     });
     return res.json(spots);
 }));
 
-router.post('/', requireAuth, validateSpot, asyncHandler(async (req, res) => {
+router.post('/', requireAuth, validateSpot, validateImages, asyncHandler(async (req, res) => {
     const { user } = req;
-    const { address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn, imageInputs} = req.body;
+    const { address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn, imageInputs } = req.body;
+    console.log('########################', 'HEYYYYYYYY')
 
     const spot = await Spot.create({
         userId: user.id,
@@ -87,8 +96,8 @@ router.post('/', requireAuth, validateSpot, asyncHandler(async (req, res) => {
         country,
         name,
         price,
-        shortDescription, 
-        longDescription, 
+        shortDescription,
+        longDescription,
         selfCheckIn
     });
 
@@ -127,8 +136,8 @@ router.put('/', requireAuth, asyncHandler(async (req, res) => {
             country,
             name,
             price,
-            shortDescription, 
-            longDescription, 
+            shortDescription,
+            longDescription,
             selfCheckIn
         });
 

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { csrfFetch } from "../../../store/csrf";
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../../store/session'
-import LoginForm from "../LoginFormModal/LoginForm";
-import SignupForm from "../SignupFormModal/SignupForm";
+import LoginForm from "../LoginForm";
+import SignupForm from "../SignupForm";
 import './CheckEmailForm.css';
 
 function CheckEmailForm() {

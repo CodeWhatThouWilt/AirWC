@@ -1,8 +1,8 @@
 import './OwnedSpot.css';
-import SpotListing from '../../../Spots/SpotsList/SpotListing';
+import SpotListing from '../../Spots/SpotListing';
 import { useDispatch } from 'react-redux';
-import { deleteSpot } from '../../../../store/spots';
-import EditListingModal from '../../../ManageSpotModal/EditListingModal';
+import { deleteSpot } from '../../../store/spots';
+import EditListingModal from '../../ManageSpotModal/EditListingModal';
 
 const OwnedSpot = ({ spot }) => {
     const dispatch = useDispatch();

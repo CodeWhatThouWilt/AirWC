@@ -2,7 +2,7 @@ import './SpotBooking.css'
 import 'react-calendar/dist/Calendar.css';
 import { useState, useEffect } from 'react';
 // import { createBooking } from '../../../../store/spots';
-import { getAllBookings, createBooking } from '../../../../store/bookings';
+import { getAllBookings, createBooking } from '../../../store/bookings';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Calendar from 'react-calendar';

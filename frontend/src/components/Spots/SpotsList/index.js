@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { getSpots } from '../../../store/spots';
 
-import SpotListing from './SpotListing';
+import SpotListing from '../SpotListing';
 
 const SpotsList = ({ spots }) => {
 

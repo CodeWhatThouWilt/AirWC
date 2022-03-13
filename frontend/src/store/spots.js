@@ -34,8 +34,8 @@ export const addSingleSpot = (spot) => async (dispatch) => {
     if (res.ok) {
         const newSpot = await res.json();
         await dispatch(addSpot(newSpot));
-        return
     }
+    return res
 }
 
 export const editSpot = (spot) => async (dispatch) => {

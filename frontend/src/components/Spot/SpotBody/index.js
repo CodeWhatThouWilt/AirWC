@@ -1,6 +1,6 @@
 import './SpotBody.css'
-import SpotContent from './SpotContent';
-import SpotBooking from './SpotBooking';
+import SpotContent from '../SpotContent';
+import SpotBooking from '../SpotBooking';
 
 const SpotBody = ({ spot }) => {
     

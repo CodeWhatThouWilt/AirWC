@@ -71,7 +71,6 @@ export const getAllBookings = () => async (dispatch) => {
 }
 
 export const createBooking = (booking) => async (dispatch) => {
-    console.log(booking);
     const res = await csrfFetch('/api/bookings', {
         method: 'POST',
         body: JSON.stringify(booking)
@@ -90,10 +89,10 @@ const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_BOOKINGS:
             action.bookings.userBookings.forEach(booking => {
-                return newState.userBookings[booking.id] = booking
+                newState.userBookings[booking.id] = booking
             });
             action.bookings.spotBookings.forEach(booking => {
-                return newState.spotBookings[booking.id] = booking
+                newState.spotBookings[booking.id] = booking
             });
             return newState;
         case REMOVE_BOOKING:

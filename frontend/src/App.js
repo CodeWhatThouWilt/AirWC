@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
+import { getAllBookings } from "./store/bookings";
+import { getSpots } from "./store/spots";
 
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
@@ -16,6 +18,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    dispatch(getSpots)
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 

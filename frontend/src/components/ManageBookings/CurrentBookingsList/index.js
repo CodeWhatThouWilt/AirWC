@@ -1,29 +1,23 @@
 import './CurrentBookingsList.css';
-import OwnedSpot from '../../ManageSpots/OwnedSpotList/OwnedSpot';
+import OwnedSpot from '../../ManageSpots/OwnedSpot';
 import { getAllBookings } from '../../../store/bookings';
+import BookingCard from '../BookingCard';
 
 
+const CurrentBookings = ({ spots, userBookings, sessionUser }) => {
 
-const CurrentBookingsList = ({ spots, sessionUser }) => {
+    const userBookingsArr = Object.values(userBookings);
+    const currentBookings = userBookingsArr.filter(booking => new Date() < new Date(booking.startDate))
 
-    const spotIds = [];
-    // let bookings = []
-    const bookings = spots.filter(spot => spot.Bookings.length)
-    const userBookings = bookings.filter(booking => booking.userId === sessionUser.id)
-
-    const bookedSpots = [];
-
-    console.log(bookings[0])
-
-
+    // const bookedSpots = userBookingsArr.filter(booking => spots[booking.spotId] && !bookedSpots.includes)
 
         return (
             <div>
-                {bookedSpots.map(spot => (
-                    <OwnedSpot key={spot.id} spot={spot} />
+                {userBookingsArr.map(booking => (
+                    <BookingCard key={booking.id} booking={currentBookings} spots={spots} />
                 ))}
             </div>
         )
 }
 
-export default CurrentBookingsList;
+export default CurrentBookings;

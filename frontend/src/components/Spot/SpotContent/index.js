@@ -1,5 +1,5 @@
 import './SpotContent.css';
-import SpotReviews from './SpotReviews';
+import SpotReviews from '../SpotReviews';
 
 const SpotContent = ({ spot }) => {
 

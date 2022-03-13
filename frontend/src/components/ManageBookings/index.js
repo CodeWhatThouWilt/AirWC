@@ -1,17 +1,20 @@
 import './ManageBookings.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import CurrentBookingsList from './CurrentBookingsList';
+import CurrentBookings from './CurrentBookingsList';
 import { getSpots } from '../../store/spots';
+import { getAllBookings } from '../../store/bookings';
 import { useEffect } from 'react';
 // import ManageSpotModal from '../ManageSpotModal';
 
 const ManageBookings = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.sessionState.user);
-    const spots = useSelector((state) => Object.values(state.spotsState));
+    const spots = useSelector((state) => state.spotsState);
+    const userBookings = useSelector(state => state.bookingsState.userBookings)
 
     useEffect(() => {
+        dispatch(getAllBookings())
         dispatch(getSpots())
     }, [dispatch])
     
@@ -19,9 +22,7 @@ const ManageBookings = () => {
 
     return (
         <div>
-            {/* <Link to='new-listing' ><button>New Listing</button></Link> */}
-            {/* <ManageSpotModal /> */}
-            <CurrentBookingsList spots={spots} sessionUser={sessionUser} />
+            <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />
         </div>
     )
 }

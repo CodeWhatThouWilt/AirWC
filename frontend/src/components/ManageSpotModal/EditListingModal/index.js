@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../../context/Modal';
-import EditListing from './EditListing';
+import EditListing from '../EditListing';
 import './EditListingModal.css';
 
 

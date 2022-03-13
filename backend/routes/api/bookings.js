@@ -14,7 +14,6 @@ const router = express.Router();
 const bookingValidations = [
     check('startDate', 'endDate')
         .custom(async (value, { req }) => {
-            // console.log('######################', value, valueTwo)
             const checkRange = await Booking.findAll({
                 where: {
                     [Op.or]: [
