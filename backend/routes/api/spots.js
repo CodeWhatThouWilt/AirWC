@@ -63,7 +63,7 @@ const validateImages = [
     check('imageInputs.*')
         .custom(async images => {
             const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
-            if (!images.match(urlCheck)) return await Promise.reject('Invalid image address')
+            if (!images.image.match(urlCheck)) return await Promise.reject('Invalid image address')
         }),
     handleValidationErrors
 ]
@@ -105,7 +105,7 @@ router.post('/', requireAuth, validateSpot, validateImages, asyncHandler(async (
     for await (const image of imageInputs) {
         await Image.create({
             spotId: spot.id,
-            url: image
+            url: image.image
         })
     }
 
