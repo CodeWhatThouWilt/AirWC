@@ -32,10 +32,6 @@ function CheckEmailForm() {
         }
     };
 
-    const goBack = () => {
-        setCurrentForm('checkEmail');
-    }
-
     const guestHandler = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -74,9 +70,9 @@ function CheckEmailForm() {
             </div>
         );
     } else if (currentForm === 'login') {
-        return <LoginForm email={email} goBack={goBack} />
+        return <LoginForm email={email} goBack={setCurrentForm} />
     } else if (currentForm === 'signup') {
-        return <SignupForm email={email} goBack={goBack} />
+        return <SignupForm email={email} setCurrentForm={setCurrentForm} />
     }
 }
 

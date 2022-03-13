@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../../store/session'
 import './SignupForm.css';
 
-function SignupForm(props, { goBack }) {
+function SignupForm(props, { setCurrentForm }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.sessionState.user);
     const [email, setEmail] = useState(props.email);
@@ -31,7 +31,7 @@ function SignupForm(props, { goBack }) {
 
     return (
         <div className='signup-modal' >
-            <i className="fa-solid fa-chevron-left back-button-modal" onClick={goBack} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px'}}></i>
+            <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setCurrentForm('checkEmail')} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px'}}></i>
             <form className='signup-form' onSubmit={handleSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}

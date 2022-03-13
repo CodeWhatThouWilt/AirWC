@@ -10,8 +10,15 @@
     border: none;
     border-radius: 10px;
     /* margin: 15px; */
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
 }
 
 .booking-card:hover {
     background-color: rgba(255, 255, 255, 0.808);
 }
+
+/* .booking-card-background {
+
+} */

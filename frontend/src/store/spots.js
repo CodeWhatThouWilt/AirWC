@@ -76,13 +76,12 @@ export const editImages = (images) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${images.spotId}/images`, {
         method: 'PUT',
         body: JSON.stringify(images)
-    });
-
+    })
+    console.log(res)
     if (res.ok) {
         const editedSpot = await res.json()
-        dispatch(addSpot(editedSpot))
+        await dispatch(addSpot(editedSpot))
     }
-    return res;
 }
 
 const initialState = {};

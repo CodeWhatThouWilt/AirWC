@@ -36,7 +36,7 @@ export const signup = (user) => async (dispatch) => {
             password
         })
     });
-
+    
     if (res.ok) {
         const { user } = await res.json();
         dispatch(setUser(user));

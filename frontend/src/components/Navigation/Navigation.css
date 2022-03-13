@@ -18,11 +18,14 @@ nav {
 }
 
 .logo-link {
+    position: relative;
     height: 30px;
     min-height: 0;
     min-width: 0;
     grid-column: 2;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .user-dropdown {
@@ -33,7 +36,7 @@ nav {
 }
 
 .logo {
-    min-height:0;
-    min-width: 0;
-    resize: none;
+    max-height: 30px;
+    max-width: auto;
+    /* position: relative; */
 }

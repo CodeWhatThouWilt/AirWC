@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { editImages } from '../../../store/spots';
 
 
-const EditImageForm = ({ spot , setShowModal}) => {
+const EditImageForm = ({ spot, setShowModal }) => {
     const dispatch = useDispatch();
 
     let startingImages = []
-    spot.Images.forEach(image => startingImages = [...startingImages, { image: image.url}])
+    spot.Images.forEach(image => startingImages = [...startingImages, { image: image.url }])
 
     const [errors, setErrors] = useState([]);
     const [imageInputs, setImageInputs] = useState(startingImages)
@@ -17,20 +17,20 @@ const EditImageForm = ({ spot , setShowModal}) => {
         e.preventDefault();
         setErrors([]);
 
-        await dispatch(editImages({
+        return dispatch(editImages({
             spotId: spot.id,
-            images: imageInputs
+            imageInputs
         }))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
+                console.log(data && data.errors ? data.errors : false, errors)
             });
-
-        if (!errors.length === 0) setShowModal(false);
+        // if (errors.length === 0) setShowModal(false);
     }
 
-    
-    
+
+
     const addImage = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -43,7 +43,6 @@ const EditImageForm = ({ spot , setShowModal}) => {
         let newState = [...imageInputs]
         newState.splice(index, 1);
         setImageInputs(newState);
-        console.log(newState)
     }
 
     const imagesInputHandler = (e, index) => {
@@ -59,7 +58,7 @@ const EditImageForm = ({ spot , setShowModal}) => {
     return (
         <div className='image-form-container'>
             {/* <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setForm('content')} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px' }}></i> */}
-            <form onSubmit={submitHandler}>
+            <form onSubmit={(e) => submitHandler(e)}>
                 {imageInputs.map((elem, index) => {
                     return (
                         <div key={index} className='image-submission-container' >

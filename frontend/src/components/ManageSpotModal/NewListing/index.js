@@ -52,7 +52,6 @@ const NewListing = ({ setShowModal }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
-        console.log(errors)
         if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
     }
 
@@ -60,8 +59,6 @@ const NewListing = ({ setShowModal }) => {
     const firstSubmit = async (e) => {
         e.preventDefault();
         setErrorTitles({})
-
-
 
         const formContent = {
             name,
@@ -105,7 +102,6 @@ const NewListing = ({ setShowModal }) => {
         let newState = [...imageInputs]
         newState.splice(index, 1);
         setImageInputs(newState);
-        console.log(newState)
     }
 
     const imagesInputHandler = (e, index) => {
@@ -116,7 +112,6 @@ const NewListing = ({ setShowModal }) => {
         setImageInputs(list);
     };
 
-    console.log(imageInputs)
     if (form === 'content') return (
         <div className='new-list-container' >
             {/* {errors.map((error, idx) => <li key={idx}>{error}</li>)} */}

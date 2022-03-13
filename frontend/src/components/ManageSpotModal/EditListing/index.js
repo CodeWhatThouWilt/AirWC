@@ -6,7 +6,6 @@ import { getSpots } from '../../../store/spots';
 
 const EditListing = ({ spot, setShowModal }) => {
     const dispatch = useDispatch();
-    console.log(spot.id)
     // const spots = useSelector((state) => Object.values(state.spotsState));
 
     // useEffect(() => {

@@ -16,7 +16,7 @@ const Spots = () => {
     }, [dispatch])
 
     return (
-        <SpotsList spots={spots} />
+            <SpotsList spots={spots} />
     )
 }
 

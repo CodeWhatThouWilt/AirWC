@@ -41,8 +41,9 @@ function ProfileButton({ user }) {
             {showMenu && (
                 <div className="dropdown-menu">
                     <ul className="dropdown-content">
-                        <li>{user.firstName}</li>
-                        <li>{user.email}</li>
+                        <li style={{ textDecoration: 'underline' }}>Hey {user.firstName}!</li>
+                        {/* <li>{user.email}</li> */}
+                        <li><NavLink to='/spots'>View listings</NavLink></li>
                         <li><NavLink to='/manage-spots'>My spots</NavLink></li>
                         <li><NavLink to='/manage-bookings'>Bookings</NavLink></li>
                         <li>

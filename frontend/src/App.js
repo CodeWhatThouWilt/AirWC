@@ -19,8 +19,9 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllBookings())
-    dispatch(getSpots)
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getSpots())
+    dispatch(sessionActions.restoreUser())
+      .then(() => setIsLoaded(true))
   }, [dispatch]);
 
   return (

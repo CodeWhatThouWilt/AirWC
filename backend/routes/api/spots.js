@@ -61,8 +61,8 @@ const validateSpot = [
 
 const validateImages = [
     check('imageInputs.*')
-        .custom(async images => {
-            const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
+    .custom(async images => {
+        const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
             if (!images.image.match(urlCheck)) return await Promise.reject('Invalid image address')
         }),
     handleValidationErrors
@@ -86,7 +86,6 @@ router.get('/', asyncHandler(async (req, res) => {
 router.post('/', requireAuth, validateSpot, validateImages, asyncHandler(async (req, res) => {
     const { user } = req;
     const { address, city, state, country, name, price, shortDescription, longDescription, selfCheckIn, imageInputs } = req.body;
-    console.log('########################', 'HEYYYYYYYY')
 
     const spot = await Spot.create({
         userId: user.id,
@@ -184,14 +183,15 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
 }))
 
 
-router.put('/:spotId/images', requireAuth, asyncHandler(async (req, res) => {
-    const { spotId, images } = req.body;
+router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (req, res) => {
+    
+    const { spotId, imageInputs } = req.body;
     const userId = req.user.id;
     const spot = await Spot.findByPk(spotId, { include: { model: Image } });
 
     if (userId === spot.userId) {
         const spotImagesArr = spot.Images.map(image => image.url)
-        const incomingImagesArr = images.map(image => image.image)
+        const incomingImagesArr = imageInputs.map(image => image.image)
         const toBeCreated = incomingImagesArr.filter(image => !spotImagesArr.includes(image))
         const toBeDestroyed = spotImagesArr.filter(image => !incomingImagesArr.includes(image))
 
@@ -204,8 +204,6 @@ router.put('/:spotId/images', requireAuth, asyncHandler(async (req, res) => {
             await doomedImage.destroy();
 
         }
-
-        // console.log('##################', toBeDestroyed);
 
         for await (const image of toBeCreated) {
             const newImage = await Image.create({
