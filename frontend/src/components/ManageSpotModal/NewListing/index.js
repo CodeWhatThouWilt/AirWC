@@ -47,14 +47,14 @@ const NewListing = ({ setShowModal }) => {
             selfCheckIn,
             imageInputs
         }))
-            .then(res => res.json())
+            .then(res => setShowModal(false))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
-        if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
+        // if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
 
-        
+
     }
 
 
@@ -77,7 +77,7 @@ const NewListing = ({ setShowModal }) => {
         await csrfFetch('api/spots/validate-forms', {
             method: 'POST',
             body: JSON.stringify(formContent)
-        }).then(res => res.json())
+        }).then(res => setForm('images'))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -90,7 +90,8 @@ const NewListing = ({ setShowModal }) => {
 
                 }
             });
-        if (!Object.values(errorTitles).length) setForm('images');
+        console.log(errorTitles);
+        // if (!Object.values(errorTitles).length) setForm('images');
     }
 
     const addImage = (e) => {
@@ -117,7 +118,7 @@ const NewListing = ({ setShowModal }) => {
 
     if (form === 'content') return (
         <div className='new-list-container' >
-            {/* {errors.map((error, idx) => <li key={idx}>{error}</li>)} */}
+            <div style={{ height: '30px' }}>{errors[0]}(s)</div>
             <form className='new-list-form' onSubmit={firstSubmit}>
                 <label>
                     <div className='label-row'>Listing Name:  <div className='error-display' >{errorTitles.name}</div></div>
