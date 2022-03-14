@@ -18,8 +18,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllBookings())
-    dispatch(getSpots())
+    // dispatch(getAllBookings())
+    // dispatch(getSpots())
     dispatch(sessionActions.restoreUser())
       .then(() => setIsLoaded(true))
   }, [dispatch]);

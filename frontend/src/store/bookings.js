@@ -1,10 +1,11 @@
 import { csrfFetch } from './csrf';
 
-const GET_BOOKINGS = 'bookings/spotBookings';
+const GET_BOOKINGS = 'bookings/getBookings';
 const ADD_BOOKING = 'bookings/addBooking'
 const REMOVE_BOOKING = 'bookings/removeBooking';
 
 const getBookings = (bookings) => {
+    
     return {
         type: GET_BOOKINGS,
         bookings,
@@ -12,6 +13,7 @@ const getBookings = (bookings) => {
 };
 
 const removeBooking = (bookingId) => {
+    
     return {
         type: REMOVE_BOOKING,
         bookingId
@@ -49,24 +51,24 @@ const addBooking = (booking) => {
 //     }
 // }
 
-// export const deleteBooking = (bookingId) => async (dispatch) => {
-//     const res = await csrfFetch('/api/spots', {
-//         method: 'DELETE',
-//         body: JSON.stringify({ bookingId })
-//     });
-//     if (res.ok) {
-//         const deletedBooking = await res.json();
-//         dispatch(removeBooking(deletedBooking))
-//     }
+export const deleteBooking = (bookingId) => async (dispatch) => {
+    const res = await csrfFetch('/api/bookings', {
+        method: 'DELETE',
+        body: JSON.stringify({ bookingId })
+    });
+    if (res.ok) {
+        const deletedBooking = await res.json();
+        dispatch(removeBooking(deletedBooking))
+    }
 
-// }
+}
 
 export const getAllBookings = () => async (dispatch) => {
     const res = await csrfFetch('/api/bookings');
 
     if (res.ok) {
         const spots = await res.json();
-        await dispatch(getBookings(spots));
+        dispatch(getBookings(spots));
     }
 }
 
@@ -96,8 +98,8 @@ const bookingsReducer = (state = initialState, action) => {
             });
             return newState;
         case REMOVE_BOOKING:
-            delete newState.spotBookings[action.spotId];
-            delete newState.userBookings[action.spotId];
+            delete newState.userBookings[action.bookingId];
+            delete newState.spotBookings[action.bookingId];
             return newState;
         case ADD_BOOKING:
             newState.spotBookings[action.booking.spotBooking.id] = { ...action.booking.spotBooking };

@@ -73,4 +73,22 @@ router.get('/', restoreUser, asyncHandler(async (req, res) => {
 }));
 
 
+router.delete('/', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { bookingId } = req.body;
+    const booking = await Booking.findByPk(bookingId);
+    console.log('####################', bookingId)
+    if (booking && user.id === booking.userId) {
+        await booking.destroy();
+        return res.json(bookingId);
+    }
+
+    const err = new Error('Unauthorized');
+    err.title = 'Unauthorized';
+    err.errors = ['Unauthorized'];
+    err.status = 401;
+    return next(err);
+}))
+
+
 module.exports = router;

@@ -1,11 +1,14 @@
 import './CurrentBookingsList.css';
 import OwnedSpot from '../../ManageSpots/OwnedSpot';
 import { getAllBookings } from '../../../store/bookings';
+import { getSpots } from '../../../store/spots';
 import BookingCard from '../BookingCard';
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 
 
 const CurrentBookings = ({ spots, userBookings, sessionUser }) => {
-
+    const dispatch = useDispatch();
     const userBookingsArr = Object.values(userBookings);
     const currentBookings = userBookingsArr.filter(booking => new Date() < new Date(booking.startDate))
 

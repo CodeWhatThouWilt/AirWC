@@ -12,20 +12,26 @@ const ManageBookings = () => {
     const sessionUser = useSelector(state => state.sessionState.user);
     const spots = useSelector((state) => state.spotsState);
     const userBookings = useSelector(state => state.bookingsState.userBookings)
+    const allBookings = useSelector(state => state.bookingsState)
 
     const [isLoaded, setIsLoaded] = useState(false)
 
+    // useEffect(() => {
+    //     dispatch(getAllBookings())
+    //         .then(() => dispatch(getSpots()))
+    //         .then(() => setIsLoaded(true))
+    // }, [dispatch]);
     useEffect(() => {
-        dispatch(getAllBookings())
-            .then(() => dispatch(getSpots()))
-            .then(() => setIsLoaded(true))
-    }, [dispatch]);
+        dispatch(getAllBookings());
+        dispatch(getSpots());
+    },[dispatch])
     
     if (!sessionUser) return <Redirect to='/' />
 
     return (
         <div>
-            {isLoaded && <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />}
+            {/* {isLoaded && <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />} */}
+            <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />
         </div>
     )
 }
