@@ -28,11 +28,14 @@
     object-fit: cover;
 }
 
-
 .image-container-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+}
+
+.main-image {
+    border-radius: 10px 0px 0px 10px;
 }
 
 .image-container-grid img:nth-child(1) {
@@ -68,4 +71,11 @@
     max-width: 250px;
     object-fit: cover;
     border-bottom-right-radius: 10px;
+}
+
+
+.spot-image-container.five-items {
+    background-color: #39538F;
+    width: 88%;
+    height: 100%;
 }
