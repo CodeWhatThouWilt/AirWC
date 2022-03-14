@@ -21,15 +21,11 @@ const ManageBookings = () => {
     //         .then(() => dispatch(getSpots()))
     //         .then(() => setIsLoaded(true))
     // }, [dispatch]);
-    useEffect(() => {
-        dispatch(getAllBookings());
-        dispatch(getSpots());
-    },[dispatch])
     
     if (!sessionUser) return <Redirect to='/' />
 
     return (
-        <div>
+        <div style={{ color: '#3A5491'}}>
             {/* {isLoaded && <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />} */}
             <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />
         </div>

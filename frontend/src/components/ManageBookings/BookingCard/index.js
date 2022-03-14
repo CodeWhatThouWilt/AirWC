@@ -1,9 +1,10 @@
 import './BookingCard.css';
 import { deleteBooking } from '../../../store/bookings';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {useEffect} from 'react'
 import { getAllBookings } from '../../../store/bookings';
 import { getSpots } from '../../../store/spots';
+import EditBookingModal from '../../EditBookingModal';
 
 const BookingCard = ({ booking, spots }) => {
     const dispatch = useDispatch();
@@ -42,9 +43,7 @@ const BookingCard = ({ booking, spots }) => {
                     <span>This location {spot.selfCheckIn ? 'has self check in' : 'does not have self check in'}</span>
                 </div>
                 <div className='booking-buttons'>
-                    <button>
-                        Edit
-                    </button>
+                    <EditBookingModal booking={booking} spot={spot} />
                     <button onClick={deleteHandler}>
                         Delete
                     </button>
