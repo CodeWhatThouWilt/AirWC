@@ -24,9 +24,7 @@ const EditImageForm = ({ spot, setShowModal }) => {
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
-                console.log(data && data.errors ? data.errors : false, errors)
             });
-        // if (errors.length === 0) setShowModal(false);
     }
 
     useEffect(() => {
@@ -61,14 +59,13 @@ const EditImageForm = ({ spot, setShowModal }) => {
 
     return (
         <div className='image-form-container'>
-            <div style={{ height: '30px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div>
-            <form onSubmit={(e) => submitHandler(e)}>
+            <form onSubmit={submitHandler} className='image-form'>
+                <div style={{ height: '30px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div>
                 {imageInputs.map((elem, index) => {
                     return (
                         <div key={index} className='image-submission-container' >
+                            <img src={imageInputs[index].image.match(urlCheck) ? imageInputs[index].image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={'user pic'} className='submitted-image' />
                             <div className='input-and-button-div'>
-                                <img src={imageInputs[index].image.match(urlCheck) ? imageInputs[index].image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={'user pic'} className='submitted-image' />
-                                <div>{!elem.image?.match(urlCheck) && setErrors.length ? errors[index] : ''}</div>
                                 <input
                                     name='image'
                                     type='text'
@@ -76,20 +73,21 @@ const EditImageForm = ({ spot, setShowModal }) => {
                                     value={elem.image}
                                     onChange={e => imagesInputHandler(e, index)}
                                 ></input>
-
-                                {imageInputs.length !== 1 &&
-                                    <button onClick={(e) => removeImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: 'red', border: 'none', borderRadius: '500px' }}>
-                                        <i className="fa-solid fa-minus" style={{ color: 'white' }}></i>
-                                    </button>}
-                                {imageInputs.length - 1 === index &&
-                                    <button onClick={(e) => addImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: '#4F72C4', border: 'none', borderRadius: '500px' }}>
-                                        <i className="fa-solid fa-plus" style={{ color: 'white' }} />
-                                    </button>}
+                                <div style={{ display: 'flex' }}>
+                                    {imageInputs.length !== 1 &&
+                                        <button onClick={(e) => removeImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: 'red', border: 'none', borderRadius: '500px' }}>
+                                            <i className="fa-solid fa-minus" style={{ color: 'white' }}></i>
+                                        </button>}
+                                    {imageInputs.length - 1 === index &&
+                                        <button onClick={(e) => addImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: '#4F72C4', border: 'none', borderRadius: '500px' }}>
+                                            <i className="fa-solid fa-plus" style={{ color: 'white' }} />
+                                        </button>}
+                                </div>
                             </div>
                         </div>
                     )
                 })}
-                <button>Submit</button>
+                <button className='login-button'>Submit</button>
             </form>
         </div>
     )

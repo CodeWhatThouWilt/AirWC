@@ -17,7 +17,7 @@ const OwnedSpot = ({ spot }) => {
             <div className='buttons' >
                 <EditImagesModal spot={spot} />
                 <EditListingModal spot={spot} />
-                <button onClick={deleteHandler} >Delete</button>
+                <button onClick={deleteHandler} className='delete-button'>Delete</button>
             </div>
             <SpotListing details={spot} />
         </div>

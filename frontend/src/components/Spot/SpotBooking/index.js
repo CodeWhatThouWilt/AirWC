@@ -19,6 +19,7 @@ const SpotBooking = ({ spot }) => {
     const [dayTime, setDayTime] = useState('PM');
     const [minBooked, setMinBooked] = useState(5);
     const [errors, setErrors] = useState([])
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         dispatch(getAllBookings())
@@ -87,13 +88,14 @@ const SpotBooking = ({ spot }) => {
         }
 
         await dispatch(createBooking(booking))
+        .then(res => setSubmitted(true))
         .catch( res => setErrors([1]))
 
     }
 
     return (
         <div className='spot-booking-container'>
-            <div style={{ display:'inline', color:'white', height: '25px'}}>{errors.length ? 'Whoops! That slot is taken' : 'Booking successful!'}</div>
+            <div style={{ display: 'inline', color: 'white', height: '35px' }}>{errors.length ? 'Whoops! That slot is taken' : submitted ? 'Booking successful!' : ''}</div>
             <form onSubmit={e => submitHandler(e)}>
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
                 <label style={{ marginTop: '10px', color: 'white' }}>
@@ -118,7 +120,7 @@ const SpotBooking = ({ spot }) => {
                     <div className='min-selector'>
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
-                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: {spot.price * (minBooked / 5) }</div>
+                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: ${spot.price * (minBooked / 5) }</div>
                 </label>
                 <div className='button-background' >
                 <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>

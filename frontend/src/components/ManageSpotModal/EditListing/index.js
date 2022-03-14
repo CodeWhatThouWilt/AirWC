@@ -48,11 +48,12 @@ const EditListing = ({ spot, setShowModal }) => {
             longDescription,
             selfCheckIn
         }))
+            .then(res => setShowModal(false))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) {
                     let errorsObj = {}
-                    console.log(data.errors)
+
                     data.errors.forEach((error, index) => {
                         errorsObj = { ...errorsObj, [data.params[index]]: error }
                     })
@@ -60,8 +61,6 @@ const EditListing = ({ spot, setShowModal }) => {
 
                 }
             });
-
-        // if (!errorTitles.length) setShowModal(false);
     }
 
 

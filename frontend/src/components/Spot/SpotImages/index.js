@@ -18,7 +18,7 @@ const SpotImages = ({ images }) => {
             )} */}
             {images.length >= 5 && (
                 <div className='spot-image-container five-items'>
-                    <img src={images[0].url} alt='pic 1' />
+                    <img src={images[0].url} alt='pic 1' className='main-image'/>
                     <div className='image-container-grid'>
                         <img src={images[1].url} alt='pic 2' />
                         <img src={images[2].url} alt='pic 3' />

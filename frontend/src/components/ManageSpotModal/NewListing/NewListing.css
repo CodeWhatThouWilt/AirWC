@@ -80,6 +80,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 
@@ -95,7 +96,10 @@
 .input-and-button-div {
     width: 100%;
     height: 40px;
-    display: inline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
 }
 
 .image-form-container {
@@ -104,4 +108,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
+}
+
+.image-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }

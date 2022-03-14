@@ -1,7 +1,7 @@
 import './BookingCard.css';
 import { deleteBooking } from '../../../store/bookings';
 import { useDispatch, useSelector } from 'react-redux';
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import { getAllBookings } from '../../../store/bookings';
 import { getSpots } from '../../../store/spots';
 import EditBookingModal from '../../EditBookingModal';
@@ -27,20 +27,24 @@ const BookingCard = ({ booking, spots }) => {
     return (
         <div className='booking-card-background'>
             <div className='booking-card'>
-                <h3 style={{ textAlign: 'center'}}>Booking Information</h3>
-                <div className='address-container'>
-                    <div className='booking-section-title'>Address:</div>
-                    <span>{`${spot.address}`}</span>
-                    <span>{`${spot.city}, ${spot.state} `}</span>
+                <div className='header-div'>
+                    <h3 className='booking-card-header' >Booking Information</h3>
                 </div>
-                <div className='time-container'>
-                    <div className='booking-section-title'>Booked for:</div>
-                    <span>{date}</span>
-                    <span>{startTime} for {timeFrame} min</span>
-                </div>
-                <div className='self-checkin-container'>
-                    <div className='booking-section-title'>Self check in:</div>
-                    <span>This location {spot.selfCheckIn ? 'has self check in' : 'does not have self check in'}</span>
+                <div className='booking-card-content'>
+                    <div className='address-container'>
+                        <div className='booking-section-title'>Address:</div>
+                        <span>{`${spot.address}`}</span>
+                        <span>{`${spot.city}, ${spot.state} `}</span>
+                    </div>
+                    <div className='time-container'>
+                        <div className='booking-section-title'>Booked for:</div>
+                        <span>{date}</span>
+                        <span>{startTime} for {timeFrame} min</span>
+                    </div>
+                    <div className='self-checkin-container'>
+                        <div className='booking-section-title'>Self check in:</div>
+                        <span>This location {spot.selfCheckIn ? 'has self check in' : 'does not have self check in'}</span>
+                    </div>
                 </div>
                 <div className='booking-buttons'>
                     <EditBookingModal booking={booking} spot={spot} />

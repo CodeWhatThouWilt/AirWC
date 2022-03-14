@@ -10,3 +10,12 @@
     left: 400px;
     gap: 20px;
 }
+
+.delete-button {
+    background-color: red;
+    border: none;
+    height: 30px;
+    width: 150px;
+    color: white;
+    border-radius: 10px;
+}

@@ -77,7 +77,7 @@ export const editImages = (images) => async (dispatch) => {
         method: 'PUT',
         body: JSON.stringify(images)
     })
-    console.log(res)
+    
     if (res.ok) {
         const editedSpot = await res.json()
         await dispatch(addSpot(editedSpot))
