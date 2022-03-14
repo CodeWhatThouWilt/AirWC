@@ -118,7 +118,7 @@ const NewListing = ({ setShowModal }) => {
 
     if (form === 'content') return (
         <div className='new-list-container' >
-            <div style={{ height: '30px' }}>{errors[0]}(s)</div>
+            <div style={{ height: '30px' }}>{`${errors[0]}(s)`}</div>
             <form className='new-list-form' onSubmit={firstSubmit}>
                 <label>
                     <div className='label-row'>Listing Name:  <div className='error-display' >{errorTitles.name}</div></div>
