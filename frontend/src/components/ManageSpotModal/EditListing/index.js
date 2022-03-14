@@ -52,6 +52,7 @@ const EditListing = ({ spot, setShowModal }) => {
                 const data = await res.json();
                 if (data && data.errors) {
                     let errorsObj = {}
+                    console.log(data.errors)
                     data.errors.forEach((error, index) => {
                         errorsObj = { ...errorsObj, [data.params[index]]: error }
                     })

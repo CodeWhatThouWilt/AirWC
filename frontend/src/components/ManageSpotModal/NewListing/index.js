@@ -1,5 +1,5 @@
 import './NewListing.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../../store/spots';
 import { csrfFetch } from '../../../store/csrf';
@@ -53,6 +53,8 @@ const NewListing = ({ setShowModal }) => {
                 if (data && data.errors) setErrors(data.errors);
             });
         if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
+
+        
     }
 
 
@@ -80,6 +82,7 @@ const NewListing = ({ setShowModal }) => {
                 const data = await res.json();
                 if (data && data.errors) {
                     let errorsObj = {}
+                    console.log(data.errors)
                     data.errors.forEach((error, index) => {
                         errorsObj = { ...errorsObj, [data.params[index]]: error }
                     })
