@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../../context/Modal';
-import EditListing from './EditListing';
+import EditListing from '../EditListing';
 import './EditListingModal.css';
 
 
@@ -9,7 +9,7 @@ const EditListingModal = ({ spot }) => {
 
     return (
         <>
-            <button className='create-spot-button' onClick={() => setShowModal(true)}>Edit</button>
+            <button className='create-spot-button' onClick={() => setShowModal(true)}>Edit Content</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <EditListing spot={spot} setShowModal={setShowModal} />

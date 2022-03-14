@@ -32,17 +32,22 @@ function ProfileButton({ user }) {
 
     return (
         <>
-            <button onClick={openMenu} className='profile-button' >
-                User settings
+            <button onClick={openMenu} className='login-button' >
+                <div className='user-dropdown-icons'>
+                    <i className="fa-solid fa-restroom"></i>
+                    <i className="fa-solid fa-poop"></i>
+                </div>
             </button>
             {showMenu && (
                 <div className="dropdown-menu">
                     <ul className="dropdown-content">
-                        <li>{user.firstName}</li>
-                        <li>{user.email}</li>
-                        <li><NavLink to='/manage-spots'>Manage Spots</NavLink></li>
+                        <li style={{ textDecoration: 'underline' }}>Hey {user.firstName}!</li>
+                        {/* <li>{user.email}</li> */}
+                        <li><NavLink to='/spots'>View listings</NavLink></li>
+                        <li><NavLink to='/manage-spots'>My spots</NavLink></li>
+                        <li><NavLink to='/manage-bookings'>Bookings</NavLink></li>
                         <li>
-                            <button onClick={logout}>Log Out</button>
+                            <button className='home-list-button logout-button' onClick={logout}>Log Out</button>
                         </li>
                     </ul>
                 </div>

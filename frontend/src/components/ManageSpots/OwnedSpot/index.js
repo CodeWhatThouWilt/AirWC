@@ -1,8 +1,9 @@
 import './OwnedSpot.css';
-import SpotListing from '../../../Spots/SpotsList/SpotListing';
+import SpotListing from '../../Spots/SpotListing';
 import { useDispatch } from 'react-redux';
-import { deleteSpot } from '../../../../store/spots';
-import EditListingModal from '../../../ManageSpotModal/EditListingModal';
+import { deleteSpot } from '../../../store/spots';
+import EditListingModal from '../../ManageSpotModal/EditListingModal';
+import EditImagesModal from '../../ManageSpotModal/EditImagesModal';
 
 const OwnedSpot = ({ spot }) => {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const OwnedSpot = ({ spot }) => {
     return (
         <div className='spot-card'>
             <div className='buttons' >
+                <EditImagesModal spot={spot} />
                 <EditListingModal spot={spot} />
                 <button onClick={deleteHandler} >Delete</button>
             </div>

@@ -1,5 +1,5 @@
 import './OwnedSpotList.css';
-import OwnedSpot from './OwnedSpot';
+import OwnedSpot from '../OwnedSpot';
 
 const OwnedSpotList = ({ spots, sessionUser }) => {
     const ownedSpots = spots.filter(spot => spot.userId === sessionUser.id)

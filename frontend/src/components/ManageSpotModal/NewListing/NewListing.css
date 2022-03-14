@@ -71,11 +71,36 @@
 .submitted-image {
     height: 100px;
     width: 100px;
+    justify-self: center;
 }
 
 .image-submission-container {
     width: 100%;
     height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.error-display {
+    color: red
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-and-button-div {
+    width: 100%;
+    height: 40px;
+    display: inline;
+}
+
+.image-form-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

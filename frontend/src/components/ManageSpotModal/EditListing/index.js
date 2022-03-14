@@ -1,13 +1,17 @@
 import './EditListing.css';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { editSpot } from '../../../../store/spots';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { editSpot } from '../../../store/spots';
+import { getSpots } from '../../../store/spots';
 
 const EditListing = ({ spot, setShowModal }) => {
-    const history = useHistory();
     const dispatch = useDispatch();
-    
+    // const spots = useSelector((state) => Object.values(state.spotsState));
+
+    // useEffect(() => {
+    //     dispatch(getSpots())
+    // }, [dispatch])
+
     const [name, setName] = useState(spot.name);
     const [address, setAddress] = useState(spot.address);
     const [city, setCity] = useState(spot.city);
@@ -15,19 +19,23 @@ const EditListing = ({ spot, setShowModal }) => {
     const [price, setPrice] = useState(spot.price);
     const [state, setState] = useState(spot.state);
     const [selfCheckIn, setSelfCheckIn] = useState(spot.selfCheckIn);
+    const [errorTitles, setErrorTitles] = useState({});
 
     const [shortDescription, setshortDescription] = useState(spot.shortDescription);
     const [shortSelection, setShortSelection] = useState(false);
     let shortError;
-    if (shortDescription.length > 35) shortError = { color: 'red' }
+    if (shortDescription.length > 35 || shortDescription.length === 0) shortError = { color: 'red' }
 
     const [longDescription, setLongDescription] = useState(spot.longDescription);
     const [longSelection, setLongSelection] = useState(false);
     let longError;
-    if (longDescription.length > 1500) longError = { color: 'red' }
+    if (shortDescription.length > 1500 || longDescription.length === 0) longError = { color: 'red' }
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setErrorTitles({})
+
         dispatch(editSpot({
             spotId: spot.id,
             name,
@@ -39,21 +47,33 @@ const EditListing = ({ spot, setShowModal }) => {
             shortDescription,
             longDescription,
             selfCheckIn
-        }));
-        setShowModal(false);
-        return history.push('/manage-spots')
+        }))
+            .catch(async res => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    let errorsObj = {}
+                    data.errors.forEach((error, index) => {
+                        errorsObj = { ...errorsObj, [data.params[index]]: error }
+                    })
+                    setErrorTitles(errorsObj)
+
+                }
+            });
+
+        // if (!errorTitles.length) setShowModal(false);
     }
 
 
 
     return (
         <div className='new-list-container' >
-            <form className='new-list-form'>
+            {/* {errors.map((error, idx) => <li key={idx}>{error}</li>)} */}
+            <form className='new-list-form' onSubmit={submitHandler}>
                 <label>
-                    Listing Name:
+                    <div className='label-row'>Listing Name:  <div className='error-display' >{errorTitles.name}</div></div>
                     <input
                         type='text'
-                        required
+                        // required
                         placeholder='Listing name'
                         value={name}
                         onChange={e => setName(e.target.value)}
@@ -61,50 +81,51 @@ const EditListing = ({ spot, setShowModal }) => {
                     />
                 </label>
                 <label>
-                    Address:
+                    <div className='label-row'>Address:  <div className='error-display' >{errorTitles.address}</div></div>
                     <input
                         type='text'
-                        required
+                        // required
                         placeholder='Address'
                         value={address}
                         onChange={e => setAddress(e.target.value)}
                     />
                 </label>
                 <label>
-                    City:
+                    <div className='label-row'>City:  <div className='error-display' >{errorTitles.city}</div></div>
                     <input
                         type='text'
-                        required
+                        // required
                         placeholder='City'
                         value={city}
                         onChange={e => setCity(e.target.value)}
                     />
                 </label>
                 <label>
-                    State:
+                    <div className='label-row'>State:  <div className='error-display' >{errorTitles.state}</div></div>
                     <input
                         type='text'
-                        required
+                        // required
                         placeholder='State'
                         value={state}
                         onChange={e => setState(e.target.value)}
                     />
                 </label>
                 <label>
-                    Country:
+                    <div className='label-row'>Country:  <div className='error-display' >{errorTitles.country}</div></div>
                     <input
                         type='text'
-                        required
+                        // required
                         placeholder='Country'
                         value={country}
                         onChange={e => setCountry(e.target.value)}
                     />
                 </label>
                 <label>
-                    Price per 5 minutes:
+                    <div className='label-row'>Price per 5 minutes: <div className='error-display'>{errorTitles.price}</div></div>
                     <input
                         type='number'
-                        required
+                        max={500}
+                        // required
                         placeholder='0'
                         value={price}
                         onChange={e => setPrice(e.target.value)}
@@ -114,7 +135,7 @@ const EditListing = ({ spot, setShowModal }) => {
                     <div className='description-div'>Short description: {shortSelection && <span style={shortError}>{`${shortDescription.length} / 35`}</span>}</div>
                     <input
                         type='text'
-                        required
+                        // required
                         placeholder='Short description (35 char max)'
                         value={shortDescription}
                         onChange={e => setshortDescription(e.target.value)}
@@ -123,9 +144,9 @@ const EditListing = ({ spot, setShowModal }) => {
                     />
                 </label>
                 <label>
-                    <div className='description-div'>Long description: {longSelection && <span style={longError}>{`${longDescription.length} / 1500`}</span>}</div>
+                    <div className='description-div'>Long description: {longSelection && <span style={longError} >{`${longDescription.length} / 1500`}</span>}</div>
                     <textarea
-                        required
+                        // required
                         placeholder='Long description (1500 char max)'
                         value={longDescription}
                         onChange={e => setLongDescription(e.target.value)}
@@ -140,7 +161,7 @@ const EditListing = ({ spot, setShowModal }) => {
                         <option value='false' >False</option>
                     </select>
                 </label>
-                <button className='new-list-button' onClick={submitHandler}>Submit</button>
+                <button className='new-list-button'>Continue</button>
             </form>
         </div>
     )

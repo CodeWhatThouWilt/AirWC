@@ -9,7 +9,12 @@ const UserModal = () => {
 
     return (
         <>
-            <button className='login-button' onClick={() => setShowModal(true)}>Log in / Sign up</button>
+            <button className='login-button' onClick={() => setShowModal(true)}>
+                <div className='user-dropdown-icons'>
+                    <i className="fa-solid fa-restroom"></i>
+                    <i className="fa-solid fa-poop"></i>
+                </div>
+            </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <CheckEmailForm />

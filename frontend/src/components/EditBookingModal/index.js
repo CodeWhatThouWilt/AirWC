@@ -1,30 +1,30 @@
-import './ManageSpotModal.css';
+import './EditBookingModal.css'
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import NewListing from './NewListing';
+import EditBookingForm from './EditBookingForm';
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getSpots } from '../../store/spots';
 
-const ManageSpotModal = () => {
+const EditBookingModal = ({ booking, spot }) => {
     const [showModal, setShowModal] = useState(false);
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getSpots()).then(res => setShowModal(false));
     }, [dispatch])
-    
+
     return (
         <>
-            <button className='create-spot-button' onClick={() => setShowModal(true)}>Create New Listing</button>
+            <button className='create-spot-button' onClick={() => setShowModal(true)}>Edit booking</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <NewListing setShowModal={setShowModal} />
+                    <EditBookingForm booking={booking} spot={spot} />
                 </Modal>
             )}
         </>
     );
 }
 
-export default ManageSpotModal;
+export default EditBookingModal;

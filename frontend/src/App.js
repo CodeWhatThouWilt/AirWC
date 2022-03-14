@@ -2,20 +2,26 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
+import { getAllBookings } from "./store/bookings";
+import { getSpots } from "./store/spots";
 
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage";
 import Spots from "./components/Spots";
 import ManageSpots from "./components/ManageSpots";
 import Spot from "./components/Spot";
+import ManageBookings from "./components/ManageBookings";
 
 function App() {
-  
+
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getAllBookings())
+    dispatch(getSpots())
+    dispatch(sessionActions.restoreUser())
+      .then(() => setIsLoaded(true))
   }, [dispatch]);
 
   return (
@@ -24,7 +30,11 @@ function App() {
       {isLoaded && (
         <Switch>
 
-          <Route path='/manage-spots'>
+          <Route exact path='/manage-bookings'>
+            <ManageBookings />
+          </Route>
+
+          <Route exact path='/manage-spots'>
             <ManageSpots />
           </Route>
 
@@ -40,6 +50,9 @@ function App() {
             <Homepage />
           </Route>
 
+          <Route path='/' >
+            404 Not found.
+          </Route>
         </Switch>
       )}
     </>

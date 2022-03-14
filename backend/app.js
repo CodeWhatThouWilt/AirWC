@@ -67,9 +67,10 @@ app.use((err, _req, _res, next) => {
 // Error formatter error-handler
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
-    console.error(err);
+    
     res.json({
         title: err.title || 'Server Error',
+        params: err.inputErrors,
         message: err.message,
         errors: err.errors,
         stack: isProduction ? null : err.stack
