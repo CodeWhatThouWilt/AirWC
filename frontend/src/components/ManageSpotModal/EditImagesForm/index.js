@@ -61,7 +61,7 @@ const EditImageForm = ({ spot, setShowModal }) => {
 
     return (
         <div className='image-form-container'>
-            <div style={{ height: '30px' }}>{`${errors[0]}(s)`}</div>
+            <div style={{ height: '30px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div>
             <form onSubmit={(e) => submitHandler(e)}>
                 {imageInputs.map((elem, index) => {
                     return (
