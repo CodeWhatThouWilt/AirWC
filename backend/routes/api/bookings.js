@@ -77,7 +77,7 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
     const { bookingId } = req.body;
     const booking = await Booking.findByPk(bookingId);
-    console.log('####################', bookingId)
+
     if (booking && user.id === booking.userId) {
         await booking.destroy();
         return res.json(bookingId);
@@ -93,7 +93,7 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
 router.put('/', requireAuth, bookingValidations, asyncHandler(async (req, res) => {
     const userId = req.user.id;
     const { bookingId, startDate, endDate } = req.body;
-    console.log('####################', req.body.endDate);
+    
 
     const booking = await Booking.findByPk(bookingId)
 

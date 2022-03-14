@@ -9,7 +9,7 @@ import Calendar from 'react-calendar';
 import { isBefore } from 'date-fns'
 
 
-const EditBookingForm = ({ booking, spot }) => {
+const EditBookingForm = ({ booking, spot, setShowModal }) => {
     const dispatch = useDispatch();
 
     const bookingDateObj = new Date(booking.startDate)
@@ -20,13 +20,14 @@ const EditBookingForm = ({ booking, spot }) => {
     const timeFrame = (new Date(booking.endDate) - new Date(booking.startDate)) / 60000
     startHours = startHours >= 13 ? startHours - 12 : startHours
     startMinutes = startMinutes < 10 ? '0' + startMinutes : startMinutes
-    console.log(amPm)
 
     const [value, setValue] = useState(bookingDateObj);
     const [minSelection, setMinSelection] = useState(startMinutes);
     const [hourSelection, setHourSelection] = useState(startHours);
     const [dayTime, setDayTime] = useState(amPm);
     const [minBooked, setMinBooked] = useState(timeFrame);
+    const [errors, setErrors] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
 
     function tileDisabled({ date, view }) {
         if (view === 'month') {
@@ -50,6 +51,7 @@ const EditBookingForm = ({ booking, spot }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setErrors([]);
 
         let startHour;
 
@@ -73,37 +75,45 @@ const EditBookingForm = ({ booking, spot }) => {
         }
 
         await dispatch(editBooking(editedBooking))
+            .then(res => setShowModal(false))
+            .catch(res => setErrors([1]))
 
     }
 
     return (
         <div className='edit-booking-container'>
-            <form onSubmit={e => submitHandler(e)}>
+            <div style={{ display: 'inline', color: 'white', height: '35px' }}>{errors.length ? 'Whoops! That slot is taken' : submitted ? 'Booking successful!' : ''}</div>
+            <form onSubmit={e => submitHandler(e)} className='booking-edit-form' >
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
-                <label>
+                <label style={{ marginTop: '10px', color: 'white', display: 'flex', flexDirection: 'column' }}>
                     Time:
-                    <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
-                        {hours.map(hour => (
-                            <option key={hour}  value={hour} >{hour}</option>
-                        ))}
-                    </select>
-                    <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
-                        {minutes.map(min => (
-                            <option key={min} value={min} >{min}</option>
-                        ))}
-                    </select>
-                    <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
-                        <option value='AM' >AM</option>
-                        <option value='PM' >PM</option>
-                    </select>
+                    <div className='time-select-div'>
+                        <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
+                            {hours.map(hour => (
+                                <option key={hour} value={hour} >{hour}</option>
+                            ))}
+                        </select>
+                        <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
+                            {minutes.map(min => (
+                                <option key={min} value={min} >{min}</option>
+                            ))}
+                        </select>
+                        <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
+                            <option value='AM' >AM</option>
+                            <option value='PM' >PM</option>
+                        </select>
+                    </div>
                 </label>
-                <label>
+                <label style={{ marginTop: '10px', color: 'white' }}>
                     Book for:
                     <div className='min-selector'>
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
+                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: ${spot.price * (minBooked / 5)}</div>
                 </label>
-                <button className='login-button'>Submit Changes</button>
+                <div className='button-background' style={{ marginTop: '20px' }}>
+                    <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>
+                </div>
             </form>
         </div>
     )

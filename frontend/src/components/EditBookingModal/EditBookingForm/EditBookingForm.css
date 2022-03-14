@@ -2,4 +2,29 @@
     height: 100%;
     width: 100%;
     color: #3A5491;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 50px;
+}
+
+.booking-edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form label {
+    justify-self: center;
+}
+
+form select {
+    border: none;
+}
+
+.time-select-div {
+    display: flex;
+    gap: 2px;
 }
