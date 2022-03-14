@@ -13,7 +13,7 @@ const OwnedSpot = ({ spot }) => {
     }
 
     return (
-        <div className='spot-card'>
+        <div style={{ position: 'relative'}}>
             <div className='buttons' >
                 <EditImagesModal spot={spot} />
                 <EditListingModal spot={spot} />

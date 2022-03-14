@@ -1,5 +1,5 @@
 import './NewListing.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSingleSpot } from '../../../store/spots';
 import { csrfFetch } from '../../../store/csrf';
@@ -47,12 +47,14 @@ const NewListing = ({ setShowModal }) => {
             selfCheckIn,
             imageInputs
         }))
-            .then(res => res.json())
+            .then(res => setShowModal(false))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
-        if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
+        // if (errors.length === 0 && errorTitles.length === 0) setShowModal(false);
+
+
     }
 
 
@@ -75,11 +77,12 @@ const NewListing = ({ setShowModal }) => {
         await csrfFetch('api/spots/validate-forms', {
             method: 'POST',
             body: JSON.stringify(formContent)
-        }).then(res => res.json())
+        }).then(res => setForm('images'))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) {
                     let errorsObj = {}
+                    console.log(data.errors)
                     data.errors.forEach((error, index) => {
                         errorsObj = { ...errorsObj, [data.params[index]]: error }
                     })
@@ -87,7 +90,8 @@ const NewListing = ({ setShowModal }) => {
 
                 }
             });
-        if (!Object.values(errorTitles).length) setForm('images');
+        console.log(errorTitles);
+        // if (!Object.values(errorTitles).length) setForm('images');
     }
 
     const addImage = (e) => {
@@ -114,7 +118,7 @@ const NewListing = ({ setShowModal }) => {
 
     if (form === 'content') return (
         <div className='new-list-container' >
-            {/* {errors.map((error, idx) => <li key={idx}>{error}</li>)} */}
+            {/* <div style={{ height: '30px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div> */}
             <form className='new-list-form' onSubmit={firstSubmit}>
                 <label>
                     <div className='label-row'>Listing Name:  <div className='error-display' >{errorTitles.name}</div></div>
@@ -220,13 +224,14 @@ const NewListing = ({ setShowModal }) => {
         <div className='image-form-container'>
             <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setForm('content')} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px' }}></i>
             <form onSubmit={secondSubmit}>
+                <div style={{ height: '30px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div>
                 {imageInputs.map((elem, index) => {
                     return (
                         <div key={index} className='image-submission-container' >
                             <div className='input-and-button-div'>
                                 <img src={imageInputs[index].image.match(urlCheck) ? imageInputs[index].image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={'user pic'} className='submitted-image' />
                                 {/* <div>{elem.image?.match(urlCheck) && setErrors.length &&  <div>{errors[0]}</div>}</div> */}
-                                <div>{!elem.image?.match(urlCheck) && setErrors.length ? errors[index] : ''}</div>
+                                {/* <div>{!elem.image?.match(urlCheck) && setErrors.length ? errors[index] : ''}</div> */}
                                 <input
                                     name='image'
                                     type='text'

@@ -17,7 +17,7 @@ const ManageSpotModal = () => {
     
     return (
         <>
-            <button className='create-spot-button' onClick={() => setShowModal(true)}>Create New Listing</button>
+            <button className='create-spot' onClick={() => setShowModal(true)}>Create New Listing</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <NewListing setShowModal={setShowModal} />

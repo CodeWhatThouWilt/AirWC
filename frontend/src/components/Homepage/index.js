@@ -16,7 +16,7 @@ const Homepage = () => {
     return (
         <div className='homepage-container'>
             <Banner />
-            <SpotSlideShow spots={spots} />
+            {/* <SpotSlideShow spots={spots} /> */}
         </div>
         
     )

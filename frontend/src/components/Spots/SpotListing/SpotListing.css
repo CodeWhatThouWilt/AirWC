@@ -1,6 +1,6 @@
 .listing-card {
     height: 300px;
-    width: 75%;
+    width: 700px;
     background-color: #4F72C4;
     margin-bottom: 2px;
     border-radius: 10px;
@@ -8,6 +8,8 @@
     justify-content: center;
     align-content: center;
 }
+
+
 
 .listing-card:hover {
     box-shadow: 0.5px 0.5px 5px black;
@@ -32,7 +34,7 @@
 .listing-card-background {
     background-color: white;
     height: 90%;
-    width: 95%;
+    width: 93%;
     border-radius: 10px;
     align-self: center;
     justify-self: center;

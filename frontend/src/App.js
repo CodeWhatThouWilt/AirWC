@@ -11,6 +11,7 @@ import Spots from "./components/Spots";
 import ManageSpots from "./components/ManageSpots";
 import Spot from "./components/Spot";
 import ManageBookings from "./components/ManageBookings";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { editImages } from '../../../store/spots';
 
@@ -20,7 +20,7 @@ const EditImageForm = ({ spot, setShowModal }) => {
         return dispatch(editImages({
             spotId: spot.id,
             imageInputs
-        }))
+        })).then(() => setShowModal(false))
             .catch(async res => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -28,6 +28,10 @@ const EditImageForm = ({ spot, setShowModal }) => {
             });
         // if (errors.length === 0) setShowModal(false);
     }
+
+    useEffect(() => {
+
+    }, [imageInputs])
 
 
 
@@ -57,14 +61,13 @@ const EditImageForm = ({ spot, setShowModal }) => {
 
     return (
         <div className='image-form-container'>
-            {/* <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setForm('content')} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px' }}></i> */}
+            <div style={{ height: '30px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div>
             <form onSubmit={(e) => submitHandler(e)}>
                 {imageInputs.map((elem, index) => {
                     return (
                         <div key={index} className='image-submission-container' >
                             <div className='input-and-button-div'>
                                 <img src={imageInputs[index].image.match(urlCheck) ? imageInputs[index].image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={'user pic'} className='submitted-image' />
-                                {/* <div>{elem.image?.match(urlCheck) && setErrors.length &&  <div>{errors[0]}</div>}</div> */}
                                 <div>{!elem.image?.match(urlCheck) && setErrors.length ? errors[index] : ''}</div>
                                 <input
                                     name='image'

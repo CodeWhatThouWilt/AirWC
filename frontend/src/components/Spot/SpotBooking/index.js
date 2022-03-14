@@ -18,6 +18,7 @@ const SpotBooking = ({ spot }) => {
     const [hourSelection, setHourSelection] = useState(12);
     const [dayTime, setDayTime] = useState('PM');
     const [minBooked, setMinBooked] = useState(5);
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         dispatch(getAllBookings())
@@ -62,6 +63,7 @@ const SpotBooking = ({ spot }) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setErrors([])
 
         let startHour;
         
@@ -85,14 +87,16 @@ const SpotBooking = ({ spot }) => {
         }
 
         await dispatch(createBooking(booking))
+        .catch( res => setErrors([1]))
 
     }
 
     return (
         <div className='spot-booking-container'>
+            <div style={{ display:'inline', color:'white', height: '25px'}}>{errors.length ? 'Whoops! That slot is taken' : 'Booking successful!'}</div>
             <form onSubmit={e => submitHandler(e)}>
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
-                <label>
+                <label style={{ marginTop: '10px', color: 'white' }}>
                     Time:
                     <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
                         {hours.map(hour => (
@@ -109,13 +113,16 @@ const SpotBooking = ({ spot }) => {
                         <option value='PM' >PM</option>
                     </select>
                 </label>
-                <label>
+                <label style={{ marginTop: '10px', color: 'white' }}>
                     Book for:
                     <div className='min-selector'>
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
+                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: {spot.price * (minBooked / 5) }</div>
                 </label>
-                <button>Check Availability</button>
+                <div className='button-background' >
+                <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>
+                </div>
             </form>
         </div>
     )

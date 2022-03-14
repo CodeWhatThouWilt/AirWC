@@ -9,12 +9,12 @@ const SpotContent = ({ spot }) => {
                 <h2>{spot.shortDescription}</h2>
             </div>
             <div>
-                <span>{`${spot.selfCheckIn}`}</span>
+                <span><i class="fa-solid fa-door-open" style={{ fontSize: '28px', marginRight: '15px'}}></i>{spot.selfCheckIn ? 'This host allows you to let yourself in' : '' }</span>
             </div>
             <div>
                 <p>{spot.longDescription}</p>
             </div>
-            <SpotReviews />
+            {/* <SpotReviews /> */}
         </div>
     )
 }

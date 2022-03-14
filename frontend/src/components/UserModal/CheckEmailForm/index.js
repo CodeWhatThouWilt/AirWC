@@ -70,9 +70,9 @@ function CheckEmailForm() {
             </div>
         );
     } else if (currentForm === 'login') {
-        return <LoginForm email={email} goBack={setCurrentForm} />
+        return <LoginForm email={email} />
     } else if (currentForm === 'signup') {
-        return <SignupForm email={email} setCurrentForm={setCurrentForm} />
+        return <SignupForm email={email} />
     }
 }
 

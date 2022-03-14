@@ -5,7 +5,7 @@ const OwnedSpotList = ({ spots, sessionUser }) => {
     const ownedSpots = spots.filter(spot => spot.userId === sessionUser.id)
 
     return (
-        <div>
+        <div style={{ marginTop: '150px' }} className='spot-list-container'>
             {ownedSpots.map(spot => (
                 <OwnedSpot key={spot.id} spot={spot} />
             ))}
