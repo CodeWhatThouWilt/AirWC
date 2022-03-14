@@ -27,29 +27,18 @@ const addBooking = (booking) => {
     };
 };
 
-// export const addSingleBooking = (spot) => async (dispatch) => {
-//     const res = await csrfFetch('/api/bookings', {
-//         method: 'POST',
-//         body: JSON.stringify(booking)
-//     });
+export const editBooking = (booking) => async (dispatch) => {
+    const res = await csrfFetch('/api/bookings', {
+        method: 'PUT',
+        body: JSON.stringify(booking)
+    });
 
-//     if (res.ok) {
-//         const booking = await res.json();
-//         await dispatch(addBooking(booking));
-//     }
-// }
-
-// export const editBooking = (booking) => async (dispatch) => {
-//     const res = await csrfFetch('/api/spots', {
-//         method: 'PUT',
-//         body: JSON.stringify({ spot })
-//     });
-
-//     if (res.ok) {
-//         const newSpot = await res.json();
-//         await dispatch(addBooking(newSpot));
-//     }
-// }
+    
+    if (res.ok) {
+        const editedBooking = await res.json();
+        await dispatch(addBooking(editedBooking));
+    }
+}
 
 export const deleteBooking = (bookingId) => async (dispatch) => {
     const res = await csrfFetch('/api/bookings', {

@@ -17,7 +17,7 @@ const SpotBooking = ({ spot }) => {
     const [minSelection, setMinSelection] = useState('00');
     const [hourSelection, setHourSelection] = useState(12);
     const [dayTime, setDayTime] = useState('PM');
-    const [minBooked, setMinBooked ] =  useState(5);
+    const [minBooked, setMinBooked] = useState(5);
 
     useEffect(() => {
         dispatch(getAllBookings())
@@ -60,14 +60,14 @@ const SpotBooking = ({ spot }) => {
             hour + 12 < rightNow.getHours() && rightNow > value
     }
 
-    const submitHandler = async(e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
         let startHour;
         
         if (dayTime === 'AM' && hourSelection === 12) {
             startHour = 0;
-        } else if (dayTime === 'AM'){
+        } else if (dayTime === 'AM') {
             startHour = hourSelection
         } else if (dayTime === 'PM' && hourSelection === 12) {
             startHour = 12;
@@ -79,7 +79,7 @@ const SpotBooking = ({ spot }) => {
         const endDate = new Date(startDate.getTime() + parseInt(minBooked, 10) * 1000 * 60);
 
         const booking = {
-            spotId : spot.id,
+            spotId: spot.id,
             startDate,
             endDate
         }

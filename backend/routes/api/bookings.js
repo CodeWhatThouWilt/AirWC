@@ -90,5 +90,27 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
     return next(err);
 }))
 
+router.put('/', requireAuth, bookingValidations, asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { bookingId, startDate, endDate } = req.body;
+    console.log('####################', req.body.endDate);
+
+    const booking = await Booking.findByPk(bookingId)
+
+    if (userId === booking.userId && booking) {
+        booking.startDate = startDate;
+        booking.endDate = endDate
+        await booking.save();
+
+        editedBooking = await Booking.findByPk(bookingId, {
+            attributes: { exclude: ['userId'] }
+        });
+
+        return res.json({ userBooking: booking, spotBooking: editedBooking });
+    }
+
+
+}));
+
 
 module.exports = router;

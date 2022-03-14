@@ -27,24 +27,24 @@ const BookingCard = ({ booking, spots }) => {
     return (
         <div className='booking-card-background'>
             <div className='booking-card'>
-                <h3 style={{ textAlign: 'center' }}>Booking Information</h3>
+                <h3 style={{ textAlign: 'center'}}>Booking Information</h3>
                 <div className='address-container'>
-                    <h4>Address:</h4>
+                    <div className='booking-section-title'>Address:</div>
                     <span>{`${spot.address}`}</span>
                     <span>{`${spot.city}, ${spot.state} `}</span>
                 </div>
                 <div className='time-container'>
-                    <h4>Booked for:</h4>
+                    <div className='booking-section-title'>Booked for:</div>
                     <span>{date}</span>
                     <span>{startTime} for {timeFrame} min</span>
                 </div>
                 <div className='self-checkin-container'>
-                    <h4>Self check in:</h4>
+                    <div className='booking-section-title'>Self check in:</div>
                     <span>This location {spot.selfCheckIn ? 'has self check in' : 'does not have self check in'}</span>
                 </div>
                 <div className='booking-buttons'>
                     <EditBookingModal booking={booking} spot={spot} />
-                    <button onClick={deleteHandler}>
+                    <button onClick={deleteHandler} className='booking-delete-button' >
                         Delete
                     </button>
                 </div>

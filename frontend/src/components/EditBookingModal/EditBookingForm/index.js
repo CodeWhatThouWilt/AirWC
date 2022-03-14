@@ -2,7 +2,7 @@ import './EditBookingForm.css';
 import 'react-calendar/dist/Calendar.css';
 import { useState, useEffect } from 'react';
 // import { createBooking } from '../../../../store/spots';
-import { getAllBookings, createBooking } from '../../../store/bookings';
+import { editBooking } from '../../../store/bookings';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Calendar from 'react-calendar';
@@ -11,9 +11,6 @@ import { isBefore } from 'date-fns'
 
 const EditBookingForm = ({ booking, spot }) => {
     const dispatch = useDispatch();
-
-    const bookingTimeObj = new Date(booking.startDate);
-    console.log(bookingTimeObj);
 
     const bookingDateObj = new Date(booking.startDate)
     const date = bookingDateObj.toDateString();
@@ -24,7 +21,8 @@ const EditBookingForm = ({ booking, spot }) => {
     startHours = startHours >= 13 ? startHours - 12 : startHours
     startMinutes = startMinutes < 10 ? '0' + startMinutes : startMinutes
     console.log(amPm)
-    const [value, setValue] = useState(new Date());
+
+    const [value, setValue] = useState(bookingDateObj);
     const [minSelection, setMinSelection] = useState(startMinutes);
     const [hourSelection, setHourSelection] = useState(startHours);
     const [dayTime, setDayTime] = useState(amPm);
@@ -50,23 +48,6 @@ const EditBookingForm = ({ booking, spot }) => {
         }
     })();
 
-    // const rightNow = new Date();
-
-    // const minDisabled = (minute) => {
-    //     if (dayTime === 'AM') {
-    //         return hourSelection !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
-    //     } else {
-    //         return hourSelection + 12 !== rightNow.getHours() && minute < rightNow.getMinutes() && rightNow > value
-    //     }
-    // }
-
-
-    // const hourDisabled = (hour) => {
-    //     return dayTime === 'AM' ?
-    //         hour < rightNow.getHours() && rightNow > value :
-    //         hour + 12 < rightNow.getHours() && rightNow > value
-    // }
-
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -85,13 +66,13 @@ const EditBookingForm = ({ booking, spot }) => {
         const startDate = new Date(value.getFullYear(), value.getMonth(), value.getDate(), startHour, minSelection);
         const endDate = new Date(startDate.getTime() + parseInt(minBooked, 10) * 1000 * 60);
 
-        const booking = {
-            spotId: spot.id,
+        const editedBooking = {
+            bookingId: booking.id,
             startDate,
             endDate
         }
 
-        await dispatch(createBooking(booking))
+        await dispatch(editBooking(editedBooking))
 
     }
 
@@ -122,7 +103,7 @@ const EditBookingForm = ({ booking, spot }) => {
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
                 </label>
-                <button>Check Availability</button>
+                <button className='login-button'>Submit Changes</button>
             </form>
         </div>
     )
