@@ -14,7 +14,7 @@ const SpotContent = ({ spot }) => {
             <div>
                 <p>{spot.longDescription}</p>
             </div>
-            {/* <SpotReviews /> */}
+            <SpotReviews />
         </div>
     )
 }
