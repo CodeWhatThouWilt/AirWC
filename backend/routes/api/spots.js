@@ -218,4 +218,18 @@ router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (r
 }))
 
 
+// ----------- REVIEWS -----------
+
+// Get reviews for a specific spot
+router.get('/:spotId/reviews', asyncHandler(async (req, res) => {
+    const { spotId } = req.params;
+    const spotReviews = await Review.findAll({
+        where: {
+            spotId
+        }
+    })
+    return res.json(spotReviews)
+}))
+
+
 module.exports = router;

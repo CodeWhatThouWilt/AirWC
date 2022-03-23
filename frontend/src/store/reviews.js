@@ -11,6 +11,14 @@ const getReviews = (reviews) => {
 }
 
 
+export const getSpotReviews = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
+
+    if (res.ok) {
+        const reviews = await res.json();
+        dispatch(getReviews(reviews));
+    }
+}
 
 
 
@@ -22,7 +30,10 @@ const reviewsReducer = (state = initialState, action) => {
     
     switch (action.type) {
         case GET_REVIEWS:
-            break
+            action.reviews.forEach(review => {
+                newState[review.id] =  review
+            });
+            return newState
         default:
             return newState
     }
