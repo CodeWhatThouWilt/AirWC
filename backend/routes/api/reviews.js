@@ -9,15 +9,16 @@ const { Spot, Review } = require('../../db/models');
 const router = express.Router();
 
 
-router.get('/', asyncHandler(async (req, res) => {
-    const { spotId } = req.body;
-    const spotReviews = await Review.findAll({
-        where: {
-            spotId
-        }
-    })
-    return res.json(spotReviews)
-}))
+// router.get('/', asyncHandler(async (req, res) => {
+//     const { spotId } = req.body;
+//     console.log('###################', spotReviews)
+//     const spotReviews = await Review.findAll({
+//         where: {
+//             spotId
+//         },
+//     })
+//     return res.json(spotReviews)
+// }))
 
 
 module.exports = router;

@@ -7,46 +7,70 @@ module.exports = {
         spotId: 1,
         userId: 2,
         review: 'Awesome host and very clean spot!',
-        rating: 5
+        cleanliness: 4,
+        communication: 3,
+        checkin: 5,
+        accuracy: 4,
+        location: 3,
+        value: 4,
       },
       {
         spotId: 1,
         userId: 3,
         review: 'Super clean, was able to be in and out in a jiffy!',
-        rating: 5
+        cleanliness: 2,
+        communication: 3,
+        checkin: 3,
+        accuracy: 5,
+        location: 5,
+        value: 3,
       },
       {
         spotId: 1,
         userId: 2,
         review: 'Awesome host and very clean spot!',
-        rating: 5
+        cleanliness: 5,
+        communication: 2,
+        checkin: 4,
+        accuracy: 3,
+        location: 1,
+        value: 5,
       },
       {
         spotId: 1,
         userId: 2,
         review: 'Awesome host and very clean spot!',
-        rating: 5
+        cleanliness: 5,
+        communication: 5,
+        checkin: 4,
+        accuracy: 2,
+        location: 5,
+        value: 5,
       },
       {
         spotId: 1,
         userId: 2,
         review: 'Awesome host and very clean spot!',
-        rating: 5
+        cleanliness: 4,
+        communication: 3,
+        checkin: 5,
+        accuracy: 4,
+        location: 3,
+        value: 4,
       },
       {
         spotId: 1,
         userId: 2,
         review: 'Awesome host and very clean spot!',
-        rating: 5
+        cleanliness: 2,
+        communication: 5,
+        checkin: 3,
+        accuracy: 2,
+        location: 4,
+        value: 1,
       },
     ], {});
   },
-
-
-  spotId: DataTypes.INTEGER,
-  userId: DataTypes.INTEGER,
-  review: DataTypes.STRING,
-  rating: DataTypes.INTEGER
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Reviews', null, {});

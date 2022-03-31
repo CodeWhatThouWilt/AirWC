@@ -13,7 +13,7 @@ router.use('/spots', spotsRouter);
 
 router.use('/bookings', bookingsRouter);
 
-router.use('/reviews', reviewsRouter);
+// router.use('/reviews', reviewsRouter);
 
 module.exports = router;
 

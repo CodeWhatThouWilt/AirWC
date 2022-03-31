@@ -67,7 +67,7 @@ const SpotBooking = ({ spot }) => {
         setErrors([])
 
         let startHour;
-        
+
         if (dayTime === 'AM' && hourSelection === 12) {
             startHour = 0;
         } else if (dayTime === 'AM') {
@@ -88,8 +88,8 @@ const SpotBooking = ({ spot }) => {
         }
 
         await dispatch(createBooking(booking))
-        .then(res => setSubmitted(true))
-        .catch( res => setErrors([1]))
+            .then(res => setSubmitted(true))
+            .catch(res => setErrors([1]))
 
     }
 
@@ -120,10 +120,10 @@ const SpotBooking = ({ spot }) => {
                     <div className='min-selector'>
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
-                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: ${spot.price * (minBooked / 5) }</div>
+                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: ${spot.price * (minBooked / 5)}</div>
                 </label>
                 <div className='button-background' >
-                <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>
+                    <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>
                 </div>
             </form>
         </div>

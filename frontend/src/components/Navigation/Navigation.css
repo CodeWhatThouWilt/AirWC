@@ -1,21 +1,21 @@
 .navbar-containter {
-    position: sticky;
+    position: fixed;
     top: 0;
     display: flex;
     height: 100px;
     width: 100%;
+    /* background-color: #30364585; */
 }
 .nav-list {
     list-style: none;
 }
 
 nav {
+    background: linear-gradient(to bottom, rgba(79, 114, 196, 1), rgba(79, 114, 196, 0));
     min-height: 100px;
     display: grid;
     grid-template-columns: 1fr 1.5fr 8fr 1.5fr 1fr ;
     grid-template-rows: 1fr;
-    /* background-color: #30364585; */
-    background: linear-gradient(to bottom, #4F72C4, #4F72C490, #4F72C400);
 }
 
 .logo-link {

@@ -12,8 +12,8 @@ const getReviews = (reviews) => {
 
 
 export const getSpotReviews = (spotId) => async (dispatch) => {
+    console.log("Made it")
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
-
     if (res.ok) {
         const reviews = await res.json();
         dispatch(getReviews(reviews));
