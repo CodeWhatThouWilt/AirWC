@@ -11,9 +11,9 @@
     height: 60px;
     width: 200px;
     border: none;
-    border-radius: 100px;
+    border-radius: 10px;
     font-size: 18px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.472);
+    box-shadow: 0.5px 0.5px 5px rgba(0, 0, 0, 0.472);
 }
 
 .create-spot:hover {

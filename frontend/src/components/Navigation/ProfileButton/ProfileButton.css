@@ -47,6 +47,7 @@
     font-size: 22px;
     display: flex;
     gap: 10px;
+    outline: 4px solid #4F72C4;
 }
 
 .home-list-button.logout-button {

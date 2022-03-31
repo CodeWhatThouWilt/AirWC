@@ -40,7 +40,7 @@
 
 .email-check-continue {
     justify-self: end;
-    border-radius: 40px;
+    border-radius: 10px;
     border: none;
     background-color: #4F72C4;
     color: white;
@@ -50,7 +50,7 @@
 
 .demo-user-button {
     justify-self: end;
-    border-radius: 40px;
+    border-radius: 10px;
     border: none;
     background-color: #4F72C490;
     color: white;

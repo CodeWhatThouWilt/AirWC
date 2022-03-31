@@ -1,16 +1,18 @@
 .login-button {
     grid-column: 4;
     justify-self: end;
-    border-radius: 40px;
-    border: none;
+    border-radius: 2px;
+    border: 2px white solid;
     background-color: #4F72C4;
     color: white;
     height: 50%;
-    padding: 0px 20px;
+    padding: 5px 5px;
     margin-top: 25px;
+    outline: solid 2px #4F72C4;
 }
 
 .login-button:hover {
     background-color: #4869b8;
+
 }
 

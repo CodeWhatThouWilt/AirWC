@@ -45,12 +45,12 @@ const BookingCard = ({ booking, spots }) => {
                         <div className='booking-section-title'>Self check in:</div>
                         <span>This location {spot.selfCheckIn ? 'has self check in' : 'does not have self check in'}</span>
                     </div>
-                </div>
-                <div className='booking-buttons'>
-                    <EditBookingModal booking={booking} spot={spot} />
-                    <button onClick={deleteHandler} className='booking-delete-button' >
-                        Delete
-                    </button>
+                    <div className='booking-buttons'>
+                        <EditBookingModal booking={booking} spot={spot} />
+                        <button onClick={deleteHandler} className='booking-delete-button' >
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

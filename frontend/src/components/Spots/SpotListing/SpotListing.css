@@ -1,9 +1,9 @@
 .listing-card {
     height: 300px;
     width: 700px;
-    background-color: #4F72C4;
+    background-color: #4F72C485;
     margin-bottom: 2px;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -12,8 +12,8 @@
 
 
 .listing-card:hover {
-    box-shadow: 0.5px 0.5px 5px black;
-    background-color: #4A6CBA;
+    box-shadow: 0.5px 0.5px 6px rgba(0, 0, 0, 0.3);
+    background-color: #4A6CBA85;
 
 }
 
@@ -26,26 +26,26 @@
     height: 220px;
     width: 250px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
     grid-column: 1;
     align-self: center;
 }
 
 .listing-card-background {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     height: 90%;
     width: 93%;
-    border-radius: 10px;
+    border-radius: 5px;
     align-self: center;
     justify-self: center;
     padding-left: 20px;
-    box-shadow: 0.5px 0.5px 10px black;
+    box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.3);
     display: grid;
     grid-template-columns: 270px 1fr;
 }
 
 .listing-card-background:hover {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .listing-card-link {
@@ -138,12 +138,11 @@
 
 .listing-price {
     justify-self: end;
-    align-self: ;
+    /* align-self: ; */
 }
 
 .listing-name {
     font-size: 20px;
     font-weight: bold;
 }
-
 }

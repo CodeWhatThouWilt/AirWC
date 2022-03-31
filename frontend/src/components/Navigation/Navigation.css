@@ -14,7 +14,8 @@ nav {
     display: grid;
     grid-template-columns: 1fr 1.5fr 8fr 1.5fr 1fr ;
     grid-template-rows: 1fr;
-    background-color: #303645;
+    /* background-color: #30364585; */
+    background: linear-gradient(to bottom, #4F72C4, #4F72C490, #4F72C400);
 }
 
 .logo-link {
@@ -39,4 +40,32 @@ nav {
     max-height: 30px;
     max-width: auto;
     /* position: relative; */
+}
+
+.search-bar-div {
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar-input {
+    width: 300px;
+    height:35px;
+    border-radius: 0px 3px 3px 0px;
+    border: none;
+}
+
+.search-bar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 37px;
+    width: 35px;
+    background-color: white;
+    border-radius: 3px 0px 0px 3px;
+    border-right: 1px solid #80808050;
+    color: black;
+    font-size: 20px;
+
 }
