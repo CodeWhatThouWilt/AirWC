@@ -1,5 +1,6 @@
 .banner-container {
     /* background-color: #1C284585; */
+    position: relative;
     color: white;
     margin-top: 100px;
     height: 100%;
@@ -7,17 +8,32 @@
     border-radius: 5px;
     background-repeat: no-repeat;
     background-position: center;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .4);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px 50px;
+    padding: 30px 0px;
 }
 
-/* .banner-container h3 {
-    color: wh;
-} */
+.banner-container img {
+    width: 65%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.banner-txt {
+    position: absolute;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* height: 100%;
+    width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+}
 
 .home-list-button {
     border: none;
@@ -27,4 +43,5 @@
     background-color: #37c5ff;
     color: white;
     font-size: 18px;
+    cursor: pointer;
 }

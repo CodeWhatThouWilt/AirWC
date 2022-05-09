@@ -1,10 +1,10 @@
 .spot-list-container {
-    margin-top: 15px;
+    padding-top: 115px;
     margin-left: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
-    overflow: scroll;
+    /* overflow: auto; */
     height: 100vh;
 }
