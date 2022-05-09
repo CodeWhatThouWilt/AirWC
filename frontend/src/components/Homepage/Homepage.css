@@ -4,4 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    background: linear-gradient(to bottom,#fb966c 60%, white 40%);
+    /* background-color: #fb966c; */
 }
