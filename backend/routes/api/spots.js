@@ -80,7 +80,20 @@ router.get('/', asyncHandler(async (req, res) => {
             { model: Image }
         ]
     });
-    return res.json(spots);
+
+    const normalizedSpots = {};
+
+    spots.forEach(spot => {
+        normalizedSpots[spot.id] = spot;
+        const spotImages = spot.Images;
+        const normalizedImages = {};
+        spotImages.forEach(image => {
+            normalizedImages[image.id] = image;
+        });
+        normalizedSpots[spot.id].dataValues.Images = normalizedImages;
+    });
+
+    return res.json(normalizedSpots);
 }));
 
 router.post('/', requireAuth, validateSpot, validateImages, asyncHandler(async (req, res) => {
@@ -181,6 +194,19 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
     err.status = 401;
     return next(err);
 }))
+
+
+router.get('/:spotId', asyncHandler(async (req, res) => {
+    const { spotId } = req.params;
+
+    const spot = Spot.findByPk(spotId, {
+        include: [
+            { model: Image },
+            { model: Booking },
+            { model: Review}
+        ]
+    });
+}));
 
 
 router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (req, res) => {

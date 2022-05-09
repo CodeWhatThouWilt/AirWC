@@ -16,7 +16,8 @@ const Spot = () => {
     const spot = useSelector(state => state.spotsState[spotId]);
     
     useEffect(() => {
-        dispatch(getSpots()).then(res => setIsLoaded(true));
+        dispatch(getSpots())
+        .then(res => setIsLoaded(true));
     }, [dispatch]);
 
     if (!spot && isLoaded) return <Redirect to='/spots' />
