@@ -23,20 +23,21 @@
     flex-direction: column;
     position: absolute;
     z-index: 50;
-    background-color: #4F72C4;
+    background-color: #7991ff;
     border-radius: 5px;
     margin-top: 8px;
     padding: 15px 10px;
     justify-content: center;
     align-items: center;
     right: 0px;
-    width: 250px;
+    width: 150px;
     box-shadow: -4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu * {
     text-decoration: none;
     color: white;
+    font-weight: 500;
 }
 
 .dropdown-menu a:hover {
@@ -51,6 +52,6 @@
 }
 
 .home-list-button.logout-button {
-    background-color: #303645;
-    margin-left: 20px;
+    background-color: #37c5ff;
+    font-weight: 600;
 }
