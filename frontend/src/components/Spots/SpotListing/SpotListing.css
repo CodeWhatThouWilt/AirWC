@@ -1,16 +1,19 @@
-.listing-card-link {
+.listing-card {
     height: 229px;
-    width: 716px;
-    padding: 8px 8px 12px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    border-bottom: 1px solid black;
+    width: 650px;
+    padding: 0px 8px;
+    border-bottom: 1px solid lightgray;
+    margin-top: 24px;
 }
 
 .listing-card-link {
+    height: 200px;
+    width: 650px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
     text-decoration: none;
-    color: #3A5491;
+    color: #484848;
 }
 
 .listing-card-link img {
@@ -28,13 +31,25 @@
     height: 100%;
     width: calc(100% - 300px);
     align-self: center;
+    padding-left: 16px;
 }
 
 .listing-price {
     align-self: end;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.listing-price span {
+    font-weight: 800;
+    font-size: 16px;
 }
 
 .listing-name {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

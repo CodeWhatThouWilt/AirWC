@@ -2,8 +2,9 @@
     padding-top: 115px;
     margin-left: 20px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-wrap: wrap;
-    gap: 5px;
+    /* gap: 50px; */
+    column-gap: 50px;
     height: 100vh;
 }
