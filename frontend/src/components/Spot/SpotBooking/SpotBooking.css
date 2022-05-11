@@ -4,19 +4,18 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 40%;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #4f72c4c9;
+    width: 30%;
+    /* padding: 15px; */
+    border-radius: 5px;
+    background-color: #fb966c;
     
 }
 
 .spot-booking-container form {
-    width: 80%;
+    width: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
 }
 
 .spot-booking-container select {
@@ -30,28 +29,11 @@
 .check-availability-button {
     border: none;
     height: 40px;
-    width: 100px;
+    width: 150px;
     color: white;
-    background-color: #39538F;
-    border-radius: 10px;
+    background-color: #37c5ff;
+    border-radius: 5px;
     margin-bottom: 9px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.438);
-}
-
-.check-availability-button:hover {
-    box-shadow: none;
-}
-
-.button-background {
-    background-color: white;
-    width: 105px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
-
-.spot-content {
-    margin-right: 20px;
+    white-space: nowrap;
+    font-size: 16px;
 }

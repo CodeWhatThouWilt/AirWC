@@ -98,7 +98,7 @@ const SpotBooking = ({ spot }) => {
             <div style={{ display: 'inline', color: 'white', height: '35px' }}>{errors.length ? 'Whoops! That slot is taken' : submitted ? 'Booking successful!' : ''}</div>
             <form onSubmit={e => submitHandler(e)}>
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
-                <label style={{ marginTop: '10px', color: 'white' }}>
+                <label>
                     Time:
                     <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
                         {hours.map(hour => (
@@ -115,16 +115,14 @@ const SpotBooking = ({ spot }) => {
                         <option value='PM' >PM</option>
                     </select>
                 </label>
-                <label style={{ marginTop: '10px', color: 'white' }}>
+                <label>
                     Book for:
                     <div className='min-selector'>
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
-                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: ${spot.price * (minBooked / 5)}</div>
+                    <div>Total cost: ${spot.price * (minBooked / 5)}</div>
                 </label>
-                <div className='button-background' >
-                    <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>
-                </div>
+                    <button className='check-availability-button'>Check Availability</button>
             </form>
         </div>
     )
