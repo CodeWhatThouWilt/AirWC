@@ -21,7 +21,7 @@ function LoginForm({ email }) {
     };
 
     return (
-        <div className='login-modal' >
+        <div className='user-auth-modal' style={{ height: '250px' }}>
             <form onSubmit={handleSubmit} className='login-form'>
                 <ul>
                     {errors.map((error, idx) => (

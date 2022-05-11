@@ -1,4 +1,4 @@
-.login-button {
+.nav-button {
     grid-column: 4;
     justify-self: end;
     border-radius: 2px;
@@ -9,10 +9,10 @@
     padding: 5px 5px;
     margin-top: 25px;
     outline: solid 2px #4F72C4;
+    cursor: pointer;
 }
 
-.login-button:hover {
+.nav-button:hover {
     background-color: #4869b8;
-
 }
 

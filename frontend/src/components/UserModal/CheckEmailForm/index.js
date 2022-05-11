@@ -45,7 +45,7 @@ function CheckEmailForm() {
 
     if (currentForm === 'checkEmail') {
         return (
-            <div className="email-check-modal" >
+            <div className="user-auth-modal" >
                 <form onSubmit={handleSubmit} className='email-check-form'>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
