@@ -3,8 +3,7 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-top: 300px;
-    overflow: auto;
+    align-items: center;
+    padding-top: 115px;
 }
 
