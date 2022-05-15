@@ -12,7 +12,7 @@ const EditImagesModal = ({ spot }) => {
 
     return (
         <>
-            <button className='create-spot-button' onClick={() => setShowModal(true)}>Edit Images</button>
+            <button className='spot-edit-btn' onClick={() => setShowModal(true)}>Edit Images</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <EditImageForm spot={spot} setShowModal={setShowModal} />

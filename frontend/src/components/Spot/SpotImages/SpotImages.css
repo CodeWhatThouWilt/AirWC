@@ -6,8 +6,8 @@
 }
 
 .spot-image-container {
-    height: 100%;
-    width: 60%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     object-fit: cover;
@@ -22,17 +22,18 @@
 }
 
 .main-image {
-    border-radius: 10px 0px 0px 10px;
-    max-height: calc(60vh - 64px);
-    max-width: calc(60vh - 64px);
+    /* border-radius: 10px 0px 0px 10px; */
+    height: calc(60vh - 64px);
+    width: calc(60vh - 64px);
     object-fit: cover;
 }
 
 .sm-img-ctn {
-    max-height: calc(60vh - 64px);
-    max-width: calc(60vh - 64px);
+    height: calc(60vh - 64px);
+    width: calc(60vh - 64px);
     display: flex;
     flex-flow: wrap;
+    /* gap: 5px; */
 }
 
 .sm-img-ctn img {

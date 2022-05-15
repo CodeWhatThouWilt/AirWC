@@ -10,17 +10,19 @@ const ManageSpots = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.sessionState.user);
     const spots = useSelector((state) => Object.values(state.spotsState));
-    
+
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])
-    
+
     if (!sessionUser) return <Redirect to='/' />
 
     return (
         <div>
             {/* <Link to='new-listing' ><button>New Listing</button></Link> */}
-            <ManageSpotModal />
+            <div className='manage-spot-create-btn-ctn'>
+                <ManageSpotModal />
+            </div>
             <OwnedSpotList spots={spots} sessionUser={sessionUser} />
         </div>
     )

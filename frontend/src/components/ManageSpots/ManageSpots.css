@@ -1,0 +1,8 @@
+.manage-spot-create-btn-ctn {
+    height: 100px;
+    position: relative;
+    top: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

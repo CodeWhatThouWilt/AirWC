@@ -7,7 +7,8 @@ const EditImageForm = ({ spot, setShowModal }) => {
     const dispatch = useDispatch();
 
     let startingImages = []
-    spot.Images.forEach(image => startingImages = [...startingImages, { image: image.url }])
+    const images = Object.values(spot.Images);
+    images.forEach(image => startingImages = [...startingImages, { image: image.url }])
 
     const [errors, setErrors] = useState([]);
     const [imageInputs, setImageInputs] = useState(startingImages)
