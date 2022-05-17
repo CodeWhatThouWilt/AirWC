@@ -45,3 +45,8 @@
     width: 88%;
     height: 100%;
 }
+
+.spot-image-container.one-item {
+    width: 80%;
+    height: auto;
+}

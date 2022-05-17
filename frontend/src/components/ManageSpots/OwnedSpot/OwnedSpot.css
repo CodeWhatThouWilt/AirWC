@@ -9,6 +9,9 @@
     top: 90px;
     left: 360px;
     gap: 20px;
+}
+
+.buttons button {
     cursor: pointer;
 }
 

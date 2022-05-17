@@ -9,7 +9,7 @@ const SpotImages = ({ images }) => {
 
     return (
         <div className='spot-image-section'>
-            {imagesArr.length < 5 && (<div className='spot-image-container one-item'><img className='spot-solo-image' src={images[0].url} alt='pic 1' /></div>)}
+            {imagesArr.length < 5 && (<div className='spot-image-container one-item'><img className='spot-solo-image' src={imagesArr[0].url} alt='pic 1' /></div>)}
             {/* {images.length > 1 && images.length < 5 && (
                 <div className='spot-image-container two-items'>
                     <img src={images[0].url} alt='pic 1' />
