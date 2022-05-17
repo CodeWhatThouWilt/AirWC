@@ -25,7 +25,7 @@ const ManageBookings = () => {
     if (!sessionUser) return <Redirect to='/' />
 
     return (
-        <div style={{ color: '#3A5491'}}>
+        <div className='manage-bookings-ctn'>
             {/* {isLoaded && <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />} */}
             <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />
         </div>

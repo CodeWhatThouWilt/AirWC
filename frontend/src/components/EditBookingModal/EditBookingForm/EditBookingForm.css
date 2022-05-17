@@ -1,11 +1,13 @@
-.edit-booking-container {
-    height: 100%;
-    width: 100%;
+.edit-booking-ctn {
+    height: 600px;
+    width: 600px;
     color: #3A5491;
+    background-color: #7991ff;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
+    justify-content: center;
     margin-top: 50px;
 }
 
@@ -27,4 +29,5 @@ form select {
 .time-select-div {
     display: flex;
     gap: 2px;
+    width: 50px;
 }

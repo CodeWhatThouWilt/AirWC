@@ -48,7 +48,7 @@
 }
 
 .edit-booking-button {
-    background-color: #8FA1CC;
+    background-color: #37c5ff;
     border: none;
     height: 30px;
     width: 150px;
@@ -70,13 +70,13 @@
 }
 
 .header-div {
-    background-color: #39538F;
+    background-color: #fb966c;
     border-radius: 5px 5px 0px 0px;
     /* margin-bottom: 30px; */
 }
 
 .booking-card-content {
-    background-color: #4E71C2;
+    background-color: #7991ff;
     color: white;
     border-radius: 0px 0px 5px 5px;
     padding: 10px 0px 10px 20px;

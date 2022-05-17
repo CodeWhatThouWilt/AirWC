@@ -81,7 +81,7 @@ const EditBookingForm = ({ booking, spot, setShowModal }) => {
     }
 
     return (
-        <div className='edit-booking-container'>
+        <div className='edit-booking-ctn'>
             <div style={{ display: 'inline', color: 'white', height: '35px' }}>{errors.length ? 'Whoops! That slot is taken' : submitted ? 'Booking successful!' : ''}</div>
             <form onSubmit={e => submitHandler(e)} className='booking-edit-form' >
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { editImages } from '../../../store/spots';
+import './EditImagesForm.css';
 
 
 const EditImageForm = ({ spot, setShowModal }) => {
@@ -80,7 +81,7 @@ const EditImageForm = ({ spot, setShowModal }) => {
                                             <i className="fa-solid fa-minus" style={{ color: 'white' }}></i>
                                         </button>}
                                     {imageInputs.length - 1 === index &&
-                                        <button onClick={(e) => addImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: '#4F72C4', border: 'none', borderRadius: '500px' }}>
+                                        <button className={imageInputs.length > 1 ? 'add-img-btn' : ''} onClick={(e) => addImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: '#4F72C4', border: 'none', borderRadius: '500px' }}>
                                             <i className="fa-solid fa-plus" style={{ color: 'white' }} />
                                         </button>}
                                 </div>
@@ -88,7 +89,7 @@ const EditImageForm = ({ spot, setShowModal }) => {
                         </div>
                     )
                 })}
-                <button className='login-button'>Submit</button>
+                <button className='edit-img-submit-btn'>Submit</button>
             </form>
         </div>
     )
