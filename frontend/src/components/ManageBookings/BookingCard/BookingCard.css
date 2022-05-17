@@ -29,12 +29,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-}
-
-
-.booking-buttons button:hover {
-    box-shadow: 0.5px 0.5px 5px rgba(0, 0, 0, 0.3)
-
+    cursor: pointer;
 }
 
 .booking-delete-button {

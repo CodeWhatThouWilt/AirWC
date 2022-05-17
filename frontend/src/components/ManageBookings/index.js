@@ -16,18 +16,18 @@ const ManageBookings = () => {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
-    // useEffect(() => {
-    //     dispatch(getAllBookings())
-    //         .then(() => dispatch(getSpots()))
-    //         .then(() => setIsLoaded(true))
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(getAllBookings())
+            .then(() => dispatch(getSpots()))
+            .then(() => setIsLoaded(true))
+    }, [dispatch]);
     
     if (!sessionUser) return <Redirect to='/' />
 
     return (
         <div className='manage-bookings-ctn'>
-            {/* {isLoaded && <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />} */}
-            <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />
+            {isLoaded && <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} />}
+            {/* <CurrentBookings spots={spots} userBookings={userBookings} sessionUser={sessionUser} /> */}
         </div>
     )
 }

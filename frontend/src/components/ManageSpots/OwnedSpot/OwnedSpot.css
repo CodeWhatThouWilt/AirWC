@@ -9,6 +9,7 @@
     top: 90px;
     left: 360px;
     gap: 20px;
+    cursor: pointer;
 }
 
 .delete-button {
@@ -18,4 +19,5 @@
     width: 100px;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
 }
