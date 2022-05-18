@@ -23,7 +23,7 @@ const SpotBooking = ({ spot }) => {
 
     useEffect(() => {
         dispatch(getAllBookings())
-    }, [dispatch])
+    }, [dispatch]);
 
     function tileDisabled({ date, view }) {
         if (view === 'month') {

@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     spotId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     review: DataTypes.STRING,
-    rating: DataTypes.INTEGER,
     cleanliness: DataTypes.INTEGER,
     communication: DataTypes.INTEGER,
     checkin: DataTypes.INTEGER,

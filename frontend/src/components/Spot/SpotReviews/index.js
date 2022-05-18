@@ -19,8 +19,8 @@ const SpotReviews = () => {
 
     useEffect(() => {
         dispatch(getSpotReviews(spotId))
-            .then(() => setIsLoaded(true))
-    }, [dispatch, isLoaded]);
+            .then(() => setIsLoaded(true));
+    }, [dispatch, isLoaded, spotId]);
 
     return (
         <div className='review-list'>

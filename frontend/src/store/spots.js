@@ -129,7 +129,7 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
 
         case GET_REVIEWS:
-            newState[action.spotId].Reviews = action.reviews;
+            newState[action.payload.spotId].Reviews = action.payload.reviews;
             return newState
 
         default:
