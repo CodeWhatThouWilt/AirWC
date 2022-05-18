@@ -14,9 +14,10 @@ const Spot = () => {
     const { spotId } = useParams();
 
     const spot = useSelector(state => state.spotsState[spotId]);
-    
+
     useEffect(() => {
-        dispatch(getSpots()).then(res => setIsLoaded(true));
+        dispatch(getSpots())
+            .then(res => setIsLoaded(true));
     }, [dispatch]);
 
     if (!spot && isLoaded) return <Redirect to='/spots' />
@@ -24,13 +25,9 @@ const Spot = () => {
     return (
         isLoaded && (
             <div className='spot-container'>
-                <div className='spot-card' >
-                    <div className='spot-background'>
-                        <SpotTitle spot={spot} />
-                        <SpotImages images={spot.Images} />
-                        <SpotBody spot={spot} />
-                    </div>
-                </div>
+                <SpotTitle spot={spot} />
+                <SpotImages images={spot.Images} />
+                <SpotBody spot={spot} />
             </div >
         )
     )

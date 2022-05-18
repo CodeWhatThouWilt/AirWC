@@ -22,7 +22,27 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      rating: {
+      cleanliness: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      communication: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      checkin: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      accuracy: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      location: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      value: {
         allowNull: false,
         type: Sequelize.INTEGER
       },

@@ -30,7 +30,7 @@ function SignupForm(props) {
     };
 
     return (
-        <div className='signup-modal' >
+        <div className='user-auth-modal' style={{ height: '400px'}}>
             <form className='signup-form' onSubmit={handleSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}

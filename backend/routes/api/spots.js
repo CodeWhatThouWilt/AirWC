@@ -5,7 +5,7 @@ const { check, oneOf } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, Image, Review, Booking } = require('../../db/models');
+const { Spot, Image, Review, Booking, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -80,7 +80,20 @@ router.get('/', asyncHandler(async (req, res) => {
             { model: Image }
         ]
     });
-    return res.json(spots);
+
+    const normalizedSpots = {};
+
+    spots.forEach(spot => {
+        normalizedSpots[spot.id] = spot;
+        const spotImages = spot.Images;
+        const normalizedImages = {};
+        spotImages.forEach(image => {
+            normalizedImages[image.id] = image;
+        });
+        normalizedSpots[spot.id].dataValues.Images = normalizedImages;
+    });
+
+    return res.json(normalizedSpots);
 }));
 
 router.post('/', requireAuth, validateSpot, validateImages, asyncHandler(async (req, res) => {
@@ -183,6 +196,19 @@ router.delete('/', requireAuth, asyncHandler(async (req, res) => {
 }))
 
 
+router.get('/:spotId', asyncHandler(async (req, res) => {
+    const { spotId } = req.params;
+
+    const spot = Spot.findByPk(spotId, {
+        include: [
+            { model: Image },
+            { model: Booking },
+            { model: Review}
+        ]
+    });
+}));
+
+
 router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (req, res) => {
     
     const { spotId, imageInputs } = req.body;
@@ -216,6 +242,28 @@ router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (r
     }
 
 }))
+
+
+// ----------- REVIEWS -----------
+
+// Get reviews for a specific spot
+router.get('/:spotId(\\d+)/reviews', asyncHandler(async (req, res) => {
+    const { spotId } = req.params;
+    const reviews = await Review.findAll({
+        where: {
+            spotId
+        },
+        include: [
+            {model: User}
+        ]
+    });
+    const normalizedReviews = {};
+    
+    reviews.forEach(review => {
+        normalizedReviews[review.id] = review;
+    });
+    return res.json({ spotId, reviews: normalizedReviews });
+}));
 
 
 module.exports = router;

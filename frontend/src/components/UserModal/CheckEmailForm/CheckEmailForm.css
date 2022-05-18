@@ -1,3 +1,17 @@
+.user-auth-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 300px;
+    width: 400px;
+    background-color: #7991ff;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: height 1s;
+}
+
 .email-check-form {
     display: flex;
     flex-direction: column;
@@ -11,6 +25,7 @@
     width: 100%;
     border:none;
     border-radius: 4px;
+    outline: none;
 }
 
 .email-check-form label {
@@ -18,42 +33,33 @@
     flex-direction: column;
     gap: 4px;
     width: 50%;
-}
-
-.email-check-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-}
-
-.email-check-modal button {
-    margin-top: 25px;
+    font-size: 14px;
 }
 
 .welcome-to-airwc {
     font-size: 20px;
     margin-bottom: 35px;
+    font-weight: 600;
 }
 
 .email-check-continue {
     justify-self: end;
-    border-radius: 40px;
+    border-radius: 10px;
     border: none;
-    background-color: #4F72C4;
+    background-color: #37c5ff;
     color: white;
     height: 25px;
     padding: 0px 20px;
+    margin-top: 15px;
 }
 
 .demo-user-button {
     justify-self: end;
-    border-radius: 40px;
+    border-radius: 10px;
     border: none;
-    background-color: #4F72C490;
+    background-color: #37c5ff90;
     color: white;
     height: 25px;
     padding: 0px 20px;
+    margin-top: 15px;
 }

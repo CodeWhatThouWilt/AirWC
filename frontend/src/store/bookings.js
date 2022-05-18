@@ -37,8 +37,8 @@ export const editBooking = (booking) => async (dispatch) => {
     if (res.ok) {
         const editedBooking = await res.json();
         await dispatch(addBooking(editedBooking));
-    }
-}
+    };
+};
 
 export const deleteBooking = (bookingId) => async (dispatch) => {
     const res = await csrfFetch('/api/bookings', {
@@ -48,9 +48,8 @@ export const deleteBooking = (bookingId) => async (dispatch) => {
     if (res.ok) {
         const deletedBooking = await res.json();
         dispatch(removeBooking(deletedBooking))
-    }
-
-}
+    };
+};
 
 export const getAllBookings = () => async (dispatch) => {
     const res = await csrfFetch('/api/bookings');
@@ -58,8 +57,8 @@ export const getAllBookings = () => async (dispatch) => {
     if (res.ok) {
         const spots = await res.json();
         dispatch(getBookings(spots));
-    }
-}
+    };
+};
 
 export const createBooking = (booking) => async (dispatch) => {
     const res = await csrfFetch('/api/bookings', {
@@ -70,8 +69,8 @@ export const createBooking = (booking) => async (dispatch) => {
     if (res.ok) {
         const booking = await res.json();
         await dispatch(addBooking(booking));
-    }
-}
+    };
+};
 
 const initialState = { spotBookings: {}, userBookings: {}};
 

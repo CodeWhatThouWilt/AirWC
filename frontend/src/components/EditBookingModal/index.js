@@ -17,7 +17,7 @@ const EditBookingModal = ({ booking, spot }) => {
 
     return (
         <>
-            <button className='create-spot-button' onClick={() => setShowModal(true)}>Edit booking</button>
+            <button className='edit-booking-button' onClick={() => setShowModal(true)}>Edit booking</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <EditBookingForm booking={booking} spot={spot} setShowModal={setShowModal} />

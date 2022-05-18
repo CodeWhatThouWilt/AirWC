@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 #modal-background {
@@ -15,22 +16,13 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
 }
 
 #modal-content {
     position: absolute;
-    background-color:white;
-    height: 500px;
-    width: 30%;
-    min-width: 394px;
-    min-height: 700px;
-    width: 40%;
-    max-width: 700px;
-    border-radius: 10px;
-    border: 10px #4F72C4 solid;
-    box-shadow: 1px 1px 10px black;
-    background-color: #90A3CE;
-    color: white;
-    overflow: scroll;
+    background-color: transparent;
+    border-radius: 30px;
+    z-index: 10;
 }

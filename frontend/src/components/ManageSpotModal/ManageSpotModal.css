@@ -1,21 +1,11 @@
 .create-spot {
-    background-color: #4e71c2;
+    background-color: #37c5ff;
     color: white;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    top: 150px;
-    right: 0;
     text-align: center;
-    height: 60px;
-    width: 200px;
+    height: 50px;
+    width: 175px;
     border: none;
-    border-radius: 100px;
+    border-radius: 5px;
     font-size: 18px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.472);
-}
-
-.create-spot:hover {
-    box-shadow: none;
+    cursor: pointer;
 }

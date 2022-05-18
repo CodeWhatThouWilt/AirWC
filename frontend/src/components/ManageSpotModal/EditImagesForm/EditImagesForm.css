@@ -1,0 +1,26 @@
+.image-form-container {
+    min-height: 500px;
+    max-height: 500px;
+    min-width: 400px;
+    max-width: 400px;
+    background-color: #7991ff;
+    border-radius: 5px;
+    overflow: scroll;
+}
+
+.image-form-container form {
+}
+
+.edit-img-submit-btn {
+    height: 35px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #37c5ff;
+    color: white;
+}
+
+/* .add-img-btn {
+    position: absolute;
+    right: 50px;
+} */

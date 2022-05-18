@@ -32,10 +32,9 @@ function ProfileButton({ user }) {
 
     return (
         <>
-            <button onClick={openMenu} className='login-button' >
+            <button onClick={openMenu} className='nav-button' >
                 <div className='user-dropdown-icons'>
                     <i className="fa-solid fa-restroom"></i>
-                    <i className="fa-solid fa-poop"></i>
                 </div>
             </button>
             {showMenu && (

@@ -4,18 +4,18 @@
 }
 
 .booking-card {
-    height: 420px;
+    /* height: 420px; */
     width: 300px;
-    background-color: white;
+    /* background-color: white; */
     border: none;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding: 20px 30px;
+    /* padding: 15px 30px; */
 }
 
 .booking-card:hover {
-    box-shadow: 2px 2px 5px black;
+    box-shadow: 0.5px 0.5px 5px rgba(0, 0, 0, 0.7);
 }
 
 .time-container {
@@ -29,23 +29,26 @@
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-}
-
-.booking-buttons button {
-    box-shadow: 1px 1px 5px black;
-}
-
-.booking-buttons button:hover {
-    box-shadow: 1px 1px 1px black
+    cursor: pointer;
 }
 
 .booking-delete-button {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.7);
     border: none;
     color: white;
-    width: 85px;
+    width: 100px;
     height: 30px;
-    border-radius: 100px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.edit-booking-button {
+    background-color: #37c5ff;
+    border: none;
+    height: 30px;
+    width: 150px;
+    color: white;
+    border-radius: 5px;
     font-size: 16px;
 }
 
@@ -62,16 +65,24 @@
 }
 
 .header-div {
-    background-color: #39538F;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px black;
-    margin-bottom: 30px;
+    background-color: #fb966c;
+    border-radius: 5px 5px 0px 0px;
+    /* margin-bottom: 30px; */
 }
 
 .booking-card-content {
-    background-color: #4E71C2;
+    background-color: #7991ff;
     color: white;
-    border-radius: 10px;
+    border-radius: 0px 0px 5px 5px;
     padding: 10px 0px 10px 20px;
-    box-shadow: 2px 2px 5px black;
+}
+
+.booking-card-background{
+    background-color: white;
+    height: 410px;
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }

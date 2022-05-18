@@ -1,5 +1,5 @@
 .spot-content-container {
     display: flex;
-    justify-content: space-between;
-    width: 87%;
+    justify-content: center;
+    width: 70%;
 }

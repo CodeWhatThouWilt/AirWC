@@ -23,7 +23,7 @@ const SpotBooking = ({ spot }) => {
 
     useEffect(() => {
         dispatch(getAllBookings())
-    }, [dispatch])
+    }, [dispatch]);
 
     function tileDisabled({ date, view }) {
         if (view === 'month') {
@@ -67,7 +67,7 @@ const SpotBooking = ({ spot }) => {
         setErrors([])
 
         let startHour;
-        
+
         if (dayTime === 'AM' && hourSelection === 12) {
             startHour = 0;
         } else if (dayTime === 'AM') {
@@ -88,8 +88,8 @@ const SpotBooking = ({ spot }) => {
         }
 
         await dispatch(createBooking(booking))
-        .then(res => setSubmitted(true))
-        .catch( res => setErrors([1]))
+            .then(res => setSubmitted(true))
+            .catch(res => setErrors([1]))
 
     }
 
@@ -98,33 +98,35 @@ const SpotBooking = ({ spot }) => {
             <div style={{ display: 'inline', color: 'white', height: '35px' }}>{errors.length ? 'Whoops! That slot is taken' : submitted ? 'Booking successful!' : ''}</div>
             <form onSubmit={e => submitHandler(e)}>
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
-                <label style={{ marginTop: '10px', color: 'white' }}>
-                    Time:
-                    <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
-                        {hours.map(hour => (
-                            <option key={hour} disabled={hourDisabled(hour)} value={hour} >{hour}</option>
-                        ))}
-                    </select>
-                    <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
-                        {minutes.map(min => (
-                            <option key={min} disabled={minDisabled(min)} value={min} >{min}</option>
-                        ))}
-                    </select>
-                    <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
-                        <option disabled={rightNow.getHours() > 11 && rightNow > value} value='AM' >AM</option>
-                        <option value='PM' >PM</option>
-                    </select>
-                </label>
-                <label style={{ marginTop: '10px', color: 'white' }}>
+                <div className='booking-time-select'>
+                    <label>
+                        Time:
+                    </label>
+                    <div>
+                        <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
+                            {hours.map(hour => (
+                                <option key={hour} disabled={hourDisabled(hour)} value={hour} >{hour}</option>
+                            ))}
+                        </select>
+                        <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
+                            {minutes.map(min => (
+                                <option key={min} disabled={minDisabled(min)} value={min} >{min}</option>
+                            ))}
+                        </select>
+                        <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
+                            <option disabled={rightNow.getHours() > 11 && rightNow > value} value='AM' >AM</option>
+                            <option value='PM' >PM</option>
+                        </select>
+                    </div>
+                </div>
+                <label>
                     Book for:
                     <div className='min-selector'>
                         <input type='number' max={60} step={5} value={minBooked} onChange={e => setMinBooked(e.target.value)} ></input>
                     </div>
-                    <div style={{ marginTop: '10px', color: 'white' }}>Total cost: ${spot.price * (minBooked / 5) }</div>
+                    <div>Total cost: ${spot.price * (minBooked / 5)}</div>
                 </label>
-                <div className='button-background' >
-                <button className='check-availability-button' style={{ marginTop: '10px' }}>Check Availability</button>
-                </div>
+                <button className='check-availability-button'>Check Availability</button>
             </form>
         </div>
     )
