@@ -1,0 +1,29 @@
+
+.reviews-overview {
+    display: flex;
+}
+
+.review-stats {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    padding-right: 20px;
+}
+
+.review-bar-ctn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 5px;
+    width: 100px;
+}
+
+.review-bar {
+    height: 100%;
+    border-radius: 500px 0 0 500px;
+    background-color: black;
+}

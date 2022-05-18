@@ -14,7 +14,7 @@ const SpotReviews = () => {
     
     let reviewsArr;
     if (isLoaded) {
-        reviewsArr = Object.values(spot.Reviews);
+        reviewsArr = Object.values(spot[spotId].Reviews);
     };
 
     useEffect(() => {
