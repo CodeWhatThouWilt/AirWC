@@ -10,8 +10,7 @@ import reviewsReducer from './reviews';
 const rootReducer = combineReducers({
     sessionState: sessionReducer,
     spotsState: spotsReducer,
-    bookingsState: bookingsReducer,
-    reviewsState: reviewsReducer
+    bookingsState: bookingsReducer
 });
 
 

@@ -4,6 +4,7 @@ const GET_SPOTS = 'spots/getAllSpots';
 const GET_SPOT = 'spot/getSpot'
 const ADD_SPOT = 'spots/addSpot'
 const REMOVE_SPOT = 'spots/removeSpot';
+const GET_REVIEWS = 'spots/getReviews'
 
 const getAllSpots = (spots) => {
     return {
@@ -30,6 +31,13 @@ const getSpot = (spot) => {
     return {
         type: GET_SPOT,
         spot
+    };
+};
+
+const getReviews = (payload) => {
+    return {
+        type: GET_REVIEWS,
+        payload
     };
 };
 
@@ -92,6 +100,15 @@ export const editImages = (images) => async (dispatch) => {
     };
 };
 
+export const getSpotReviews = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+
+    if (res.ok) {
+        const payload = res.json();
+        dispatch(getReviews(payload));
+    };
+};
+
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
@@ -110,6 +127,10 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_SPOT:
             newState[action.spot.id] = {...action.spot};
             return newState;
+
+        case GET_REVIEWS:
+            newState[action.spotId].Reviews = action.reviews;
+            return newState
 
         default:
             return state;
