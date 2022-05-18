@@ -247,16 +247,21 @@ router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (r
 // ----------- REVIEWS -----------
 
 // Get reviews for a specific spot
-router.get('/:spotId/reviews', asyncHandler(async (req, res) => {
-    console.log('###################', spotReviews)
+router.get('/:spotId(\\d+)/reviews', asyncHandler(async (req, res) => {
     const { spotId } = req.params;
+    // console.log("#####", spotReviews);
     const spotReviews = await Review.findAll({
         where: {
-            spotId: spotId
-        }
+            spotId
+        },
     })
-    return res.json(spotReviews)
-}))
+    const normalizedReviews = {};
+    
+    spotReviews.forEach(review => {
+        normalizedReviews[review.id] = review;
+    });
+    return res.json({ spotId, reviews: normalizedReviews })
+}));
 
 
 module.exports = router;

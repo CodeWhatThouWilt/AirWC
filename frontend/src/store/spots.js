@@ -104,7 +104,7 @@ export const getSpotReviews = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
 
     if (res.ok) {
-        const payload = res.json();
+        const payload = await res.json();
         dispatch(getReviews(payload));
     };
 };

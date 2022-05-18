@@ -1,27 +1,37 @@
 import './SpotReviews.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'
-import { getSpotReviews } from '../../../store/reviews';
-import SpotReviewSummary from './SpotReviewSummary'
-import ReviewCard from './ReviewCard'
+import { useEffect, useState } from 'react';
+import { getSpotReviews } from '../../../store/spots';
+import SpotReviewSummary from './SpotReviewSummary';
+import ReviewCard from './ReviewCard';
 
 const SpotReviews = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
     const { spotId } = useParams();
     const dispatch = useDispatch();
-
-    const reviews = useSelector((state) => state.reviewsState);
-    const reviewsArr = Object.values(reviews)
+    const spot = useSelector((state) => state.spotsState);
+    
+    let reviewsArr;
+    if (isLoaded) {
+        reviewsArr = Object.values(spot.Reviews);
+    };
 
     useEffect(() => {
         dispatch(getSpotReviews(spotId))
-    },[dispatch])
+            .then(() => setIsLoaded(true))
+    }, [dispatch, isLoaded]);
+
     return (
         <div className='review-list'>
-            <SpotReviewSummary reviews={reviewsArr} />
-            {reviewsArr.map(review => (
-                <ReviewCard review={review} />
-            ))}
+            {isLoaded &&
+                <>
+                    <SpotReviewSummary reviews={reviewsArr} />
+                    {reviewsArr.map(review => (
+                        <ReviewCard review={review} />
+                    ))}
+                </>
+            }
         </div>
     )
 }
