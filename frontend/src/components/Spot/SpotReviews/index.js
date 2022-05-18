@@ -26,12 +26,21 @@ const SpotReviews = () => {
         <div className='review-ctn'>
             {isLoaded &&
                 <>
-                    <SpotReviewSummary reviews={reviewsArr} />
-                    <div className='review-list'>
-                        {reviewsArr.map(review => (
-                            <ReviewCard review={review} />
-                        ))}
-                    </div>
+                    {reviewsArr.length > 0 &&
+                        <>
+                            <SpotReviewSummary reviews={reviewsArr} />
+                            <div className='review-list'>
+                                {reviewsArr.map(review => (
+                                    <ReviewCard review={review} />
+                                ))}
+                            </div>
+                        </>
+                    }
+                    {reviewsArr.length < 1 &&
+                        <div className='reviews-empty'>
+                            This spot hasn't received any reviews
+                        </div>
+                    }
                 </>
             }
         </div>

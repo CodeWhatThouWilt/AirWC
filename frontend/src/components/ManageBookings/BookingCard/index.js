@@ -14,6 +14,7 @@ const BookingCard = ({ booking, spots }) => {
     const date = bookingDateObj.toDateString();
     const startHours = bookingDateObj.getHours();
     const startMinutes = bookingDateObj.getMinutes();
+    const bookingPast = bookingDateObj > new Date();
     const timeFrame = (new Date(booking.endDate) - new Date(booking.startDate)) / 60000
     let timeOfDay = startHours > 11 ? 'PM' : 'AM'
 
@@ -25,7 +26,6 @@ const BookingCard = ({ booking, spots }) => {
 
 
     return (
-        <div className='booking-card-background'>
             <div className='booking-card'>
                 <div className='header-div'>
                     <h3 className='booking-card-header' >Booking Information</h3>
@@ -45,15 +45,16 @@ const BookingCard = ({ booking, spots }) => {
                         <div className='booking-section-title'>Self check in:</div>
                         <span>This location {spot.selfCheckIn ? 'has self check in' : 'does not have self check in'}</span>
                     </div>
-                    <div className='booking-buttons'>
-                        <EditBookingModal booking={booking} spot={spot} />
-                        <button onClick={deleteHandler} className='booking-delete-button' >
-                            Delete
-                        </button>
-                    </div>
+                    {bookingPast &&
+                        <div className='booking-buttons'>
+                            <EditBookingModal booking={booking} spot={spot} />
+                            <button onClick={deleteHandler} className='booking-delete-button' >
+                                Delete
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
     )
 }
 
