@@ -98,23 +98,27 @@ const SpotBooking = ({ spot }) => {
             <div style={{ display: 'inline', color: 'white', height: '35px' }}>{errors.length ? 'Whoops! That slot is taken' : submitted ? 'Booking successful!' : ''}</div>
             <form onSubmit={e => submitHandler(e)}>
                 <Calendar value={value} onChange={onChange} tileDisabled={tileDisabled} />
-                <label>
-                    Time:
-                    <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
-                        {hours.map(hour => (
-                            <option key={hour} disabled={hourDisabled(hour)} value={hour} >{hour}</option>
-                        ))}
-                    </select>
-                    <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
-                        {minutes.map(min => (
-                            <option key={min} disabled={minDisabled(min)} value={min} >{min}</option>
-                        ))}
-                    </select>
-                    <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
-                        <option disabled={rightNow.getHours() > 11 && rightNow > value} value='AM' >AM</option>
-                        <option value='PM' >PM</option>
-                    </select>
-                </label>
+                <div className='booking-time-select'>
+                    <label>
+                        Time:
+                    </label>
+                    <div>
+                        <select value={hourSelection} onChange={e => setHourSelection(e.target.value)} >
+                            {hours.map(hour => (
+                                <option key={hour} disabled={hourDisabled(hour)} value={hour} >{hour}</option>
+                            ))}
+                        </select>
+                        <select value={minSelection} onChange={e => setMinSelection(e.target.value)}>
+                            {minutes.map(min => (
+                                <option key={min} disabled={minDisabled(min)} value={min} >{min}</option>
+                            ))}
+                        </select>
+                        <select value={dayTime} onChange={e => setDayTime(e.target.value)}>
+                            <option disabled={rightNow.getHours() > 11 && rightNow > value} value='AM' >AM</option>
+                            <option value='PM' >PM</option>
+                        </select>
+                    </div>
+                </div>
                 <label>
                     Book for:
                     <div className='min-selector'>
@@ -122,7 +126,7 @@ const SpotBooking = ({ spot }) => {
                     </div>
                     <div>Total cost: ${spot.price * (minBooked / 5)}</div>
                 </label>
-                    <button className='check-availability-button'>Check Availability</button>
+                <button className='check-availability-button'>Check Availability</button>
             </form>
         </div>
     )

@@ -8,6 +8,7 @@ const SpotReviewSummary = ({ reviews }) => {
     let accuracySum = 0;
     let locationSum = 0;
     let valueSum = 0;
+
     reviews.forEach(review => {
         cleanSum += review.cleanliness;
         commSum += review.communication;
@@ -35,50 +36,62 @@ const SpotReviewSummary = ({ reviews }) => {
     return (
         <div className='reviews-overview'>
             <span></span>
-            <div>
+            <div className='review-avg-section'>
                 <div className='review-stats'>
                     <span>Cleanliness</span>
-                    <div className='review-bar-ctn'>
-                        <div className='review-bar' style={barStyling(cleanAvg)}></div>
+                    <div className='review-stats-sub-ctn'>
+                        <div className='review-bar-ctn'>
+                            <div className='review-bar' style={barStyling(cleanAvg)}></div>
+                        </div>
+                        <span>{cleanAvg.toFixed(1)}</span>
                     </div>
-                    <span>{cleanAvg.toFixed(1)}</span>
                 </div>
                 <div className='review-stats'>
                     <span>Communication</span>
-                    <div className='review-bar-ctn'>
-                        <div className='review-bar' style={barStyling(commAvg)}></div>
+                    <div className='review-stats-sub-ctn'>
+                        <div className='review-bar-ctn'>
+                            <div className='review-bar' style={barStyling(commAvg)}></div>
+                        </div>
+                        <span>{commAvg.toFixed(1)}</span>
                     </div>
-                    <span>{commAvg.toFixed(1)}</span>
                 </div>
                 <div className='review-stats'>
                     <span>Check-in</span>
-                    <div className='review-bar-ctn'>
-                        <div className='review-bar' style={barStyling(checkAvg)}></div>
+                    <div className='review-stats-sub-ctn'>
+                        <div className='review-bar-ctn'>
+                            <div className='review-bar' style={barStyling(checkAvg)}></div>
+                        </div>
+                        <span>{checkAvg.toFixed(1)}</span>
                     </div>
-                    <span>{checkAvg.toFixed(1)}</span>
                 </div>
             </div>
-            <div>
+            <div className='review-avg-section'>
                 <div className='review-stats'>
                     <span>Accuracy</span>
-                    <div className='review-bar-ctn'>
-                        <div className='review-bar' style={barStyling(accuracyAvg)}></div>
+                    <div className='review-stats-sub-ctn'>
+                        <div className='review-bar-ctn'>
+                            <div className='review-bar' style={barStyling(accuracyAvg)}></div>
+                        </div>
+                        <span>{accuracyAvg.toFixed(1)}</span>
                     </div>
-                    <span>{accuracyAvg.toFixed(1)}</span>
                 </div>
                 <div className='review-stats'>
                     <span>Location</span>
-                    <div className='review-bar-ctn'>
-                        <div className='review-bar' style={barStyling(locationAvg)}></div>
+                    <div className='review-stats-sub-ctn'>
+                        <div className='review-bar-ctn'>
+                            <div className='review-bar' style={barStyling(locationAvg)}></div>
+                        </div>
+                        <span>{locationAvg.toFixed(1)}</span>
                     </div>
-                    <span>{locationAvg.toFixed(1)}</span>
                 </div>
                 <div className='review-stats'>
                     <span>Value</span>
-                    <div className='review-bar-ctn'>
-                        <div className='review-bar' style={barStyling(valueAvg)}></div>
+                    <div className='review-stats-sub-ctn'>
+                        <div className='review-bar-ctn'>
+                            <div className='review-bar' style={barStyling(valueAvg)}></div>
+                        </div>
+                        <span>{valueAvg.toFixed(1)}</span>
                     </div>
-                    <span>{valueAvg.toFixed(1)}</span>
                 </div>
             </div>
         </div>

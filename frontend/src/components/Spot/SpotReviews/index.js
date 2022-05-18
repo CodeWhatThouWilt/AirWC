@@ -11,7 +11,7 @@ const SpotReviews = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spotsState);
-    
+
     let reviewsArr;
     if (isLoaded) {
         reviewsArr = Object.values(spot[spotId].Reviews);
@@ -23,13 +23,15 @@ const SpotReviews = () => {
     }, [dispatch, isLoaded, spotId]);
 
     return (
-        <div className='review-list'>
+        <div className='review-ctn'>
             {isLoaded &&
                 <>
                     <SpotReviewSummary reviews={reviewsArr} />
-                    {reviewsArr.map(review => (
-                        <ReviewCard review={review} />
-                    ))}
+                    <div className='review-list'>
+                        {reviewsArr.map(review => (
+                            <ReviewCard review={review} />
+                        ))}
+                    </div>
                 </>
             }
         </div>

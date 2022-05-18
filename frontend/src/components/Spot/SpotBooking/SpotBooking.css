@@ -5,10 +5,15 @@
     align-items: center;
     flex-direction: column;
     width: 30%;
-    /* padding: 15px; */
+    height: 450px;
+    padding: 10px;
     border-radius: 5px;
     background-color: #fb966c;
     
+}
+
+.react-calendar {
+    border-radius: 5px;
 }
 
 .spot-booking-container form {
@@ -24,6 +29,17 @@
 
 .spot-booking-container input {
     border: none;
+}
+
+.booking-time-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.booking-time-select select {
+    width: calc(100% / 3);
 }
 
 .check-availability-button {

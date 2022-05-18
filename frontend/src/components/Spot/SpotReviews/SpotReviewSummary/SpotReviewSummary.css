@@ -1,25 +1,35 @@
 
 .reviews-overview {
     display: flex;
+    width: 100%;
+    margin: 20px 0px 30px;
+}
+
+.review-avg-section {
+    width: 100%;
+    padding-right: 15px;
 }
 
 .review-stats {
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
+    width: 100%;
     padding-right: 20px;
 }
 
+.review-stats-sub-ctn {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .review-bar-ctn {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
     height: 5px;
     width: 100px;
+    border-radius: 500px;
+    background-color: rgba(0, 0, 0, 0.187);
 }
 
 .review-bar {

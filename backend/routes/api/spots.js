@@ -5,7 +5,7 @@ const { check, oneOf } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, Image, Review, Booking } = require('../../db/models');
+const { Spot, Image, Review, Booking, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -252,7 +252,10 @@ router.get('/:spotId(\\d+)/reviews', asyncHandler(async (req, res) => {
     const reviews = await Review.findAll({
         where: {
             spotId
-        }
+        },
+        include: [
+            {model: User}
+        ]
     });
     const normalizedReviews = {};
     

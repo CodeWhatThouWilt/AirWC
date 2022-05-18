@@ -1,0 +1,22 @@
+
+
+.review-card {
+    width: 50%;
+    height: 200px;
+}
+
+.review-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.review-date {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 5px;
+}
