@@ -1,0 +1,61 @@
+
+
+.create-review-ctn {
+    height: 600px;
+    width: 500px;
+    background-color: #7991ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+}
+
+.create-review-header {
+    font-size: 20px;
+    margin: 20px 0px;
+}
+
+.create-review-ctn form {
+    width: 80%;
+}
+
+.review-input-ctn {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.review-input-ctn label {
+    margin-bottom: 2px;
+}
+
+.review-input-ctn input {
+    outline: none;
+    width: 30%;
+}
+
+.review-input-ctn textarea {
+    height: 100px;
+    outline: none;
+}
+
+.create-review-btn-ctn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create-review-btn-ctn button {
+    position: relative;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    padding: 0px 10px;
+    margin-top: 20px;
+    background-color: #37c5ff;
+    color: white;
+    cursor: pointer;
+}

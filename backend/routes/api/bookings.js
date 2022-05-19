@@ -107,9 +107,7 @@ router.put('/', requireAuth, bookingValidations, asyncHandler(async (req, res) =
         });
 
         return res.json({ userBooking: booking, spotBooking: editedBooking });
-    }
-
-
+    };
 }));
 
 
