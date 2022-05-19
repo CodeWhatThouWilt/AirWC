@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const GET_FAVORITES = 'favorites/getFavorites';
 const ADD_FAVORITE = 'favorites/addFavorite';
 const REMOVE_FAVORITE = 'favorites/removeFavorite';
+const REMOVE_ALL_FAVORITES = 'favorites/removeAllFavorites';
 
 const getFavorites = (payload) => {
     return {
@@ -22,6 +23,12 @@ const removeFavorite = (favorite) => {
     return {
         type: REMOVE_FAVORITE,
         favorite
+    };
+};
+
+export const removeAllFavorites = () => {
+    return {
+        type: REMOVE_ALL_FAVORITES
     };
 };
 
@@ -74,6 +81,9 @@ const favoritesReducer = (state = initialState, action) => {
         case REMOVE_FAVORITE:
             delete newState[action.favorite.spotId];
             return newState;
+
+        case REMOVE_ALL_FAVORITES:
+            return initialState;
 
         default:
             return state;

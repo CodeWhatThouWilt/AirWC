@@ -13,6 +13,7 @@ import Spot from "./components/Spot";
 import ManageBookings from "./components/ManageBookings";
 import Footer from "./components/Footer";
 import { getAllFavorites } from "./store/favorites";
+import FavoritesPage from "./components/FavoritesPage";
 
 function App() {
 
@@ -30,6 +31,10 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+
+          <Route exact path='/favorites'>
+            <FavoritesPage />
+          </Route>
 
           <Route exact path='/manage-bookings'>
             <ManageBookings />

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../../store/session';
 import './ProfileButton.css';
 import { NavLink } from "react-router-dom";
+import { removeAllFavorites } from '../../../store/favorites';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -27,7 +28,8 @@ function ProfileButton({ user }) {
 
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logout());
+        dispatch(sessionActions.logout())
+        .then(() => dispatch(removeAllFavorites()))
     };
 
     return (
@@ -45,6 +47,7 @@ function ProfileButton({ user }) {
                         <li><NavLink to='/spots'>View listings</NavLink></li>
                         <li><NavLink to='/manage-spots'>My spots</NavLink></li>
                         <li><NavLink to='/manage-bookings'>Bookings</NavLink></li>
+                        <li><NavLink to='/favorites'>Favorites</NavLink></li>
                         <li>
                             <button className='home-list-button logout-button' onClick={logout}>Log Out</button>
                         </li>
