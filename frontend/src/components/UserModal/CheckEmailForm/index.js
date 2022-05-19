@@ -37,7 +37,6 @@ function CheckEmailForm() {
         e.preventDefault();
         setErrors([]);
         return dispatch(sessionActions.login({ credential: 'user1@default.com', password: 'password' }))
-        .then(() => dispatch(getAllFavorites()))
         .catch(
             async (res) => {
                 const data = await res.json();
