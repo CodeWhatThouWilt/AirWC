@@ -3,23 +3,26 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Modal } from '../../../../context/Modal';
 import CreateReviewModal from '../../../CreateReviewModal';
+import EditReviewModal from '../../../EditReviewModal';
 
 const UserReview = ({ reviews }) => {
     const [reviewModal, setReviewModal] = useState(false);
-    const user = useSelector(state => state.sessionState.id);
-    const usersReview = reviews.find(review => review.userId === user);
+    const [editReviewModal, setEditReviewModal] = useState(false);
+    const user = useSelector(state => state.sessionState);
+    const userId = user.user.id;
+    const userReview = reviews.find(review => review.userId === userId);
 
     return (
         <>
             <div className='user-review-ctn'>
-                {!usersReview &&
+                {!userReview &&
                     <button onClick={() => setReviewModal(true)} className='user-review-btn'>
                         Leave a review
                     </button>
                 }
-                {usersReview &&
+                {userReview &&
                     <div className='user-review-btn-ctn'>
-                        <button className='user-review-btn'>Edit Review</button>
+                        <button onClick={() => setEditReviewModal(true)} className='user-review-btn'>Edit Review</button>
                         <button className='user-review-delete-btn'>Delete Review</button>
                     </div>
                 }
@@ -29,6 +32,12 @@ const UserReview = ({ reviews }) => {
                     <CreateReviewModal setReviewModal={setReviewModal} />
                 </Modal>
             }
+            {editReviewModal &&
+                <Modal onClose={() => setEditReviewModal(false)}>
+                    <EditReviewModal setEditReviewModal={setEditReviewModal} userReview={userReview} />
+                </Modal>
+            }
+
         </>
     );
 };

@@ -1,23 +1,24 @@
-import './CreateReviewModal.css';
+import '../CreateReviewModal/CreateReviewModal.css';
 import { useState } from 'react';
-import { createReview } from '../../store/spots';
+import { editReview } from '../../store/spots';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-const CreateReviewModal = ({ setReviewModal }) => {
-    const [cleanliness, setCleanliness] = useState();
-    const [communication, setCommunication] = useState();
-    const [checkin, setCheckin] = useState();
-    const [accuracy, setAccuracy] = useState();
-    const [location, setLocation] = useState();
-    const [value, setValue] = useState();
-    const [review, setReview] = useState('');
+const EditReviewModal = ({ setEditReviewModal, userReview }) => {
+    const [cleanliness, setCleanliness] = useState(userReview.cleanliness);
+    const [communication, setCommunication] = useState(userReview.communication);
+    const [checkin, setCheckin] = useState(userReview.checkin);
+    const [accuracy, setAccuracy] = useState(userReview.accuracy);
+    const [location, setLocation] = useState(userReview.location);
+    const [value, setValue] = useState(userReview.value);
+    const [review, setReview] = useState(userReview.review);
     const dispatch = useDispatch();
     const { spotId } = useParams();
 
     const submitHandler = (e) => {
         e.preventDefault();
         const payload = {
+            reviewId: userReview.id,
             spotId,
             cleanliness,
             communication,
@@ -27,8 +28,8 @@ const CreateReviewModal = ({ setReviewModal }) => {
             value,
             review
         }
-        dispatch(createReview(payload))
-        .then(() => setReviewModal(false) )
+        dispatch(editReview(payload))
+            .then(() => setEditReviewModal(false))
     };
 
     const numValidator = (value, setState) => {
@@ -145,4 +146,4 @@ const CreateReviewModal = ({ setReviewModal }) => {
     );
 };
 
-export default CreateReviewModal;
+export default EditReviewModal;

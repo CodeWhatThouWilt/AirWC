@@ -37,6 +37,7 @@
 
 .review-input-ctn textarea {
     height: 100px;
+    outline: none;
 }
 
 .create-review-btn-ctn {

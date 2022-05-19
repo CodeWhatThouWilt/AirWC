@@ -61,8 +61,8 @@ const validateSpot = [
 
 const validateImages = [
     check('imageInputs.*')
-    .custom(async images => {
-        const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
+        .custom(async images => {
+            const urlCheck = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i
             if (!images.image.match(urlCheck)) return await Promise.reject('Invalid image address')
         }),
     handleValidationErrors
@@ -203,14 +203,14 @@ router.get('/:spotId', asyncHandler(async (req, res) => {
         include: [
             { model: Image },
             { model: Booking },
-            { model: Review}
+            { model: Review }
         ]
     });
 }));
 
 
 router.put('/:spotId/images', requireAuth, validateImages, asyncHandler(async (req, res) => {
-    
+
     const { spotId, imageInputs } = req.body;
     const userId = req.user.id;
     const spot = await Spot.findByPk(spotId, { include: { model: Image } });
@@ -254,27 +254,27 @@ router.get('/:spotId(\\d+)/reviews', asyncHandler(async (req, res) => {
             spotId
         },
         include: [
-            {model: User}
+            { model: User }
         ]
     });
     const normalizedReviews = {};
-    
+
     reviews.forEach(review => {
         normalizedReviews[review.id] = review;
     });
     return res.json({ spotId, reviews: normalizedReviews });
 }));
 
-router.post('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async(req,res) => {
+router.post('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async (req, res) => {
     const { spotId } = req.params;
     const userId = req.user.id;
-    const { 
-        review, 
-        cleanliness, 
-        communication, 
-        checkin, 
-        accuracy, 
-        location, 
+    const {
+        review,
+        cleanliness,
+        communication,
+        checkin,
+        accuracy,
+        location,
         value } = req.body;
 
     const newReview = await Review.create({
@@ -297,6 +297,40 @@ router.post('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async(req,res) =
 
 }));
 
+router.put('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async (req, res) => {
+    const { spotId } = req.params;
+    const userId = req.user.id;
+    const {
+        reviewId,
+        review,
+        cleanliness,
+        communication,
+        checkin,
+        accuracy,
+        location,
+        value } = req.body;
+
+    const userReview = await Review.findByPk(reviewId, {
+        include: { model: User }
+    });
+
+    await userReview.update({
+        spotId,
+        userId,
+        review,
+        cleanliness,
+        communication,
+        checkin,
+        accuracy,
+        location,
+        value
+    });
+
+
+    return res.json(userReview);
+
+}));
+
 
 router.get('/:spotId/bookings', requireAuth, asyncHandler(async (req, res) => {
     const { spotId } = req.params;
@@ -309,7 +343,7 @@ router.get('/:spotId/bookings', requireAuth, asyncHandler(async (req, res) => {
         }
     });
 
-    return res.json({ bookings: bookings ? true : false, spotId});
+    return res.json({ bookings: bookings ? true : false, spotId });
 }));
 
 

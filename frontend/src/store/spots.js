@@ -6,6 +6,7 @@ const ADD_SPOT = 'spots/addSpot';
 const REMOVE_SPOT = 'spots/removeSpot';
 const GET_REVIEWS = 'spots/getReviews';
 const ADD_REVIEW = 'spots/addReview';
+const UPDATE_REVIEW = 'spots/updateReview';
 const REVIEW_STATUS = 'spots/reviewStatus';
 
 const getAllSpots = (spots) => {
@@ -46,6 +47,13 @@ const getReviews = (payload) => {
 const addReview = (review) => {
     return {
         type: ADD_REVIEW,
+        review
+    };
+};
+
+const updateReview = (review) => {
+    return {
+        type: UPDATE_REVIEW,
         review
     };
 };
@@ -125,6 +133,35 @@ export const getSpotReviews = (spotId) => async (dispatch) => {
     };
 };
 
+
+export const createReview = (payload) => async(dispatch) => {
+    const { spotId } = payload;
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+    });
+    
+    if (res.ok) {
+        const review = await res.json();
+        dispatch(addReview(review));
+    };
+    return res;
+}
+
+export const editReview = (payload) => async(dispatch) => {
+    const { spotId } = payload;
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+        const review = await res.json();
+        dispatch(updateReview(review));
+    };
+    return res;
+};
+
 export const getReviewStatus = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/bookings`);
 
@@ -133,20 +170,6 @@ export const getReviewStatus = (spotId) => async (dispatch) => {
         dispatch(reviewStatus(payload));
     };
 };
-
-export const createReview = (payload) => async(dispatch) => {
-    const { spotId } = payload;
-    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'POST',
-        body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-        const review = await res.json();
-        dispatch(addReview(review));
-    };
-    return res;
-}
 
 const initialState = {};
 
@@ -172,7 +195,10 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
 
         case ADD_REVIEW:
-            console.log(action)
+            newState[action.review.spotId].Reviews[action.review.id] = action.review;
+            return newState;
+
+        case UPDATE_REVIEW:
             newState[action.review.spotId].Reviews[action.review.id] = action.review;
             return newState;
 
