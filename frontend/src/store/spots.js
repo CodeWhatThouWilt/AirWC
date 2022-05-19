@@ -5,6 +5,7 @@ const GET_SPOT = 'spot/getSpot';
 const ADD_SPOT = 'spots/addSpot';
 const REMOVE_SPOT = 'spots/removeSpot';
 const GET_REVIEWS = 'spots/getReviews';
+const ADD_REVIEW = 'spots/addReview';
 const REVIEW_STATUS = 'spots/reviewStatus';
 
 const getAllSpots = (spots) => {
@@ -39,6 +40,13 @@ const getReviews = (payload) => {
     return {
         type: GET_REVIEWS,
         payload
+    };
+};
+
+const addReview = (review) => {
+    return {
+        type: ADD_REVIEW,
+        review
     };
 };
 
@@ -126,6 +134,20 @@ export const getReviewStatus = (spotId) => async (dispatch) => {
     };
 };
 
+export const createReview = (payload) => async(dispatch) => {
+    const { spotId } = payload;
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+        const review = await res.json();
+        dispatch(addReview(review));
+    };
+    return res;
+}
+
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
@@ -147,6 +169,11 @@ const spotsReducer = (state = initialState, action) => {
 
         case GET_REVIEWS:
             newState[action.payload.spotId].Reviews = action.payload.reviews;
+            return newState;
+
+        case ADD_REVIEW:
+            console.log(action)
+            newState[action.review.spotId].Reviews[action.review.id] = action.review;
             return newState;
 
         case REVIEW_STATUS:

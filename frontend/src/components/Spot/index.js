@@ -2,7 +2,7 @@ import './Spot.css';
 import { useParams, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getSpots } from '../../store/spots';
+import { getSpots, getReviewStatus } from '../../store/spots';
 
 import SpotTitle from './SpotTitle';
 import SpotImages from './SpotImages';
@@ -17,6 +17,7 @@ const Spot = () => {
 
     useEffect(() => {
         dispatch(getSpots())
+            .then(() => dispatch(getReviewStatus(spotId)))
             .then(res => setIsLoaded(true));
     }, [dispatch]);
 

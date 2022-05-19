@@ -265,6 +265,39 @@ router.get('/:spotId(\\d+)/reviews', asyncHandler(async (req, res) => {
     return res.json({ spotId, reviews: normalizedReviews });
 }));
 
+router.post('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async(req,res) => {
+    const { spotId } = req.params;
+    const userId = req.user.id;
+    const { 
+        review, 
+        cleanliness, 
+        communication, 
+        checkin, 
+        accuracy, 
+        location, 
+        value } = req.body;
+
+    const newReview = await Review.create({
+        spotId,
+        userId,
+        review,
+        cleanliness,
+        communication,
+        checkin,
+        accuracy,
+        location,
+        value
+    });
+
+    const userReview = await Review.findByPk(newReview.id, {
+        include: { model: User }
+    });
+
+    return res.json(userReview);
+
+}));
+
+
 router.get('/:spotId/bookings', requireAuth, asyncHandler(async (req, res) => {
     const { spotId } = req.params;
     const userId = req.user.id;
