@@ -4,13 +4,21 @@ import { useState } from 'react';
 import { Modal } from '../../../../context/Modal';
 import CreateReviewModal from '../../../CreateReviewModal';
 import EditReviewModal from '../../../EditReviewModal';
+import { deleteReview } from '../../../../store/spots';
+import { useDispatch } from 'react-redux';
 
 const UserReview = ({ reviews }) => {
     const [reviewModal, setReviewModal] = useState(false);
     const [editReviewModal, setEditReviewModal] = useState(false);
+    const dispatch = useDispatch();
     const user = useSelector(state => state.sessionState);
     const userId = user.user.id;
     const userReview = reviews.find(review => review.userId === userId);
+
+    const deleteHandler = () => {
+        const payload = { reviewId: userReview.id, spotId: userReview.spotId };
+        dispatch(deleteReview(payload));
+    };
 
     return (
         <>
@@ -23,7 +31,7 @@ const UserReview = ({ reviews }) => {
                 {userReview &&
                     <div className='user-review-btn-ctn'>
                         <button onClick={() => setEditReviewModal(true)} className='user-review-btn'>Edit Review</button>
-                        <button className='user-review-delete-btn'>Delete Review</button>
+                        <button onClick={() => deleteHandler()} className='user-review-delete-btn'>Delete Review</button>
                     </div>
                 }
             </div>

@@ -297,11 +297,10 @@ router.post('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async (req, res)
 
 }));
 
-router.put('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async (req, res) => {
-    const { spotId } = req.params;
+router.put('/:spotId(\\d+)/reviews/:reviewId(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const { spotId, reviewId } = req.params;
     const userId = req.user.id;
     const {
-        reviewId,
         review,
         cleanliness,
         communication,
@@ -329,6 +328,15 @@ router.put('/:spotId(\\d+)/reviews', requireAuth, asyncHandler(async (req, res) 
 
     return res.json(userReview);
 
+}));
+
+router.delete('/:spotId(\\d+)/reviews/:reviewId(\\d+)', requireAuth, asyncHandler(async(req, res) => {
+    const { spotId, reviewId } = req.params;
+
+    const doomedReview = await Review.findByPk(reviewId);
+    await doomedReview.destroy();
+
+    return res.json({ spotId, reviewId: doomedReview.id })
 }));
 
 

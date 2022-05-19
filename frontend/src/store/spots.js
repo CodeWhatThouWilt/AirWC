@@ -7,6 +7,7 @@ const REMOVE_SPOT = 'spots/removeSpot';
 const GET_REVIEWS = 'spots/getReviews';
 const ADD_REVIEW = 'spots/addReview';
 const UPDATE_REVIEW = 'spots/updateReview';
+const REMOVE_REVIEW = 'spots/removeReview';
 const REVIEW_STATUS = 'spots/reviewStatus';
 
 const getAllSpots = (spots) => {
@@ -55,6 +56,13 @@ const updateReview = (review) => {
     return {
         type: UPDATE_REVIEW,
         review
+    };
+};
+
+const removeReview = (payload) => {
+    return {
+        type: REMOVE_REVIEW,
+        payload
     };
 };
 
@@ -149,8 +157,8 @@ export const createReview = (payload) => async(dispatch) => {
 }
 
 export const editReview = (payload) => async(dispatch) => {
-    const { spotId } = payload;
-    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    const { spotId, reviewId } = payload;
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews/${reviewId}`, {
         method: 'PUT',
         body: JSON.stringify(payload)
     });
@@ -160,6 +168,18 @@ export const editReview = (payload) => async(dispatch) => {
         dispatch(updateReview(review));
     };
     return res;
+};
+
+export const deleteReview = (payload) => async(dispatch) => {
+    const { spotId, reviewId } = payload;
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews/${reviewId}`, {
+        method: 'DELETE'
+    });
+
+    if (res.ok) {
+        const payload = await res.json();
+        dispatch(removeReview(payload));
+    };
 };
 
 export const getReviewStatus = (spotId) => async (dispatch) => {
@@ -200,6 +220,10 @@ const spotsReducer = (state = initialState, action) => {
 
         case UPDATE_REVIEW:
             newState[action.review.spotId].Reviews[action.review.id] = action.review;
+            return newState;
+
+        case REMOVE_REVIEW:
+            delete newState[action.payload.spotId].Reviews[action.payload.reviewId];
             return newState;
 
         case REVIEW_STATUS:
