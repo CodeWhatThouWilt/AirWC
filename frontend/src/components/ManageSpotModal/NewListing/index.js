@@ -220,12 +220,12 @@ const NewListing = ({ setShowModal }) => {
 
     if (form === 'images') return (
         <div className='image-form-container'>
-            <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setForm('content')} style={{ position: 'absolute', top: '30px', left: '30px', fontSize: '30px' }}></i>
             <form onSubmit={secondSubmit} className='image-form'>
+                <i className="fa-solid fa-chevron-left back-button-modal" onClick={() => setForm('content')}></i>
                 {imageInputs.map((elem, index) => {
                     return (
                         <div key={index} className='image-submission-container' >
-                                <img src={imageInputs[index].image.match(urlCheck) ? imageInputs[index].image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={'user pic'} className='submitted-image' />
+                            <img src={imageInputs[index].image.match(urlCheck) ? imageInputs[index].image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={'user pic'} className='submitted-image' />
                             <div className='input-and-button-div'>
                                 <input
                                     name='image'
@@ -234,22 +234,22 @@ const NewListing = ({ setShowModal }) => {
                                     value={elem.image}
                                     onChange={e => imagesInputHandler(e, index)}
                                 ></input>
-                                <div style={{ display: 'flex'}}>
-                                {imageInputs.length !== 1 &&
-                                    <button onClick={(e) => removeImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: 'red', border: 'none', borderRadius: '500px' }}>
-                                        <i className="fa-solid fa-minus" style={{ color: 'white' }}></i>
-                                    </button>}
-                                {imageInputs.length - 1 === index &&
-                                    <button onClick={(e) => addImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: '#4F72C4', border: 'none', borderRadius: '500px' }}>
-                                        <i className="fa-solid fa-plus" style={{ color: 'white' }} />
-                                    </button>}
+                                <div style={{ display: 'flex' }}>
+                                    {imageInputs.length !== 1 &&
+                                        <button onClick={(e) => removeImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: 'red', border: 'none', borderRadius: '500px' }}>
+                                            <i className="fa-solid fa-minus" style={{ color: 'white' }}></i>
+                                        </button>}
+                                    {imageInputs.length - 1 === index &&
+                                        <button onClick={(e) => addImage(e, index)} style={{ padding: '5px 7px', marginLeft: '10px', backgroundColor: '#4F72C4', border: 'none', borderRadius: '500px' }}>
+                                            <i className="fa-solid fa-plus" style={{ color: 'white' }} />
+                                        </button>}
                                 </div>
                             </div>
                         </div>
                     )
                 })}
                 <div style={{ height: '40px' }}>{errors.length ? `${errors[0]}(s)` : ''}</div>
-                <button className='login-button'>Submit</button>
+                <button className='submit-btn'>Submit</button>
             </form>
         </div>
     )

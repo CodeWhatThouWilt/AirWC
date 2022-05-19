@@ -10,6 +10,7 @@
     box-sizing: border-box;
     overflow-y: auto;
     transition: height 1s;
+    color: white;
 }
 
 .email-check-form {
@@ -44,22 +45,24 @@
 
 .email-check-continue {
     justify-self: end;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
     background-color: #37c5ff;
     color: white;
     height: 25px;
     padding: 0px 20px;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 .demo-user-button {
     justify-self: end;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
-    background-color: #37c5ff90;
+    background-color: #37c5ff;
     color: white;
     height: 25px;
     padding: 0px 20px;
     margin-top: 15px;
+    cursor: pointer;
 }

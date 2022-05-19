@@ -33,18 +33,18 @@
 
 .signup-button {
     justify-self: end;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
-    background-color: #4F72C4;
+    background-color: #37c5ff;
     color: white;
     height: 25px;
     padding: 0px 20px;
     margin-top: 20px;
 }
 
-.fa-solid.fa-chevron-left.back-button-modal {
-    position: 'absolute';
-    top: '30px';
-    left: '30px';
-    font-size: '30px';
-}
+/* .back-button-modal {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 30px;
+} */

@@ -34,6 +34,7 @@ function SignupForm(props) {
     return (
         <div className='user-auth-modal' style={{ height: '400px'}}>
             <form className='signup-form' onSubmit={handleSubmit}>
+                <div></div>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
