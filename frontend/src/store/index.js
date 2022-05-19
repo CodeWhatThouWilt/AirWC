@@ -4,12 +4,14 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import spotsReducer from './spots';
 import bookingsReducer from './bookings';
+import favoritesReducer from './favorites';
 
 
 const rootReducer = combineReducers({
     sessionState: sessionReducer,
     spotsState: spotsReducer,
-    bookingsState: bookingsReducer
+    bookingsState: bookingsReducer,
+    favoritesState: favoritesReducer
 });
 
 

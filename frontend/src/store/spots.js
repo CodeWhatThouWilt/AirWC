@@ -198,7 +198,6 @@ const spotsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_SPOTS:
-            console.log(action.spots);
             newState = { ...newState, ...action.spots};
             return newState;
 
