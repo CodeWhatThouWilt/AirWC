@@ -17,7 +17,13 @@ router.get('/', requireAuth, asyncHandler(async(req, res) => {
         }
     });
 
-    return res.json(favorites);
+    const normalizedFav = {};
+
+    favorites.forEach(fav => {
+        normalizedFav[fav.spotId] = fav;
+    });
+
+    return res.json(normalizedFav);
 }));
 
 router.post('/', requireAuth, asyncHandler(async(req, res) => {

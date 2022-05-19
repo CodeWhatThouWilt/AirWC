@@ -1,11 +1,27 @@
 import { csrfFetch } from './csrf';
 
 const GET_FAVORITES = 'favorites/getFavorites';
+const ADD_FAVORITE = 'favorites/addFavorite';
+const REMOVE_FAVORITE = 'favorites/removeFavorite';
 
 const getFavorites = (payload) => {
     return {
         type: GET_FAVORITES,
         payload
+    };
+};
+
+const addFavorite = (favorite) => {
+    return {
+        type: ADD_FAVORITE,
+        favorite
+    };
+};
+
+const removeFavorite = (favorite) => {
+    return {
+        type: REMOVE_FAVORITE,
+        favorite
     };
 };
 
@@ -18,6 +34,29 @@ export const getAllFavorites = () => async(dispatch) => {
     };
 };
 
+export const createFavorite = (spotId) => async(dispatch) => {
+    const res = await csrfFetch('/api/favorites', {
+        method: 'POST',
+        body: JSON.stringify({spotId})
+    });
+
+    if (res.ok) {
+        const favorite = await res.json();
+        dispatch(addFavorite(favorite));
+    };
+};
+
+export const deleteFavorite = (favId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/favorites/${favId}`, {
+        method: 'DELETE'
+    });
+
+    if (res.ok) {
+        const favorite = await res.json();
+        dispatch(removeFavorite(favorite));
+    };
+};
+
 const initialState = {};
 
 const favoritesReducer = (state = initialState, action) => {
@@ -26,6 +65,14 @@ const favoritesReducer = (state = initialState, action) => {
 
         case GET_FAVORITES:
             newState = { ...newState, ...action.payload };
+            return newState;
+
+        case ADD_FAVORITE:
+            newState[action.favorite.spotId] = action.favorite;
+            return newState;
+
+        case REMOVE_FAVORITE:
+            delete newState[action.favorite.spotId];
             return newState;
 
         default:

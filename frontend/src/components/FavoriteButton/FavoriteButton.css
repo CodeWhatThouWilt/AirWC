@@ -1,0 +1,18 @@
+.listing-fav-ctn {
+    font-size: 26px;
+}
+
+.listing-fav-ctn i {
+    position: relative;
+    cursor: pointer;
+}
+
+.favorited {
+    color: #fb3958;
+}
+
+
+
+/* .listing-fav-ctn i:hover {
+    box-shadow: inset -5px -5px -5px black;
+} */

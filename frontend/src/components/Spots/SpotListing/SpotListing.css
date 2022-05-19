@@ -1,4 +1,5 @@
 .listing-card {
+    position: relative;
     height: 229px;
     width: 650px;
     padding: 0px 8px;
@@ -54,6 +55,3 @@
     text-overflow: ellipsis;
 }
 
-.listing-fav {
-    font-size: 26px;
-}
