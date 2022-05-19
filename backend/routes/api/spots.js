@@ -265,5 +265,19 @@ router.get('/:spotId(\\d+)/reviews', asyncHandler(async (req, res) => {
     return res.json({ spotId, reviews: normalizedReviews });
 }));
 
+router.get('/:spotId/bookings', requireAuth, asyncHandler(async (req, res) => {
+    const { spotId } = req.params;
+    const userId = req.user.id;
+
+    const bookings = await Booking.findOne({
+        where: {
+            userId,
+            spotId
+        }
+    });
+
+    return res.json({ bookings: bookings ? true : false, spotId});
+}));
+
 
 module.exports = router;
