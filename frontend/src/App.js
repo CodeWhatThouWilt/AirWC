@@ -12,6 +12,7 @@ import ManageSpots from "./components/ManageSpots";
 import Spot from "./components/Spot";
 import ManageBookings from "./components/ManageBookings";
 import Footer from "./components/Footer";
+import { getAllFavorites } from "./store/favorites";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
+    .then(res => res && dispatch(getAllFavorites()))
       .then(() => setIsLoaded(true))
   }, [dispatch]);
 

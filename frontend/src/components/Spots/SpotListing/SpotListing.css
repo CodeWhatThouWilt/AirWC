@@ -53,3 +53,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.listing-fav {
+    font-size: 26px;
+}

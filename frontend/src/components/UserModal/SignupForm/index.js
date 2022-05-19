@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../../store/session'
 import './SignupForm.css';
+import { getAllFavorites } from '../../../store/favorites';
 
 function SignupForm(props) {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function SignupForm(props) {
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({ email, firstName, lastName, password }))
+                .then(() => dispatch(getAllFavorites()))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);

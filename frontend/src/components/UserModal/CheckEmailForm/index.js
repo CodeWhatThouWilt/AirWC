@@ -5,6 +5,7 @@ import * as sessionActions from '../../../store/session'
 import LoginForm from "../LoginForm";
 import SignupForm from "../SignupForm";
 import './CheckEmailForm.css';
+import { getAllFavorites } from "../../../store/favorites";
 
 function CheckEmailForm() {
     const dispatch = useDispatch();
@@ -35,7 +36,9 @@ function CheckEmailForm() {
     const guestHandler = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential: 'user1@default.com', password: 'password' })).catch(
+        return dispatch(sessionActions.login({ credential: 'user1@default.com', password: 'password' }))
+        .then(() => dispatch(getAllFavorites()))
+        .catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

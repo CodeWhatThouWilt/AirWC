@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../../store/session"
 import { useDispatch } from "react-redux";
 import './LoginForm.css';
+import { getAllFavorites } from "../../../store/favorites";
 
 function LoginForm({ email }) {
     const dispatch = useDispatch();
@@ -12,7 +13,9 @@ function LoginForm({ email }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential, password })).catch(
+        return dispatch(sessionActions.login({ credential, password }))
+        .then(() => dispatch(getAllFavorites()))
+        .catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
