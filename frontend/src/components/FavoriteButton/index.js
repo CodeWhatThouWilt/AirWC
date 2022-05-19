@@ -31,7 +31,7 @@ const FavoriteButton = ({ type, spot }) => {
     }
 
     return (
-        <div className='listing-fav-ctn' style={type === 'list' && listStyling}>
+        <div className='listing-fav-ctn' style={type === 'list' ? listStyling : {}}>
             {favoriteStyle()}
         </div>
     )

@@ -3,6 +3,10 @@
     height: 75px;
     margin-top: 20px;
     justify-self: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 .spot-name {
