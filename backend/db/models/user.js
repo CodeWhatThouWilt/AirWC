@@ -98,6 +98,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Spot, { foreignKey: 'userId', onDelete: 'cascade', hooks: true });
     User.hasMany(models.Booking, { foreignKey: 'userId', onDelete: 'cascade', hooks: true });
     User.hasMany(models.Review, { foreignKey: 'userId', onDelete: 'cascade', hooks: true });
+    User.hasMany(models.Favorite, { foreignKey: 'userId', onDelete: 'cascade', hooks: true });
   };
 
   return User;
