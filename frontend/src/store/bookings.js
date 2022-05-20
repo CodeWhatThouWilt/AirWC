@@ -5,7 +5,6 @@ const ADD_BOOKING = 'bookings/addBooking'
 const REMOVE_BOOKING = 'bookings/removeBooking';
 
 const getBookings = (bookings) => {
-    
     return {
         type: GET_BOOKINGS,
         bookings,

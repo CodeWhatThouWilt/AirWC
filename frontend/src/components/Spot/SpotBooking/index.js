@@ -11,7 +11,7 @@ import { isBefore } from 'date-fns'
 
 const SpotBooking = ({ spot }) => {
     const dispatch = useDispatch();
-    const bookings = useSelector(state => state.bookingsState.spotBookings)
+    // const bookings = useSelector(state => state.bookingsState.spotBookings)
 
     const [value, setValue] = useState(new Date());
     const [minSelection, setMinSelection] = useState('00');
@@ -21,9 +21,9 @@ const SpotBooking = ({ spot }) => {
     const [errors, setErrors] = useState([])
     const [submitted, setSubmitted] = useState(false);
 
-    useEffect(() => {
-        dispatch(getAllBookings())
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getAllBookings())
+    // }, [dispatch]);
 
     function tileDisabled({ date, view }) {
         if (view === 'month') {

@@ -2,7 +2,7 @@ import './SpotReviews.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getSpotReviews } from '../../../store/spots';
+import { getSpotReviews, getReviewStatus } from '../../../store/spots';
 import SpotReviewSummary from './SpotReviewSummary';
 import ReviewCard from './ReviewCard';
 import UserReview from './UserReview';
@@ -12,6 +12,7 @@ const SpotReviews = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spotsState);
+    const user = useSelector(state => state.sessionState);
 
     let reviewsArr;
     if (isLoaded) {
@@ -22,6 +23,7 @@ const SpotReviews = () => {
 
     useEffect(() => {
         dispatch(getSpotReviews(spotId))
+            .then(() => user.user?.id && dispatch(getReviewStatus(spotId)))
             .then(() => setIsLoaded(true));
     }, [dispatch, spotId]);
 
