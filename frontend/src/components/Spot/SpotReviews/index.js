@@ -25,7 +25,7 @@ const SpotReviews = () => {
         dispatch(getSpotReviews(spotId))
             .then(() => user.user?.id && dispatch(getReviewStatus(spotId)))
             .then(() => setIsLoaded(true));
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId, user]);
 
     return (
         <div className='review-ctn'>
@@ -34,7 +34,7 @@ const SpotReviews = () => {
                     {reviewsArr.length > 0 &&
                         <>
                             <SpotReviewSummary reviews={reviewsArr} />
-                            {hasBooked &&
+                            {hasBooked && user.user?.id &&
                                 <UserReview reviews={reviewsArr}/>
                             }
                             <div className='review-list'>
